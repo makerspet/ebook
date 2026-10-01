@@ -10,24 +10,23 @@ and see live LiDAR data.
 You need the assembled robot (Chapter 1) and the PC software from Chapter 2. Plan for about
 30 minutes.
 
-## Upload the firmware (Arduino IDE 2.x)
+## Upload the firmware
 
-1. In Arduino IDE 2.x, open the `kaiaai-esp32` sketch.
-2. If the IDE offers library or board updates, click **LATER**. Newer versions can break the build.
+These steps use Arduino IDE 1.8.19. With IDE 2.x, see
+[If you use Arduino IDE 2.x](#ide2-upload) below; only the menus differ.
 
-   ![Close the update pop-ups. Don't update.](yt:tKfVU1n5TjA@0:36)
-
-3. Connect the ESP32 to your PC over USB, with the board's power switch **off**.
+1. Open the `kaiaai-esp32` sketch. If the IDE offers library or board updates, decline them.
+2. Connect the ESP32 to your PC over USB, with the board's power switch **off**.
 
    ![Plug the USB cable into the ESP32.](yt:tKfVU1n5TjA@0:42)
 
-4. In the board selector, choose **DOIT ESP32 DEVKIT V1** and your COM port (`COM3` in the video).
-   For a Maker's Pet ESP32-S3 driver board, choose **ESP32S3 Dev Module**.
+3. Select **Tools → Board → ESP32 Arduino → ESP32 Dev Module**, and your COM port under
+   **Tools → Port**.
 
-   ![Select the board and COM port.](yt:tKfVU1n5TjA@0:52)
+   ![Choose ESP32 Dev Module.](yt:tKfVU1n5TjA@2:46)
 
-5. Click **Upload** (the right arrow). The first compile takes a while.
-6. When the output shows `Connecting....`, press and hold **BOOT** for 3 to 5 seconds to put the
+4. Click **Upload** (the right arrow). The first compile takes a while.
+5. When the output shows `Connecting....`, press and hold **BOOT** for 3 to 5 seconds to put the
    ESP32 into download mode.
 
    ![Hold BOOT when the upload starts connecting.](yt:tKfVU1n5TjA@1:02)
@@ -37,9 +36,9 @@ You need the assembled robot (Chapter 1) and the PC software from Chapter 2. Pla
     fails with `Failed to connect to ESP32: No serial data received`, retry and press BOOT as soon as
     `Connecting...` appears.
 
-7. Wait for `Hash of data verified.` and `Hard resetting via RTS pin...`.
-8. Open **Tools → Serial Monitor** at **115200 baud** and press the ESP32's **EN** (reset) button.
-9. The ESP32 boots and asks for sketch data, as expected:
+6. Wait for `Hash of data verified.` and `Hard resetting via RTS pin...`.
+7. Open **Tools → Serial Monitor** at **115200 baud** and press the ESP32's **EN** (reset) button.
+8. The ESP32 boots and asks for sketch data, as expected:
 
    ```
    Kaia.ai firmware version 0.8.0-iron
@@ -50,65 +49,37 @@ You need the assembled robot (Chapter 1) and the PC software from Chapter 2. Pla
 
    ![The ESP32 asks for sketch data.](yt:tKfVU1n5TjA@1:27#crop=0.36,0.40,0.50,0.47)
 
-!!! note
-    Some 38-pin ESP32 boards print `E (43) SPIFFS: mount failed, -10025` instead. It means the same
-    thing.
-
-## Upload the sketch data (Arduino IDE 2.x)
+## Upload the sketch data
 
 The sketch data is the robot's configuration file, `config.yaml`, plus the WiFi setup web page. It
 lives in a separate flash area (SPIFFS), so it is uploaded separately.
 
 1. **Close the Serial Monitor**; it holds the COM port and the upload will fail.
-2. Open **Sketch → Show Sketch Folder** and go into the `data` folder.
-3. It has `config.yaml`, which the firmware loads at power-up, plus one config file per hardware
-   option. In the video:
-
-   ```
-   config.yaml
-   config_mini_32e.yaml
-   config_mini_bdc_30p.yaml
-   config_mini_bdc_38c4.yaml
-   config_mini_esp32s3_devkitc_1.yaml
-   config_mini_s3m.yaml
-   favicon.png
-   index.html
-   ```
+2. Open **Sketch → Show Sketch Folder** and go into the `data` folder. It holds `config.yaml`,
+   which the firmware loads at power-up, config files for other hardware, `favicon.png` and
+   `index.html`.
 
    ![The data folder.](yt:tKfVU1n5TjA@1:38#crop=0.1,0.37,0.68,0.5)
 
-4. Delete every `.yaml` file **except** the one for your hardware: `config_mini_bdc_30p.yaml` for the
-   BLD-120MM-PACK with the BDC-30P board. Keep `favicon.png` and `index.html`.
-5. Rename the file you kept to `config.yaml`. It sets the ESP32 pins, motors and LiDAR model.
+3. Delete every `.yaml` file **except** `config_mini_bdc_30p.yaml`, the config for the BLD-120MM-PACK
+   with the BDC-30P board. Keep `favicon.png` and `index.html`.
+4. Rename `config_mini_bdc_30p.yaml` to `config.yaml`. It sets the ESP32 pins, motors and LiDAR model.
 
    <div class="pair" markdown="1">
-   ![Keep only your board's config…](yt:tKfVU1n5TjA@1:44)
+   ![Keep only the BDC-30P config…](yt:tKfVU1n5TjA@1:44)
    ![…and rename it to config.yaml.](yt:tKfVU1n5TjA@1:47)
    </div>
 
 !!! update "Since the video was recorded"
     The firmware's default [`data/config.yaml`](https://github.com/kaiaai/firmware/blob/iron/kaiaai-esp32/data/config.yaml)
     is currently a copy of [`config_mini_bdc_30p.yaml`](https://github.com/kaiaai/firmware/blob/iron/kaiaai-esp32/data/config_mini_bdc_30p.yaml),
-    so for the BLD-120MM-PACK it already matches. Steps 4–5 give the same result.
+    so for the BLD-120MM-PACK it already matches. Steps 3–4 give the same result.
 
-!!! warning "Pick the config for your exact ESP32 chip"
-    The BDC-30P takes an ESP32 DOIT DevKit v1 (plain ESP32, not ESP32-S3). An ESP32-S3 config on a
-    plain ESP32, or vice versa, uses the wrong GPIO for the reset button, so the firmware thinks it
-    is always pressed and keeps booting into WiFi configuration (AP) mode.
+5. Run **Tools → ESP32 Sketch Data Upload**. At `Connecting....`, hold **BOOT** for 3 to 5 seconds.
 
-6. Click inside the code window, press **Ctrl+Shift+P**, type `Upload` and click
-   **Upload SPIFFS to Pico/ESP8266/ESP32**.
+   ![The sketch data upload is in the Tools menu.](yt:tKfVU1n5TjA@3:33)
 
-   ![Pick Upload SPIFFS to Pico/ESP8266/ESP32.](yt:tKfVU1n5TjA@2:08#crop=0.19,0.08,0.54,0.44)
-
-7. If it fails right away with `ERROR: No port specified, check IDE menus.`, restart the IDE and
-   retry. This happens often.
-
-   ![A common SPIFFS upload error.](yt:tKfVU1n5TjA@1:56#crop=0.36,0.40,0.50,0.16)
-
-8. At `Connecting....`, hold **BOOT** for 3 to 5 seconds.
-
-!!! tip "If the SPIFFS upload still fails"
+!!! tip "If the sketch data upload fails"
     - `Could not open COM3, the port doesn't exist`: close the Serial Monitor, check the USB cable,
       retry.
     - `SPIFFS_write error(-10010): unknown` / `error adding file!`: a file name in `data` is over
@@ -117,8 +88,8 @@ lives in a separate flash area (SPIFFS), so it is uploaded separately.
 
     See Appendix B for more.
 
-9. Close the SPIFFS Upload output tab, reopen the Serial Monitor and press **EN**.
-10. The ESP32 loads `config.yaml` and enters WiFi configuration mode:
+6. Reopen the Serial Monitor and press **EN**. The ESP32 loads `config.yaml` and enters WiFi
+   configuration mode:
 
     ```
     SPIFFS mounted successfully
@@ -131,27 +102,24 @@ lives in a separate flash area (SPIFFS), so it is uploaded separately.
 
     ![Config loaded; ready for WiFi configuration.](yt:tKfVU1n5TjA@2:34#crop=0.36,0.40,0.50,0.47)
 
-## If you use the legacy Arduino IDE 1.8.19
+## If you use Arduino IDE 2.x {: #ide2-upload }
 
-Only the menus differ. Do the `data` folder config-file steps before step 8.
+Skip this section if you use IDE 1.8.19. The steps above apply, with these differences:
 
-1. Open the robot's sketch in Arduino IDE 1.8.19.
-2. Select **Tools → Board → ESP32 Arduino → ESP32 Dev Module** (**ESP32S3 Dev Module** for Maker's
-   Pet ESP32-S3 boards).
+- **Board and port:** use the board selector at the top and choose **DOIT ESP32 DEVKIT V1** and your
+  COM port (`COM3` in the video). If the IDE offers updates, click **LATER**.
 
-   ![In IDE 1.8.19, choose ESP32 Dev Module.](yt:tKfVU1n5TjA@2:46)
+  ![Select the board and COM port in IDE 2.x.](yt:tKfVU1n5TjA@0:52)
 
-3. Connect the ESP32 over USB with the power switch off.
-4. Select your COM port under **Tools → Port** and click **Upload**.
-5. Hold **BOOT** for 3 to 5 seconds when the upload starts connecting.
-6. Open **Tools → Serial Monitor** and press **EN**. The ESP32 asks for sketch data.
-7. Close the Serial Monitor.
-8. Run **Tools → ESP32 Sketch Data Upload** and hold **BOOT** for 3 to 5 seconds when it connects.
+- **Sketch data upload:** click inside the code window, press **Ctrl+Shift+P**, type `Upload` and
+  click **Upload SPIFFS to Pico/ESP8266/ESP32**. Hold **BOOT** at `Connecting....` as before.
 
-   ![The sketch data upload is in the Tools menu.](yt:tKfVU1n5TjA@3:33)
+  ![Pick Upload SPIFFS to Pico/ESP8266/ESP32.](yt:tKfVU1n5TjA@2:08#crop=0.19,0.08,0.54,0.44)
 
-9. Reopen the Serial Monitor and press **EN**. The ESP32 loads `config.yaml` and enters WiFi
-   configuration mode.
+- If the sketch data upload fails right away with `ERROR: No port specified, check IDE menus.`,
+  restart the IDE and retry. This happens often with IDE 2.x.
+
+  ![A common IDE 2.x upload error.](yt:tKfVU1n5TjA@1:56#crop=0.36,0.40,0.50,0.16)
 
 ## Configure the robot's WiFi
 

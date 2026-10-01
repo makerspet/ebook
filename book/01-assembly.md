@@ -25,7 +25,7 @@ Lay everything out before you start:
 - **Wheels** (2) and **tires** (2).
 - **Motor cables** (2): a plug on one end, loose wires on the other.
 - **BDC-30P driver board** (open source).
-- **ESP32 30-pin dev kit module** (ESP32 DOIT DevKit v1).
+- **Maker's Pet ESP32-E 30-pin dev kit module**, compatible with the original 30-pin ESP32 DOIT DevKit v1.
 - **LDROBOT LD14P LiDAR** and its **breakout cable**.
 - **LiDAR skirt** (the white ring that holds the LiDAR).
 - **Battery case** for 6 AA batteries.
@@ -44,8 +44,7 @@ Tools:
 !!! tip "Printing the parts yourself"
     The 3D-printable parts are open source. The guide page has 3MF files for the base, LiDAR skirts,
     LiDAR posts, board posts, caster roller, caster mounts and the 2S battery holder backstop, plus
-    the wheels and motor clamps, a modified base for the longer ESP32-E board, and the full Fusion
-    360 model.
+    the wheels and motor clamps, and the full Fusion 360 model.
 
     When slicing the **caster roller** and **wheels**, set *Seam Position* to **Random**. Otherwise
     the caster can knock rhythmically and the robot may wobble.
@@ -217,18 +216,18 @@ Both motor terminal blocks use the same order:
 
 ## Insert the ESP32 module
 
-Plug the **30-pin ESP32 DevKit module** (ESP32 DOIT DevKit v1) into the board's socket with its USB
+Plug the **Maker's Pet ESP32-E 30-pin dev kit module** into the board's socket with its USB
 connector toward the **battery screw terminals**. Check before pressing it fully in: backwards, it
 gets the wrong power pins.
 
 <div class="pair" markdown="1">
-![Insert the ESP32 DOIT DevKit v1 module.](yt:6GtjAB19GP8@3:15)
+![Insert the ESP32 module.](yt:6GtjAB19GP8@3:15)
 ![USB connector toward the battery terminals.](yt:6GtjAB19GP8@3:17)
 </div>
 
 !!! note
-    The guide's `config.yaml` for BLD-120MM-PACK with the BDC-30P board takes the ESP32 DOIT DevKit
-    v1. For the longer ESP32-E board, use the modified base (see the printing tip above).
+    I test and support the kit with the Maker's Pet ESP32-E, which is compatible with the original
+    30-pin ESP32 DOIT DevKit v1. Clones from other makers might work, but aren't supported.
 
 ## Prepare the LiDAR
 

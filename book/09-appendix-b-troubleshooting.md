@@ -33,7 +33,7 @@ recording of RViz and the terminal plus a phone video of the robot.
 
 ### Can I use 18650 Li-Ion batteries instead of 6×AA?
 
-The BDC-30P (and BDC-38C4) boards are designed for alkaline batteries and have **no on-board
+The BDC-30P board is designed for alkaline batteries and has **no on-board
 protection** for rechargeable cells. If you still use them, the 120 mm base fits a 2-cell 18650
 holder:
 
@@ -832,7 +832,7 @@ Where it stops tells you where to look:
 
 ### Firmware uploaded, but no sketch data
 
-A 30-pin ESP32 dev board prints:
+The kit's ESP32-E prints:
 
 ```
 Kaia.ai firmware version 0.8.0-iron
@@ -841,10 +841,4 @@ SPIFFS mounted successfully
 Sketch data not found. Please upload sketch data.
 ```
 
-Some boards (for example a 38-pin dev board with an ESP32-WROOM-32D module) print this instead:
-
-```
-E (43) SPIFFS: mount failed, -10025
-```
-
-Either way, upload the sketch data (Chapter 3).
+Upload the sketch data (Chapter 3).

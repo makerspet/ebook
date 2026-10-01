@@ -27,7 +27,7 @@ Once it's built, your robot can:
 ## What you need
 
 - **The robot parts.** The Maker's Pet *Arduino/ROS2 Self-Driving Robot 120mm Build Pack*
-  (BLD-120MM-PACK) contains everything, including the BDC-30P driver board, an ESP32 dev kit and an
+  (BLD-120MM-PACK) contains everything, including the BDC-30P driver board, a Maker's Pet ESP32-E dev kit and an
   LDROBOT LD14P LiDAR. If you have a 3D printer, you can print the plastic parts yourself; the
   print files are listed in Appendix C.
 - **Six AA alkaline batteries.**

@@ -77,7 +77,7 @@ configuration mode.
 
 | Item | Version |
 |---|---|
-| Arduino IDE | 2.3.x (or 1.8.19) |
+| Arduino IDE | 1.8.19 (recommended) or 2.x |
 | ESP32 board package (esp32 by Espressif) | 2.0.17; avoid 2.0.15 and 3.x |
 | Robot firmware | Kaia.ai 0.8.x (`-iron`) |
 | ROS 2 | Iron, Docker image `kaiaai/kaiaai:iron` (Jazzy: `kaiaai/kaiaai:jazzy`) |
