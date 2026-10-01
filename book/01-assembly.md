@@ -78,8 +78,6 @@ Both motor terminal blocks use the same order:
     These are the colours of the cables shipping now. Restocked cables may differ; if so, go by the
     pin order on the plug and the terminal labels on the board.
 
-![One motor cable wired in.](frames/bdc-30p-with-motor-wires-attached.jpg)
-
 ![Both motor cables wired in.](frames/bdc-30p-with-motor-wires-attached-on-both-sides.jpg)
 
 !!! warning
@@ -91,28 +89,29 @@ Both motor terminal blocks use the same order:
 
 ### Posts
 
-1. Attach the four **board posts** to the base plate with **countersunk M3 screws**.
+1. Attach the four **board posts** to the base plate with **countersunk M3 screws**. Orient each
+   post's tab as shown: grab the post and its tab by hand and twist it carefully into place.
 
 <div class="pair" markdown="1">
 ![Attach the board posts.](frames/attach_board_posts_process.jpg)
 ![All four board posts in place.](frames/attach_board_posts_result.jpg)
 </div>
 
-2. Attach the four **LiDAR posts** the same way.
+2. Attach the four **LiDAR posts** the same way, oriented as shown.
 
-![Attach the LiDAR posts.](yt:6GtjAB19GP8@0:51)
-
-!!! update "Since the video was recorded"
-    Once the motors are in, check that no board post tab touches a motor. A post pressing on a motor
-    can block it, and a blocked motor can burn out when powered.
-
-![Make sure the PCB post tab doesn't touch the motor.](https://makerspet.com/wp-content/uploads/2026/04/pcb_post_touches_motor.webp)
+<div class="pair" markdown="1">
+![Attach the LiDAR posts.](frames/attach_lidar_posts_process.jpg)
+![Board and LiDAR posts in place, oriented as shown.](frames/attach_lidar_posts_result.jpg)
+</div>
 
 ### Caster roller
 
 1. Attach the two **caster wheel mounts** to the back of the base with **hex button M3 screws**, left slightly loose.
 
-![Attach the caster mounts at the back of the base.](yt:6GtjAB19GP8@1:03)
+<div class="pair" markdown="1">
+![Attach the caster mounts.](frames/attach_caster_mounts_process.jpg)
+![Caster mounts in place.](frames/attach_caster_mounts_result.jpg)
+</div>
 
 2. Push the metal shaft through the roller.
 3. Place the shaft ends into the two caster mounts.
@@ -120,8 +119,18 @@ Both motor terminal blocks use the same order:
 5. Press the roller against the table and roll the base back and forth until it spins freely.
 
 <div class="pair" markdown="1">
-![Fit the roller into the caster mounts.](yt:6GtjAB19GP8@1:24.5)
-![Roll the base to free up the roller.](yt:6GtjAB19GP8@1:33)
+![Push the shaft through the roller.](frames/insert_roller_shaft_process.jpg)
+![Place the shaft ends into the caster mounts.](frames/attach_roller_process.jpg)
+</div>
+
+<div class="pair" markdown="1">
+![Roller in place, bottom view.](frames/base_with_pcb_lidar_posts_and_roller_view_from_bottom.jpg)
+![Tighten the caster mount screws.](frames/tighten_caster_screws_process.jpg)
+</div>
+
+<div class="pair" markdown="1">
+![Roll the base to loosen the roller.](frames/loosen_the_roller_process.jpg)
+![Posts and roller in place, top view.](frames/base_with_pcb_lidar_posts_and_roller_view_from_top.jpg)
 </div>
 
 ### Motors
@@ -136,6 +145,12 @@ Both motor terminal blocks use the same order:
 </div>
 
 ![Both motors mounted, shafts pointing out.](yt:6GtjAB19GP8@2:08.5)
+
+!!! update "Since the video was recorded"
+    Check that no board post tab touches a motor. A post pressing on a motor can block it, and a
+    blocked motor can burn out when powered. If one does, twist the post to turn its tab away.
+
+![Make sure the board post tab doesn't touch the motor.](https://makerspet.com/wp-content/uploads/2026/04/pcb_post_touches_motor.webp)
 
 !!! update "Since the video was recorded"
     Bent plastic, including the base, can rub against the motor gears or encoder disk, stall the
@@ -300,7 +315,7 @@ motor-to-cable and cable-to-board connections.
 ![Both encoders should show a green light with the power on.](yt:6GtjAB19GP8@5:07)
 
 !!! update "Since the video was recorded: more motor checks from the guide"
-    - No **board post tab touches a motor** (see *Posts*).
+    - No **board post tab touches a motor** (see *Motors*).
     - The **power switch is ON**, the battery is connected and not low. The ESP32's power LED should light.
     - The motor wires are in the **correct screw terminals**, none broken or loose.
     - **No debris in the gearbox**; it can seize the gears and burn out the motor.

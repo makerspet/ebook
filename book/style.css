@@ -31,7 +31,7 @@ body { margin: 0; }
 .cover-brand span { font: 700 17pt Inter, sans-serif; color: var(--ink); letter-spacing: .01em; }
 .cover-robot { position: absolute; top: 1.7in; left: 50%; transform: translateX(-50%); width: 5.2in; }
 .cover-text { position: absolute; left: .8in; right: .8in; bottom: 1.05in; color: var(--ink); }
-.cover-title { font-size: 36pt; line-height: 1.1; margin: 0 0 .2in; font-weight: 700; padding-top: .2in; border-top: 4px solid var(--accent); }
+.cover-title { font-size: 36pt; line-height: 1.1; margin: 0 0 .2in; font-weight: 700; }
 .cover-sub { font-size: 14pt; line-height: 1.35; margin: 0 0 .3in; color: var(--muted); max-width: 5.8in; }
 .cover-author { font-size: 12pt; margin: 0; color: var(--ink); }
 
@@ -66,8 +66,9 @@ th { font-family: Inter, sans-serif; font-weight: 600; border-bottom: 1.5px soli
 /* ---- figures ---- */
 figure { margin: .1in 0 .18in; break-inside: avoid; text-align: center; }
 figure img { max-width: 100%; max-height: 3.1in; border-radius: 3pt; }
-figure.half, .pair figure { display: inline-block; width: 48.5%; vertical-align: top; margin: .05in 0 .14in; }
-figcaption { font: 8.8pt/1.35 Inter, sans-serif; color: var(--muted); margin-top: 4pt; text-align: left; }
+.pair { display: flex; gap: .16in; align-items: flex-start; break-inside: avoid; }
+.pair figure { flex: 1 1 0; min-width: 0; margin: .05in 0 .14in; }
+figcaption { font: 8.8pt/1.35 Inter, sans-serif; color: var(--muted); margin-top: 4pt; text-align: center; }
 .final .ts { display: none; }
 .ts { display: block; font: 600 7.5pt "JetBrains Mono", monospace; color: var(--accent); margin-top: 1pt; }
 p > img { max-width: 100%; max-height: 4in; display: block; margin: .08in auto; }

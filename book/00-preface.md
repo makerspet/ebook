@@ -5,9 +5,6 @@ that maps your home and drives itself to any spot you click on the map. It follo
 video course step by step, adds the fixes and tips I collected from builders after the videos
 were recorded, and puts everything in one place you can read at your workbench.
 
-!!! draft "Note for Ilia"
-    Drafted from the blog posts. Please rewrite it freely in your own words; the preface is where
-    your voice matters most.
 
 ## What you will build
 
@@ -25,7 +22,7 @@ Once it's built, your robot can:
 - **run in a 3D simulation**, mapping and navigating a virtual world;
 - **be reprogrammed** in Python or C++ to change its behaviour or process its sensor data.
 
-![The finished robot navigating on its own, next to the live map it builds.](yt:RCPUQmvS37Q@0:12)
+![The finished robot navigating on its own, next to the live map it builds.](frames/finished_robot_navigating_on_its_own.jpg)
 
 ## What you need
 

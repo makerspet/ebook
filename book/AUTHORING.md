@@ -13,7 +13,7 @@ Chapters live in `book/NN-slug.md` and are assembled in file-name order.
 - `VIDEO_ID` is the 11-character YouTube ID; `m:ss` may have a decimal (`2:24.5`).
 - `crop` is in fractions of the 1920×1080 frame: left, top, width, height (e.g. `0.25,0.1,0.5,0.6`).
   Use it to zoom into a terminal, a browser address bar, a dialog or a small part on the board.
-- To review or fix a frame: open the draft PDF, click the orange `VIDEO_ID @ m:ss` link under the
+- To review or fix a frame: build with `--timestamps`, open the draft PDF, click the orange `VIDEO_ID @ m:ss` link under the
   figure (opens YouTube at that second), pick a better moment, edit the timestamp, rebuild.
 - Two small figures side by side:
 
@@ -61,7 +61,8 @@ One or two paragraphs: what you will do, what you need before starting, roughly 
 ## Building
 
 ```
-python tools/build.py           # build/ebook-draft.pdf, with figure timestamps
+python tools/build.py           # build/ebook-draft.pdf, with open questions
+python tools/build.py --timestamps   # also label figures with timestamps / file names
 python tools/build.py --final   # build/ebook.pdf
 python tools/peek.py VIDEO_ID 1:23 1:25 [--crop x,y,w,h]   # full-res frames into work/peek/
 python tools/preview.py build/ebook-draft.pdf 5 12         # PDF pages -> work/preview/*.png

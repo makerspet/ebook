@@ -1,7 +1,8 @@
 """Build the e-book PDF from book/*.md.
 
-    python tools/build.py            # draft: figure timestamps shown, linked to YouTube
-    python tools/build.py --final    # final: no timestamp chips
+    python tools/build.py                # draft: open questions (!!! draft) shown
+    python tools/build.py --final        # final: no draft notes
+    python tools/build.py --timestamps   # also label each figure with its timestamp / file name
 
 Figures are written in Markdown as
 
@@ -99,7 +100,7 @@ def fetch(url):
 IMG_LINE_RE = re.compile(r'^([ \t]*)!\[([^\]]*)\]\(([^)\s]+)\)[ \t]*$')
 
 
-def figures(md_text, draft):
+def figures(md_text, labels):
     """Turn every image that sits on a line of its own into a captioned <figure>.
 
     yt: references become frames extracted from the video. A figure keeps its line's
@@ -117,13 +118,13 @@ def figures(md_text, draft):
         if y:
             _, vid, ts, crop = y.groups()
             src = grab(vid, ts, crop)
-            if draft:
+            if labels:
                 chip = (f'<a class="ts" href="https://youtu.be/{vid}?t={int(seconds(ts))}">{vid} @ {ts}'
                         f'{" crop " + crop if crop else ""}</a>')
         elif not re.match(r'https?://', src):  # a local image, e.g. a hand-picked frame in book/frames/
             label = src
             src = local_image(src)
-            if draft:
+            if labels:
                 chip = f'<span class="ts">{html.escape(label)}</span>'
         cap_html = markdown.markdown(cap)[3:-4] if cap else ''
         fig = (f'{indent}<figure><img src="{src}" alt="{html.escape(cap)}">'
@@ -142,7 +143,7 @@ def slug(text):
     return re.sub(r'[^a-z0-9]+', '-', text.lower()).strip('-')
 
 
-def build(draft):
+def build(draft, labels):
     os.makedirs(OUT, exist_ok=True)
     files = sorted(glob.glob(os.path.join(BOOK, '[0-9]*.md')))
     chapters, toc = [], []
@@ -152,7 +153,7 @@ def build(draft):
             text = re.sub(r'(?s)<!--.*?-->', '', text)
         md = markdown.Markdown(extensions=['extra', 'admonition', 'sane_lists', 'toc'],
                                extension_configs={'toc': {'slugify': lambda v, s: slug(v)}})
-        body = md.convert(figures(text, draft))
+        body = md.convert(figures(text, labels))
         kind = 'front' if os.path.basename(path).startswith('00') else 'chapter'
         m = re.search(r'<h1 id="([^"]+)">(.*?)</h1>', body)
         if m and kind == 'chapter':
@@ -196,5 +197,8 @@ def render_pdf(html_path, pdf_path):
 
 if __name__ == '__main__':
     ap = argparse.ArgumentParser()
-    ap.add_argument('--final', action='store_true', help='omit figure timestamps and draft notes')
-    build(draft=not ap.parse_args().final)
+    ap.add_argument('--final', action='store_true', help='omit draft notes')
+    ap.add_argument('--timestamps', action='store_true',
+                    help='label each figure with its video timestamp or file name')
+    a = ap.parse_args()
+    build(draft=not a.final, labels=a.timestamps)
