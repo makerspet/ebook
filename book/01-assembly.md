@@ -220,10 +220,7 @@ Plug the **Maker's Pet ESP32-E 30-pin dev kit module** into the board's socket w
 connector toward the **battery screw terminals**. Check before pressing it fully in: backwards, it
 gets the wrong power pins.
 
-<div class="pair" markdown="1">
-![Insert the ESP32 module.](yt:6GtjAB19GP8@3:15)
-![USB connector toward the battery terminals.](yt:6GtjAB19GP8@3:17)
-</div>
+![Insert the ESP32 module. Check the orientation.](frames/check_the_module_orientation.jpg)
 
 !!! note
     I test and support the kit with the Maker's Pet ESP32-E, which is compatible with the original
@@ -234,7 +231,7 @@ gets the wrong power pins.
 1. Attach the **LiDAR skirt** to the LiDAR with **three M3 hex button screws**, leaving no gaps.
 
 <div class="pair" markdown="1">
-![Attach the LiDAR skirt.](yt:6GtjAB19GP8@3:27)
+![Attach the LiDAR skirt.](frames/attach_lidar_skirt.jpg)
 ![No gaps between skirt and LiDAR.](yt:6GtjAB19GP8@3:40.5)
 </div>
 
@@ -243,7 +240,10 @@ gets the wrong power pins.
 1. Make sure the board's power switch is **OFF**.
 2. Put 6 × AA batteries into the case and place it on the base as shown.
 
-![Power switch OFF before inserting the batteries.](yt:6GtjAB19GP8@3:44)
+<div class="pair" markdown="1">
+![Make sure the power switch is OFF.](frames/make_sure_power_switch_is_off.jpg)
+![Place the battery case.](frames/place_the_battery.jpg)
+</div>
 
 !!! update "Since the video was recorded: 18650 rechargeable battery holder mod"
     The BDC-30P is designed for **non-rechargeable alkaline** batteries (6 × AA) and has no
@@ -271,22 +271,24 @@ gets the wrong power pins.
 
     Restocked cables may use other colours; go by the pin labels.
 
-![Connect the LiDAR breakout cable to the board.](yt:6GtjAB19GP8@3:53)
+![Connect the LiDAR wires to the board.](frames/connect_lidar_wires.jpg)
 
-2. Line the plug up with the LiDAR's connector and plug it in.
+2. Line the plug up with the LiDAR's connector and push it in gently until it clicks.
+3. Fold the wires neatly and place the LiDAR on the robot.
 
-![Align the cable plug with the LiDAR connector.](yt:6GtjAB19GP8@4:13)
-
-3. Fold the wires neatly before placing the LiDAR on the robot.
-
-![Fold the wires before placing the LiDAR.](yt:6GtjAB19GP8@4:19)
+<div class="pair" markdown="1">
+![Align the plug and push it in gently until it clicks.](frames/align_plug_with_lidar_connector_and_push_plug_in_gently_until_click.jpg)
+![Fold the wires and place the LiDAR.](frames/fold_wires_and_place_lidar.jpg)
+</div>
 
 Don't fix the LiDAR in place until after the firmware upload.
 
 
 ## Connect to your computer
 
-Connect the ESP32 to your computer with a USB cable. The robot is ready for the firmware upload.
+Place the LiDAR carefully aside on the table, still connected to the board, to reach the ESP32-E's
+USB connector. Connect the ESP32 to your computer with a USB cable. The robot is ready for the
+firmware upload.
 
 ![Ready to upload the firmware!](yt:6GtjAB19GP8@4:32)
 
@@ -298,24 +300,28 @@ Connect the ESP32 to your computer with a USB cable. The robot is ready for the 
 **A screw terminal connection fails.** Usually the stripped end is too short. Strip it even longer
 than in the video.
 
-![Strip wires long.](yt:6GtjAB19GP8@4:39)
+![Strip wires even longer than shown.](frames/even_longer_than_shown.jpg)
 
 **A screw won't hold in plastic.** Overtightening stripped the thread. Push a small wood splinter
 into the hole and drive the screw back in.
 
+![Insert a wood splinter to fix the thread.](frames/insert_a_splinter_to_fix_thread.jpg)
+
 **The motor connector housing has slid up.** The plastic housing can slide up, off the connector
 pins. Press it back down fully before plugging in the cable.
 
-![Press the connector housing back down fully.](yt:6GtjAB19GP8@4:53)
+![The connector housing slid up fully; press it back down.](frames/slide_connector_housing_up_fully.jpg)
 
 **One motor works, the other doesn't.** Swap the two motors' connections. If the problem moves
 sides, the motor (or its cable) is at fault; if it stays, check that side's screw terminals.
+
+![Swap the two motors' connections.](frames/swap_two_motors_connections.jpg)
 
 **Check the green encoder lights.** With the battery on, each motor's encoder board should show a
 green light. If one is off, that encoder has no power: check the battery, the switch, and the
 motor-to-cable and cable-to-board connections.
 
-![Both encoders should show a green light with the power on.](yt:6GtjAB19GP8@5:07)
+![Check the motor encoder lights.](frames/check_motor_encoder_lights.jpg)
 
 !!! update "Since the video was recorded: more motor checks from the guide"
     - No **board post tab touches a motor** (see *Motors*).
@@ -337,3 +343,5 @@ motor-to-cable and cable-to-board connections.
     - Check the batteries make good contact in the holder (wiggle tight ones) and measure each one.
 
 Next, set up the software and upload the firmware.
+
+![The finished robot. Happy building!](frames/the_finished_robot.jpg)
