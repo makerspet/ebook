@@ -61,7 +61,8 @@ lives in a separate flash area (SPIFFS), so it is uploaded separately.
 
 1. **Close the Serial Monitor**; it holds the COM port and the upload will fail.
 2. Open **Sketch → Show Sketch Folder** and go into the `data` folder.
-3. It has one config file per hardware option. In the video:
+3. It has `config.yaml`, which the firmware loads at power-up, plus one config file per hardware
+   option. In the video:
 
    ```
    config.yaml
@@ -85,12 +86,10 @@ lives in a separate flash area (SPIFFS), so it is uploaded separately.
    ![…and rename it to config.yaml.](yt:tKfVU1n5TjA@1:47)
    </div>
 
-!!! draft "Question for Ilia"
-    The video uses `config_mini_bdc_30p.yaml` from the firmware's data folder (overlay at 1:44).
-    The guide links "config.yaml for BLD-120MM-PACK with a BDC-30P driver board" to
-    [makerspet/store/.../MINI-BDC30P-BODY/v1.0.0/config_bdc_30p.yaml](https://github.com/makerspet/store/blob/main/MINI-BDC30P-BODY/v1.0.0/config_bdc_30p.yaml).
-    Which should readers use? If the store file, this step becomes an `!!! update`: download it,
-    rename it to config.yaml, put it in the data folder.
+!!! update "Since the video was recorded"
+    The firmware's default [`data/config.yaml`](https://github.com/kaiaai/firmware/blob/iron/kaiaai-esp32/data/config.yaml)
+    is currently a copy of [`config_mini_bdc_30p.yaml`](https://github.com/kaiaai/firmware/blob/iron/kaiaai-esp32/data/config_mini_bdc_30p.yaml),
+    so for the BLD-120MM-PACK it already matches. Steps 4–5 give the same result.
 
 !!! warning "Pick the config for your exact ESP32 chip"
     The BDC-30P takes an ESP32 DOIT DevKit v1 (plain ESP32, not ESP32-S3). An ESP32-S3 config on a
@@ -331,7 +330,7 @@ only runs at full speed, see Appendix B.
 ## Check the LiDAR
 
 1. Turn the power off and unplug the USB cable.
-2. Reattach the LiDAR if you removed it.
+2. Reattach the LiDAR to the LiDAR posts with **hex button M3 screws**.
 
    ![Reattach the LiDAR.](yt:tKfVU1n5TjA@7:48)
 

@@ -27,6 +27,9 @@ Chapters live in `book/NN-slug.md` and are assembled in file-name order.
 - Ordinary images (`![Caption](https://...)`) work too, e.g. illustrations from makerspet.com or
   the support forum; they are downloaded and cached at build time.
 
+- Keep a callout with its figure: wrap both in `<div class="keep" markdown="1"> … </div>`.
+  Force a page break with `<div class="page-break"></div>`.
+
 ## Chapter shape
 
 ```markdown

@@ -29,7 +29,8 @@ Lay everything out before you start:
 - **LDROBOT LD14P LiDAR** and its **breakout cable**.
 - **LiDAR skirt** (the white ring that holds the LiDAR).
 - **Battery case** for 6 AA batteries.
-- **M3 screws**: *countersunk* (flat, flush heads) and *hex button* (rounded, hex socket).
+- **M3 screws** of two kinds: *countersunk* (flat head) screws go on the underside of the base;
+  *hex button* (rounded head) screws go everywhere else.
 
 Tools:
 
@@ -89,7 +90,7 @@ Both motor terminal blocks use the same order:
 
 ### Posts
 
-1. Attach the four **board posts** to the base plate with **countersunk M3 screws**. Orient each
+1. Attach the four **board posts**, the shorter posts, to the base plate with **countersunk M3 screws**. Orient each
    post's tab as shown: grab the post and its tab by hand and twist it carefully into place.
 
 <div class="pair" markdown="1">
@@ -97,7 +98,7 @@ Both motor terminal blocks use the same order:
 ![All four board posts in place.](frames/attach_board_posts_result.jpg)
 </div>
 
-2. Attach the four **LiDAR posts** the same way, oriented as shown.
+2. Attach the four longer **LiDAR posts** the same way, oriented as shown.
 
 <div class="pair" markdown="1">
 ![Attach the LiDAR posts.](frames/attach_lidar_posts_process.jpg)
@@ -146,11 +147,13 @@ Both motor terminal blocks use the same order:
 
 ![Both motors mounted, shafts pointing out.](yt:6GtjAB19GP8@2:08.5)
 
+<div class="keep" markdown="1">
 !!! update "Since the video was recorded"
     Check that no board post tab touches a motor. A post pressing on a motor can block it, and a
     blocked motor can burn out when powered. If one does, twist the post to turn its tab away.
 
 ![Make sure the board post tab doesn't touch the motor.](https://makerspet.com/wp-content/uploads/2026/04/pcb_post_touches_motor.webp)
+</div>
 
 !!! update "Since the video was recorded"
     Bent plastic, including the base, can rub against the motor gears or encoder disk, stall the
@@ -160,13 +163,23 @@ Both motor terminal blocks use the same order:
 
 1. Make sure each wheel is free of debris.
 2. Press a tire into each wheel's groove all the way around.
-3. Line up the flat on the motor shaft with the flat in the wheel hub and press the wheel fully on.
-4. Spin each wheel by hand to check it doesn't rub.
 
 <div class="pair" markdown="1">
-![Press the tire into the wheel's groove.](yt:6GtjAB19GP8@2:15)
-![Line up the hub flat with the shaft flat.](yt:6GtjAB19GP8@2:23)
+![Put the tire on the wheel.](frames/attach_tire_process.jpg)
+![Press the tire into the groove with your fingers.](frames/press_tire_in_using_your_fingers.jpg)
 </div>
+
+3. Find the flat on the motor shaft and the matching flat in the wheel's hub.
+
+<div class="pair" markdown="1">
+![The flat on the motor shaft.](frames/motor_shaft_flat_being_pointed_out.jpg)
+![The flat in the wheel hub.](frames/wheel_shaft_pocket_flat_being_pointed_out.jpg)
+</div>
+
+4. Line up the flats and press the wheel fully onto the shaft with both hands.
+5. Spin each wheel by hand to check it doesn't rub.
+
+![Press the wheel fully onto the shaft with both hands. Check wheel rotation.](frames/press_wheel_onto_shaft_fully_with_both_hands.jpg)
 
 !!! update "Since the video was recorded"
     Grit or plastic shavings in the gearbox can jam the gears and burn out the motor. That's why you
@@ -176,20 +189,22 @@ Both motor terminal blocks use the same order:
 
 1. Line up each motor cable's plug with the connector on the back of the motor and press it in gently. If it won't go in, check the alignment rather than forcing it.
 
-![Align the plug with the motor's receptacle, then press it in gently.](yt:6GtjAB19GP8@2:33)
+<div class="pair" markdown="1">
+![Align the plug with the motor's receptacle.](frames/align_plug_with_the_motors_receptacle.jpg)
+![Press the plug in gently.](frames/press_plug_into_motor_receptable_gently.jpg)
+</div>
 
-2. Route the motor cables under the board.
-3. Gently bend the wires down at the plugs so they don't stick up under the board.
+2. Route the cables under the board and gently bend the wires down at the motor plugs.
 
-![Bend the wires down at the motor plugs.](yt:6GtjAB19GP8@2:50)
+![Route cables under the board. Bend the wires down at the motor plugs gently.](yt:6GtjAB19GP8@2:50)
 
-4. Attach the board to the posts with **four hex button M3 screws**.
+3. Attach the board to the posts with **four hex button M3 screws**.
 
-![Attach the board to the posts.](yt:6GtjAB19GP8@2:55)
+![Attach the board to the posts.](frames/attach_board_to_posts_using_screws.jpg)
 
 !!! tip
-    Before plugging in each cable, check the motor's connector: its plastic housing can slide out
-    of place. See [Troubleshooting](#troubleshooting-tips).
+    Before plugging in each cable, check the motor's connector: its plastic housing can slide up
+    off its pins. See [Troubleshooting](#troubleshooting-tips).
 
 ## Connect the battery
 
@@ -197,12 +212,8 @@ Both motor terminal blocks use the same order:
 2. Check the polarity **before** switching on. Reversed polarity will burn the board.
 3. This time, **don't** fold back the stripped conductors; insert them straight.
 
-![The battery terminal and the power switch next to it.](yt:6GtjAB19GP8@2:33#crop=0.35,0.1,0.35,0.4)
+![Battery wires in the screw terminal: red to +BAT, black to GND.](frames/positive_and_negative_battery_wires_attached_to_board_screw_terminals.jpg)
 
-!!! draft "Question for Ilia"
-    The video doesn't say which colour goes where; I took red → `+BAT`, black → `GND` from the
-    silkscreen. Please confirm. Also, why not fold back the battery wires (thicker wire?), so the
-    book can explain?
 
 ## Insert the ESP32 module
 
@@ -273,8 +284,6 @@ gets the wrong power pins.
 
 Don't fix the LiDAR in place until after the firmware upload.
 
-!!! draft "Question for Ilia"
-    How is the skirted LiDAR fixed to the LiDAR posts (which screws?), so Chapter 3 can say so?
 
 ## Connect to your computer
 
@@ -295,15 +304,10 @@ than in the video.
 **A screw won't hold in plastic.** Overtightening stripped the thread. Push a small wood splinter
 into the hole and drive the screw back in.
 
-**The motor connector housing has slid out of place.** The housing can slide along its pins toward
-the motor's magnet. Slide it carefully all the way back before plugging in the cable.
+**The motor connector housing has slid up.** The plastic housing can slide up, off the connector
+pins. Press it back down fully before plugging in the cable.
 
-![Slide the connector housing back into place.](yt:6GtjAB19GP8@4:53)
-
-!!! draft "Question for Ilia"
-    The narration says "the housing can slide up, press it back down", the overlay says "Slide
-    connector housing up fully", and the guide says it slides "towards the motor's magnet; pull it
-    back into place". I wrote "slide it back into place". Which wording do you want?
+![Press the connector housing back down fully.](yt:6GtjAB19GP8@4:53)
 
 **One motor works, the other doesn't.** Swap the two motors' connections. If the problem moves
 sides, the motor (or its cable) is at fault; if it stays, check that side's screw terminals.

@@ -57,6 +57,8 @@ software setup, the assembly and the bring-up. For a first build, set aside a da
 | Appendix B | Troubleshooting and FAQ | |
 | Appendix C | Quick reference: commands, LED codes and links | |
 
+<div class="page-break"></div>
+
 Pick your path:
 
 - **Windows PC:** Chapters 1 → 2 → 3 → 4 → 5.
@@ -94,6 +96,8 @@ to open.
 This edition was written for Kaia.ai firmware 0.8.0 (ROS 2 Iron), the ESP32 Arduino board package
 2.0.17 and the `kaiaai/kaiaai:iron` Docker image. A ROS 2 Jazzy image, `kaiaai/kaiaai:jazzy`, is
 also available; see Chapter 7.
+
+<div class="page-break"></div>
 
 ## Open source, and where to get help
 

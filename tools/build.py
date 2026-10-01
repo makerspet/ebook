@@ -158,6 +158,10 @@ def build(draft, labels):
         m = re.search(r'<h1 id="([^"]+)">(.*?)</h1>', body)
         if m and kind == 'chapter':
             toc.append((m.group(1), re.sub('<[^>]+>', '', m.group(2))))
+            # move "3." / "Appendix B." into data-num so the running header shows just the title
+            n = re.match(r'((?:Appendix [A-Z]|\d+)\.)\s+(.*)', m.group(2), re.S)
+            if n:
+                body = body.replace(m.group(0), f'<h1 id="{m.group(1)}" data-num="{n.group(1)}">{n.group(2)}</h1>', 1)
         chapters.append(f'<section class="{kind}">\n{body}\n</section>')
     toc_html = '\n'.join(f'<li><a href="#{a}"><span class="t">{html.escape(t)}</span><span class="dots"></span><span class="pn"></span></a></li>' for a, t in toc)
     tpl = open(os.path.join(BOOK, 'template.html'), encoding='utf-8').read()

@@ -85,7 +85,7 @@ Start with the mechanics and wiring:
   out.
 - Check the switch is ON and the batteries are connected and fresh.
 - **Double-check the motor connections**, the most common issue:
-    - The motor's connector housing can slide towards the magnet. Carefully push it back.
+    - The motor's connector housing can slide up, off its pins. Press it back down fully.
     - Make sure the motor wires go to the correct screw terminals.
     - A screw terminal wire can break off or fail to make contact. Follow Chapter 1 for reliable
       connections.

@@ -98,7 +98,7 @@ configuration mode.
 - Robot firmware: [github.com/kaiaai/firmware](https://github.com/kaiaai/firmware)
 - ROS 2 packages and command cheat sheets: [github.com/kaiaai/kaiaai](https://github.com/kaiaai/kaiaai)
 - Robot model, navigation and teleop settings: [github.com/makerspet/makerspet_mini](https://github.com/makerspet/makerspet_mini/tree/iron/config)
-- BDC-30P `config.yaml`: [github.com/makerspet/store/.../config_bdc_30p.yaml](https://github.com/makerspet/store/blob/main/MINI-BDC30P-BODY/v1.0.0/config_bdc_30p.yaml)
+- Default `config.yaml` (BDC-30P): [github.com/kaiaai/firmware/.../data/config.yaml](https://github.com/kaiaai/firmware/blob/iron/kaiaai-esp32/data/config.yaml)
 - Configuration file reference: [blog.kaia.ai/kaiaai-configuration-file](https://blog.kaia.ai/kaiaai-configuration-file)
 - Native install scripts (no Docker): [github.com/kaiaai/install](https://github.com/kaiaai/install)
 
