@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --ink: #1d232a;
+  --muted: #5d6873;
+  --accent: #d2601a;
+  --rule: #d9dee3;
+  --code-bg: #f3f5f7;
+  --note: #2f6fb3;
+  --warn: #c0392b;
+  --tip: #2e8b57;
+}
+
+@page {
+  size: letter;
+  margin: 0.8in 0.8in 0.85in 0.8in;
+  @top-left { content: string(chapter); font: 8.5pt Inter, sans-serif; color: var(--muted); }
+  @top-right { content: "Build an Arduino, ROS 2 Self-Driving Robot"; font: 8.5pt Inter, sans-serif; color: var(--muted); }
+  @bottom-center { content: counter(page); font: 9pt Inter, sans-serif; color: var(--muted); }
+}
+@page :first { margin: 0; @top-left { content: none; } @top-right { content: none; } @bottom-center { content: none; } }
+
+html { font: 10.5pt/1.5 "Source Serif 4", Georgia, serif; color: var(--ink); }
+body { margin: 0; }
+
+/* ---- cover ---- */
+.cover { position: relative; height: 11in; width: 8.5in; overflow: hidden; break-after: page; background: #fff; font-family: Inter, sans-serif; }
+.cover::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: .45in; background: var(--accent); }
+.cover-brand { position: absolute; top: .6in; left: .8in; display: flex; align-items: center; gap: .14in; }
+.cover-brand img { width: .75in; height: .75in; }
+.cover-brand span { font: 700 17pt Inter, sans-serif; color: var(--ink); letter-spacing: .01em; }
+.cover-robot { position: absolute; top: 1.7in; left: 50%; transform: translateX(-50%); width: 5.2in; }
+.cover-text { position: absolute; left: .8in; right: .8in; bottom: 1.05in; color: var(--ink); }
+.cover-title { font-size: 36pt; line-height: 1.1; margin: 0 0 .2in; font-weight: 700; padding-top: .2in; border-top: 4px solid var(--accent); }
+.cover-sub { font-size: 14pt; line-height: 1.35; margin: 0 0 .3in; color: var(--muted); max-width: 5.8in; }
+.cover-author { font-size: 12pt; margin: 0; color: var(--ink); }
+
+/* ---- contents ---- */
+.toc { break-after: page; }
+.toc h2 { font: 700 22pt Inter, sans-serif; margin: 0 0 .3in; }
+.toc ol { list-style: none; padding: 0; margin: 0; counter-reset: none; }
+.toc li { font: 11.5pt/1.2 Inter, sans-serif; margin: 0 0 .14in; }
+.toc a { color: var(--ink); text-decoration: none; display: flex; align-items: baseline; }
+.toc .dots { flex: 1; border-bottom: 1.2px dotted #9aa5ae; margin: 0 6pt; transform: translateY(-3pt); }
+.toc .pn { color: var(--muted); min-width: 1.5em; text-align: right; }
+
+/* ---- chapters ---- */
+section.chapter, section.front { break-before: page; }
+h1 { string-set: chapter content(text); font: 700 24pt/1.15 Inter, sans-serif; margin: 0 0 .25in; padding-bottom: .12in; border-bottom: 3px solid var(--accent); }
+h2 { font: 700 14.5pt/1.25 Inter, sans-serif; margin: .3in 0 .08in; break-after: avoid; }
+h3 { font: 600 11.5pt/1.3 Inter, sans-serif; margin: .2in 0 .05in; break-after: avoid; }
+p { margin: 0 0 .09in; orphans: 3; widows: 3; }
+a { color: var(--note); text-decoration: none; }
+ul, ol { margin: 0 0 .1in; padding-left: .28in; }
+li { margin: 0 0 .03in; }
+strong { font-weight: 600; }
+
+code { font: 8.8pt "JetBrains Mono", Consolas, monospace; background: var(--code-bg); padding: .5pt 2.5pt; border-radius: 2pt; }
+pre { background: var(--code-bg); border-left: 3px solid var(--rule); padding: .08in .12in; margin: .06in 0 .14in; white-space: pre-wrap; word-break: break-all; break-inside: avoid; }
+pre code { background: none; padding: 0; font-size: 8.4pt; line-height: 1.45; }
+
+table { border-collapse: collapse; margin: .08in 0 .16in; font-size: 9.5pt; width: 100%; break-inside: avoid; }
+th, td { border-bottom: 1px solid var(--rule); padding: 3pt 6pt; text-align: left; vertical-align: top; }
+th { font-family: Inter, sans-serif; font-weight: 600; border-bottom: 1.5px solid var(--ink); }
+
+/* ---- figures ---- */
+figure { margin: .1in 0 .18in; break-inside: avoid; text-align: center; }
+figure img { max-width: 100%; max-height: 3.1in; border-radius: 3pt; }
+figure.half, .pair figure { display: inline-block; width: 48.5%; vertical-align: top; margin: .05in 0 .14in; }
+figcaption { font: 8.8pt/1.35 Inter, sans-serif; color: var(--muted); margin-top: 4pt; text-align: left; }
+.final .ts { display: none; }
+.ts { display: block; font: 600 7.5pt "JetBrains Mono", monospace; color: var(--accent); margin-top: 1pt; }
+p > img { max-width: 100%; max-height: 4in; display: block; margin: .08in auto; }
+
+/* ---- callouts (Markdown "!!! note" blocks) ---- */
+.admonition { border-left: 4px solid var(--note); background: #f1f6fb; padding: .07in .13in .03in; margin: .1in 0 .15in; break-inside: avoid; border-radius: 0 3pt 3pt 0; }
+.admonition-title { font: 700 9pt Inter, sans-serif; text-transform: uppercase; letter-spacing: .05em; color: var(--note); margin-bottom: .03in; }
+.admonition.warning, .admonition.danger { border-color: var(--warn); background: #fcf1f0; }
+.admonition.warning .admonition-title, .admonition.danger .admonition-title { color: var(--warn); }
+.admonition.tip { border-color: var(--tip); background: #eff8f3; }
+.admonition.tip .admonition-title { color: var(--tip); }
+.admonition.update { border-color: var(--accent); background: #fdf3ec; }
+.admonition.update .admonition-title { color: var(--accent); }
+.admonition.draft { border-color: #9b59b6; background: #f6eff9; }
+.admonition.draft .admonition-title { color: #9b59b6; }
+.final .admonition.draft { display: none; }
+
+.video-link { font: 9pt Inter, sans-serif; color: var(--muted); margin: -.12in 0 .2in; }

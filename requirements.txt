@@ -1,0 +1,6 @@
+markdown>=3.5
+pillow>=10
+imageio-ffmpeg>=0.5
+yt-dlp>=2025.1
+playwright>=1.45
+pymupdf>=1.24
