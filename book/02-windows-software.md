@@ -16,15 +16,15 @@ the robot. Expect large downloads and a couple of reboots.
     part: install WSL2, Docker Desktop, the X server and PowerShell, and download the Docker image.
 
 !!! tip "Which Arduino IDE?"
-    I recommend **Arduino IDE 1.8.19**: it's tried and true, and frozen, so it won't change under
-    you. Arduino IDE 2.x works too, but has given me some headaches. The video shows 2.x first;
-    this book covers 1.8.19 first and 2.x after it.
+    Both Arduino IDE 2.x and 1.8.19 work. I recommend **1.8.19**: it's tried and true, and frozen,
+    so it won't change under you, while 2.x has given me some headaches. This chapter covers 2.x
+    first, then [1.8.19](#if-you-prefer-arduino-ide-1-8-19).
 
-## Install Arduino IDE 1.8.19
+## Install Arduino IDE 2
 
-1. On arduino.cc, open **Software** and, under **Legacy IDE (1.8.X)**, download **Arduino IDE
-   1.8.19** for Windows (Win 7 and newer).
-   ![Arduino IDE 1.8.19 in the Legacy IDE section.](yt:IOQBNl0O_tI@2:56)
+1. On arduino.cc, open **Software** and under **Arduino IDE 2.x** download the first **Windows**
+   option (Win 10 and newer, 64 bits). The video used Arduino IDE 2.3.4.
+   ![Arduino IDE 2 download options.](yt:IOQBNl0O_tI@0:28#crop=0,0,0.94,0.86)
 2. Run the installer, accept the defaults, and launch the IDE. If Windows Firewall asks, click
    **Allow**.
 
@@ -32,20 +32,19 @@ the robot. Expect large downloads and a couple of reboots.
 
 The robot's brain is an ESP32, so the IDE needs Espressif's ESP32 compiler and SDK.
 
-1. Go to **File → Preferences**. In **Additional Boards Manager URLs**, paste this URL and click
+1. Go to **File → Preferences**. In **Additional boards manager URLs**, paste this URL and click
    **OK**:
 
     ```
     https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
     ```
 
-2. Go to **Tools → Board → Boards Manager**, search for `esp32`, select version **2.0.17** of
-   **esp32 by Espressif Systems** (not the newest) and click **Install**. Then close the IDE.
-
-<div class="pair" markdown="1">
-![File → Preferences.](yt:IOQBNl0O_tI@3:26)
-![Boards Manager: esp32 2.0.17.](yt:IOQBNl0O_tI@3:38)
-</div>
+    ![File → Preferences in Arduino IDE 2.](yt:IOQBNl0O_tI@1:02)
+2. Go to **Tools → Board → Boards Manager**.
+   ![Tools → Board → Boards Manager.](yt:IOQBNl0O_tI@1:10)
+3. Search for `Espressif`. For **esp32 by Espressif Systems**, select version **2.0.17**, not the
+   newest, and click **INSTALL**. Then close the IDE.
+   ![Select version 2.0.17.](yt:IOQBNl0O_tI@1:16)
 
 !!! update "Since the video was recorded"
     Stay on ESP32 board package **2.0.17**:
@@ -65,43 +64,20 @@ The robot's brain is an ESP32, so the IDE needs Espressif's ESP32 compiler and S
    holds `.arduinoIDE`, `kaiaai-esp32`, `libraries`, `tools` and a few files.
    ![Inside the firmware-* folder.](yt:IOQBNl0O_tI@1:44)
 4. Copy **everything** in that folder into your Arduino sketch folder, usually
-   `Documents\Arduino`. This installs the firmware project, the tested versions of the libraries
-   it needs, and (from `tools`) the **Tools → ESP32 Sketch Data Upload** menu item used in
-   Chapter 3.
+   `Documents\Arduino`. This installs the firmware project and the tested versions of the
+   libraries it needs.
    ![Copy everything into your sketch folder.](yt:IOQBNl0O_tI@1:52)
 
 !!! tip
     Your sketch folder is shown as **Sketchbook location** in **File → Preferences**. With
     OneDrive, it may be under OneDrive, as in the video.
 
-## Compile the firmware
+## Install the Arduino IDE plugin
 
-1. Launch the Arduino IDE. If it offers library or board updates, decline them. Newer versions can
-   break compilation.
-2. Go to **File → Open** and open `Documents\Arduino\kaiaai-esp32`.
-3. Go to **Tools → Board → ESP32 Arduino** and select **ESP32 Dev Module**.
-   ![Select ESP32 Dev Module.](yt:IOQBNl0O_tI@4:06)
-4. Click **Verify** (check mark). Compiling can take a few minutes and should finish with no errors.
-   ![The firmware compiled.](yt:IOQBNl0O_tI@4:16)
+The `arduino-spiffs-upload` plugin uploads the robot's configuration files to the ESP32 later.
 
-!!! tip "Compile error: `#error This code runs on ESP32`"
-    No ESP32 board is selected. Select it as in step 3. If no ESP32 boards are listed, add the
-    Espressif toolchain first.
-
-## If you use Arduino IDE 2.x
-
-Skip this section if you installed IDE 1.8.19.
-
-1. On arduino.cc **Software**, under **Arduino IDE 2.x**, download the first **Windows** option
-   (Win 10 and newer, 64 bits). The video used 2.3.4. Install and launch it.
-   ![Arduino IDE 2 download options.](yt:IOQBNl0O_tI@0:28#crop=0,0,0.94,0.86)
-2. Add the Espressif toolchain as above: paste the same URL in **File → Preferences**, then in
-   **Tools → Board → Boards Manager** search for `Espressif` and install **esp32 by Espressif
-   Systems** version **2.0.17**. Close the IDE.
-   ![Select version 2.0.17.](yt:IOQBNl0O_tI@1:16)
-3. Download and copy the firmware project as above.
-4. Install the sketch data upload plugin: in the ZIP, go into `.arduinoIDE\plugins` and copy
-   everything in it into your IDE 2 plugins folder, creating it if needed:
+1. In the ZIP, go into `.arduinoIDE`, then `plugins`.
+2. Copy everything in it into your Arduino IDE plugins folder, creating it if needed:
 
     ```
     C:\Users\YourUserName\.arduinoIDE\plugins\
@@ -111,13 +87,17 @@ Skip this section if you installed IDE 1.8.19.
 
     ![Copy arduino-spiffs-upload-1.1.5.vsix into your .arduinoIDE\plugins folder.](yt:IOQBNl0O_tI@2:10)
 
-5. Launch the IDE. If it offers library or board updates, click **LATER**.
+## Compile the firmware
+
+1. Launch the Arduino IDE. If it offers library or board updates, click **LATER**. Newer versions
+   can break compilation.
    ![Click LATER on update offers.](yt:IOQBNl0O_tI@2:20)
-6. Go to **File → Open** and open the `kaiaai-esp32` sketch.
-7. Click the board selector, choose **Select other board and port**, search for `doit`, select
+2. Go to **File → Open** and open the `kaiaai-esp32` sketch from your sketch folder.
+3. Click the board selector, choose **Select other board and port**, search for `doit`, select
    **DOIT ESP32 DEVKIT V1** and click **OK**. No port is needed to compile.
    ![Select DOIT ESP32 DEVKIT V1.](yt:IOQBNl0O_tI@2:34)
-8. Click **Verify** (check mark). It should end with no errors and a memory summary.
+4. Click **Verify** (check mark). Compiling can take a few minutes and should end with no errors
+   and a memory summary.
    ![The firmware compiled.](yt:IOQBNl0O_tI@2:42#crop=0.19,0.19,0.67,0.68)
 
 !!! update "Since the video was recorded"
@@ -126,6 +106,35 @@ Skip this section if you installed IDE 1.8.19.
     `use of deleted function MotorController()` or `ledcAttachPin was not declared`. Prevent this by
     renaming the kaiaai libraries in `Documents\Arduino\libraries` (for example to
     `MotorController_kaia`).
+
+!!! tip "Compile error: `#error This code runs on ESP32`"
+    No ESP32 board is selected. Select it as in step 3. If no ESP32 boards are listed, add the
+    Espressif toolchain first.
+
+## If you prefer Arduino IDE 1.8.19
+
+Use this instead of IDE 2; otherwise skip to [Install Windows WSL2](#install-windows-wsl2).
+
+1. On arduino.cc **Software**, under **Legacy IDE (1.8.X)**, download **Arduino IDE 1.8.19** for
+   Windows (Win 7 and newer). Install and launch it.
+   ![Arduino IDE 1.8.19 in the Legacy IDE section.](yt:IOQBNl0O_tI@2:56)
+2. In **File → Preferences**, paste the same Espressif URL into **Additional Boards Manager URLs**.
+   In **Tools → Board → Boards Manager**, search for `esp32`, select version **2.0.17** of
+   **esp32 by Espressif Systems** and click **Install**.
+
+<div class="pair" markdown="1">
+![File → Preferences in IDE 1.8.19.](yt:IOQBNl0O_tI@3:26)
+![Boards Manager: esp32 2.0.17.](yt:IOQBNl0O_tI@3:38)
+</div>
+
+3. Copy the firmware project into `Documents\Arduino` as in
+   [Download the robot firmware project](#download-the-robot-firmware-project). With IDE 1.8.19,
+   the copied `tools` folder adds **Tools → ESP32 Sketch Data Upload**; skip the plugin step.
+4. Go to **File → Open** and open `Documents\Arduino\kaiaai-esp32`.
+5. Go to **Tools → Board → ESP32 Arduino** and select **ESP32 Dev Module**.
+   ![Select ESP32 Dev Module.](yt:IOQBNl0O_tI@4:06)
+6. Click **Verify**. It can take a few minutes and should finish with no errors.
+   ![Compiling in Arduino IDE 1.8.19.](yt:IOQBNl0O_tI@4:16)
 
 ## Install Windows WSL2
 
