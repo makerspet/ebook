@@ -122,8 +122,8 @@ Use this instead of IDE 2; otherwise skip to [Install Windows WSL2](#install-win
    **esp32 by Espressif Systems** and click **Install**.
 
 <div class="pair" markdown="1">
-![File → Preferences in IDE 1.8.19.](yt:IOQBNl0O_tI@3:26)
-![Boards Manager: esp32 2.0.17.](yt:IOQBNl0O_tI@3:38)
+![File → Preferences in IDE 1.8.19.](frames/file_preferences_old_ide.jpg#crop=0.28,0.21,0.44,0.55)
+![Boards Manager: esp32 2.0.17.](frames/boards_manager_select_2_0_17.jpg#crop=0.23,0.21,0.54,0.56)
 </div>
 
 3. Copy the firmware project into `Documents\Arduino` as in
@@ -131,7 +131,7 @@ Use this instead of IDE 2; otherwise skip to [Install Windows WSL2](#install-win
    the copied `tools` folder adds **Tools → ESP32 Sketch Data Upload**; skip the plugin step.
 4. Go to **File → Open** and open `Documents\Arduino\kaiaai-esp32`.
 5. Go to **Tools → Board → ESP32 Arduino** and select **ESP32 Dev Module**.
-   ![Select ESP32 Dev Module.](yt:IOQBNl0O_tI@4:06)
+   ![Select ESP32 Dev Module.](frames/select_esp32_dev_module.jpg#crop=0,0,0.52,0.62)
 6. Click **Verify**. It can take a few minutes and should finish with no errors.
    ![Compiling in Arduino IDE 1.8.19.](yt:IOQBNl0O_tI@4:16)
 
@@ -141,7 +141,7 @@ ROS2, the software that controls the robot, runs on Linux. WSL2 (Windows Subsyst
 Linux on your Windows PC.
 
 1. Click **Start**, type `cmd`, and on **Command Prompt** choose **Run as administrator**.
-   ![Run Command Prompt as administrator.](yt:IOQBNl0O_tI@4:22)
+   ![Run Command Prompt as administrator.](frames/run_command_prompt_as_administrator.jpg#crop=0,0.1,0.52,0.86)
 2. Run this command and wait until it reports success:
 
     ```
@@ -165,7 +165,7 @@ Docker installs and runs a large collection of robotics software in one go.
    ![Download the x86_64 installer.](yt:IOQBNl0O_tI@4:54)
 2. Run `Docker Desktop Installer.exe`, keep **Add shortcut to desktop** checked and click **OK**.
 3. At **Installation succeeded**, click **Close and restart**.
-   ![Click Close and restart.](yt:IOQBNl0O_tI@5:22)
+   ![Click Close and restart.](frames/click_close_and_restart.jpg#crop=0.11,0.2,0.45,0.59)
 
 !!! note
     Docker Desktop is free for personal use; commercial use in larger enterprises requires a paid
@@ -180,11 +180,6 @@ The video uses VcXsrv.
    **Download**.
    ![Download VcXsrv from SourceForge.](yt:IOQBNl0O_tI@5:34)
 2. Run the `vcxsrv` installer with the default components and folder.
-
-!!! note
-    SourceForge says VcXsrv has moved to
-    [github.com/marchaesen/vcxsrv](https://github.com/marchaesen/vcxsrv). The SourceForge download
-    worked in the video.
 
 ## Launch Docker Desktop and the X server
 
