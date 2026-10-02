@@ -165,7 +165,7 @@ Docker installs and runs a large collection of robotics software in one go.
    ![Download the x86_64 installer.](yt:IOQBNl0O_tI@4:54)
 2. Run `Docker Desktop Installer.exe`, keep **Add shortcut to desktop** checked and click **OK**.
 3. At **Installation succeeded**, click **Close and restart**.
-   ![Click Close and restart.](frames/click_close_and_restart.jpg#crop=0.11,0.2,0.45,0.59)
+   ![Click Close and restart.](frames/click_close_and_restart.jpg#crop=0.11,0.2,0.481,0.59)
 
 !!! note
     Docker Desktop is free for personal use; commercial use in larger enterprises requires a paid
@@ -187,15 +187,12 @@ The video uses VcXsrv.
    sign-in screen and the survey. Once Docker Engine has started, close the window; the engine
    keeps running.
 
-<div class="pair" markdown="1">
-![Click Skip.](yt:IOQBNl0O_tI@6:00)
-![Starting the Docker Engine.](yt:IOQBNl0O_tI@6:04)
-</div>
+![Starting the Docker Engine.](yt:IOQBNl0O_tI@6:04#crop=0.08,0.08,0.84,0.84)
 
 2. Launch **XLaunch** from your desktop. On **Display settings**, set **Display number** to `0`
    (zero), keep **Multiple windows** and click **Next**. Accept the remaining defaults and click
    **Finish**.
-   ![Set Display number to 0.](yt:IOQBNl0O_tI@6:10)
+   ![Set Display number to 0.](frames/set_display_to_zero.jpg#crop=0.03,0.05,0.34,0.47)
 
 !!! tip
     Launch the X server after every PC restart, before starting any robot GUI. If RViz or another
@@ -210,10 +207,10 @@ You will type the robot's Docker commands in PowerShell.
    ![Open the PowerShell releases.](yt:IOQBNl0O_tI@6:22)
 2. In the latest release's **Assets**, download `PowerShell-<version>-win-x64.exe` (in the video,
    `PowerShell-7.5.0-win-x64.exe`).
-   ![Download the win-x64.exe asset.](yt:IOQBNl0O_tI@6:26#crop=0.25,0.55,0.55,0.4)
+   ![Download the win-x64.exe asset.](frames/download_the_win_x64_exe_asset.jpg#crop=0,0,0.94,1)
 3. Run the installer.
 4. Click **Start**, type `powershell` and launch **PowerShell 7 (x64)**. Pin it to the taskbar.
-   ![PowerShell 7 (x64), not the older Windows PowerShell.](yt:IOQBNl0O_tI@6:40)
+   ![PowerShell 7 (x64), not the older Windows PowerShell.](frames/run_powershell_7.jpg#crop=0,0.08,0.52,0.78)
 
 ## Download the robot software image
 
@@ -224,7 +221,7 @@ You will type the robot's Docker commands in PowerShell.
     docker pull kaiaai/kaiaai:iron
     ```
 
-    ![docker pull in PowerShell.](yt:IOQBNl0O_tI@6:48)
+    ![docker pull in PowerShell.](frames/docker_pull.jpg#crop=0.05,0.09,0.71,0.3)
 3. The image is large. When done, PowerShell shows
    `Status: Downloaded newer image for kaiaai/kaiaai:iron`.
    ![The image has downloaded.](yt:IOQBNl0O_tI@6:51#crop=0.04,0.08,0.73,0.67)
