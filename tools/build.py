@@ -176,6 +176,11 @@ def build(draft, labels):
                .replace('{{body}}', '\n'.join(chapters))
                .replace('{{draft}}', 'draft' if draft else 'final')
                .replace('{{pagedjs}}', PAGED_JS))
+    meta = dict(line.split(':', 1) for line in open(os.path.join(BOOK, 'edition.txt'), encoding='utf-8')
+                if ':' in line)
+    meta = {k.strip(): v.strip() for k, v in meta.items()}
+    page = (page.replace('{{edition}}', meta['edition']).replace('{{date}}', meta['date'])
+                .replace('{{year}}', meta['date'].split()[-1]))
     page = re.sub(r'src="yt:([\w-]{11})@([\d:.]+)(?:#crop=([\d.,]+))?"',  # cover image in the template
                   lambda m: f'src="{grab(*m.groups())}"', page)
     page = page.replace('src="assets/', f'src="file:///{BOOK.replace(os.sep, "/")}/assets/')  # cover art

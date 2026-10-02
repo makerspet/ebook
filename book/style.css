@@ -35,6 +35,13 @@ body { margin: 0; }
 .cover-sub { font-size: 14pt; line-height: 1.35; margin: 0 0 .3in; color: var(--muted); max-width: 5.8in; }
 .cover-author { font-size: 12pt; margin: 0; color: var(--ink); }
 
+/* ---- copyright page ---- */
+@page plain { @top-left { content: none; } @top-right { content: none; } @bottom-center { content: none; } }
+.colophon { page: plain; break-after: page; height: 9.2in; display: flex; flex-direction: column; justify-content: flex-end;
+  font: 9pt/1.5 Inter, sans-serif; color: var(--muted); }
+.colophon p { margin: 0 0 .12in; }
+.colophon strong { color: var(--ink); }
+
 /* ---- contents ---- */
 .toc { break-after: page; }
 .toc h2 { font: 700 22pt Inter, sans-serif; margin: 0 0 .3in; }
