@@ -39,12 +39,11 @@ The robot's brain is an ESP32, so the IDE needs Espressif's ESP32 compiler and S
     https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
     ```
 
-    ![File → Preferences in Arduino IDE 2.](yt:IOQBNl0O_tI@1:02)
+    ![File → Preferences: paste the Espressif URL and click OK.](frames/open_file_preferences_in_arduino_2_paste_espressive_toolchain_url_and_click_ok.jpg#crop=0.19,0.26,0.68,0.72)
 2. Go to **Tools → Board → Boards Manager**.
-   ![Tools → Board → Boards Manager.](yt:IOQBNl0O_tI@1:10)
 3. Search for `Espressif`. For **esp32 by Espressif Systems**, select version **2.0.17**, not the
    newest, and click **INSTALL**. Then close the IDE.
-   ![Select version 2.0.17.](yt:IOQBNl0O_tI@1:16)
+   ![Select version 2.0.17.](yt:IOQBNl0O_tI@1:16#crop=0.19,0.25,0.3,0.44)
 
 !!! update "Since the video was recorded"
     Stay on ESP32 board package **2.0.17**:
@@ -60,13 +59,13 @@ The robot's brain is an ESP32, so the IDE needs Espressif's ESP32 compiler and S
    ![The kaiaai/firmware repository; Releases is on the right.](yt:IOQBNl0O_tI@1:34)
 2. In the latest release, expand **Assets** and download **Source code (zip)**.
    ![Download Source code (zip).](yt:IOQBNl0O_tI@1:38)
-3. Open the ZIP (in the video, `firmware-0.8.0.zip`) and step into its `firmware-*` folder. It
+3. Open the ZIP (`firmware-0.8.6.zip` at the time of writing) and step into its `firmware-*` folder. It
    holds `.arduinoIDE`, `kaiaai-esp32`, `libraries`, `tools` and a few files.
-   ![Inside the firmware-* folder.](yt:IOQBNl0O_tI@1:44)
+   ![Inside the firmware-* folder.](frames/inside_the_firmware_folder.jpg#crop=0.34,0.32,0.66,0.66)
 4. Copy **everything** in that folder into your Arduino sketch folder, usually
    `Documents\Arduino`. This installs the firmware project and the tested versions of the
    libraries it needs.
-   ![Copy everything into your sketch folder.](yt:IOQBNl0O_tI@1:52)
+   ![Copy everything into your sketch folder.](frames/copy_everything_into_your_sketch_folder.jpg#crop=0,0.31,1,0.68)
 
 !!! tip
     Your sketch folder is shown as **Sketchbook location** in **File → Preferences**. With
@@ -85,7 +84,7 @@ The `arduino-spiffs-upload` plugin uploads the robot's configuration files to th
 
     Replace `YourUserName` with your Windows user name.
 
-    ![Copy arduino-spiffs-upload-1.1.5.vsix into your .arduinoIDE\plugins folder.](yt:IOQBNl0O_tI@2:10)
+    ![Copy arduino-spiffs-upload-1.1.5.vsix into your .arduinoIDE\plugins folder.](frames/copy_arduino-spiffs-upload_into_your_plugins_folder.jpg#crop=0,0.32,1,0.68)
 
 ## Compile the firmware
 
@@ -95,10 +94,10 @@ The `arduino-spiffs-upload` plugin uploads the robot's configuration files to th
 2. Go to **File → Open** and open the `kaiaai-esp32` sketch from your sketch folder.
 3. Click the board selector, choose **Select other board and port**, search for `doit`, select
    **DOIT ESP32 DEVKIT V1** and click **OK**. No port is needed to compile.
-   ![Select DOIT ESP32 DEVKIT V1.](yt:IOQBNl0O_tI@2:34)
+   ![Select DOIT ESP32 DEVKIT V1.](frames/select_doit_esp32_devkit_v1.jpg#crop=0.18,0.18,0.68,0.70)
 4. Click **Verify** (check mark). Compiling can take a few minutes and should end with no errors
    and a memory summary.
-   ![The firmware compiled.](yt:IOQBNl0O_tI@2:42#crop=0.19,0.19,0.67,0.68)
+   ![The firmware compiled.](frames/the_firmware_compiled.jpg#crop=0.18,0.18,0.68,0.81)
 
 !!! update "Since the video was recorded"
     Arduino IDE 2.x's Library Manager can silently replace the bundled `MotorController` and `PID`

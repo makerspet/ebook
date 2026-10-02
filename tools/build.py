@@ -65,16 +65,22 @@ def grab(vid, ts, crop):
     return 'img/' + name
 
 
-def local_image(rel):
-    """Copy a local image (path relative to book/) into build/img as a downscaled JPEG."""
+def local_image(ref):
+    """Copy a local image (path relative to book/, optional #crop=x,y,w,h) into build/img as a JPEG."""
+    rel, _, crop = ref.partition('#crop=')
     path = os.path.join(BOOK, rel)
     if not os.path.exists(path):
         sys.exit(f'missing image {path}')
     os.makedirs(os.path.join(OUT, 'img'), exist_ok=True)
-    name = 'local_' + re.sub(r'[^\w.-]', '_', os.path.splitext(rel)[0]) + '.jpg'
+    name = ('local_' + re.sub(r'[^\w.-]', '_', os.path.splitext(rel)[0])
+            + (f'_c{hashlib.md5(crop.encode()).hexdigest()[:6]}' if crop else '') + '.jpg')
     dst = os.path.join(OUT, 'img', name)
     if not os.path.exists(dst) or os.path.getmtime(dst) < os.path.getmtime(path):
         im = Image.open(path).convert('RGB')
+        if crop:
+            x, y, w, h = (float(v) for v in crop.split(','))
+            W, H = im.size
+            im = im.crop((int(x * W), int(y * H), int((x + w) * W), int((y + h) * H)))
         if im.width > FIG_WIDTH:
             im = im.resize((FIG_WIDTH, round(im.height * FIG_WIDTH / im.width)), Image.LANCZOS)
         im.save(dst, quality=84, optimize=True)
