@@ -17,21 +17,24 @@ These steps use Arduino IDE 2.x. With IDE 1.8.19, see
 
 1. Open the `kaiaai-esp32` sketch. If the IDE offers library or board updates, click **LATER**.
 
-   ![Close the update pop-ups. Don't update.](yt:tKfVU1n5TjA@0:36)
+   ![Close the update pop-ups. Don't update.](frames/close_the_update_pop_ups_don_not_update_libraries_boards.jpg#crop=0.18,0.04,0.68,0.96)
 
 2. Connect the ESP32 to your PC over USB, with the board's power switch **off**.
 
-   ![Plug the USB cable into the ESP32.](yt:tKfVU1n5TjA@0:42)
+   ![Plug the USB cable into the ESP32.](frames/plug_the_usb_cable_into_the_esp32.jpg)
 
 3. In the board selector, choose **DOIT ESP32 DEVKIT V1** and your COM port (`COM3` in the video).
 
-   ![Select the board and COM port.](yt:tKfVU1n5TjA@0:52)
+   ![Select the board and COM port.](frames/select_the_board_and_com_port.jpg#crop=0.28,0.23,0.48,0.6)
 
 4. Click **Upload** (the right arrow). The first compile takes a while.
 5. When the output shows `Connecting....`, press and hold **BOOT** for 3 to 5 seconds to put the
    ESP32 into download mode.
 
-   ![Hold BOOT when the upload starts connecting.](yt:tKfVU1n5TjA@1:02)
+   <div class="pair" markdown="1">
+   ![Upload starts connecting…](frames/hold_boot_when_the_upload_starts_connecting.jpg#crop=0.18,0.04,0.68,0.96)
+   ![…press BOOT for 3–5 seconds now.](frames/press_boot_for_3_5_seconds_now.jpg)
+   </div>
 
 !!! update "Since the video was recorded"
     Some ESP32 boards don't need BOOT pressed; if the upload succeeds without it, that's fine. If it
@@ -39,7 +42,13 @@ These steps use Arduino IDE 2.x. With IDE 1.8.19, see
     `Connecting...` appears.
 
 6. Wait for `Hash of data verified.` and `Hard resetting via RTS pin...`.
+
+   ![Firmware upload success.](frames/firmware_upload_success.jpg#crop=0.09,0.04,0.82,0.96)
+
 7. Open **Tools → Serial Monitor** at **115200 baud** and press the ESP32's **EN** (reset) button.
+
+   ![Press the ESP32 reset (EN) button.](frames/press_esp32_reset.jpg)
+
 8. The ESP32 boots and asks for sketch data, as expected:
 
    ```
@@ -69,7 +78,7 @@ lives in a separate flash area (SPIFFS), so it is uploaded separately.
 
    <div class="pair" markdown="1">
    ![Keep only the BDC-30P config…](yt:tKfVU1n5TjA@1:44)
-   ![…and rename it to config.yaml.](yt:tKfVU1n5TjA@1:47)
+   ![…and rename it to config.yaml.](frames/the_data_folder_rename_config_mini_bdc_30p_yaml_to_config_yaml.jpg#crop=0.09,0.33,0.70,0.52)
    </div>
 
 !!! update "Since the video was recorded"
@@ -80,7 +89,9 @@ lives in a separate flash area (SPIFFS), so it is uploaded separately.
 5. Click inside the code window, press **Ctrl+Shift+P**, type `Upload` and click
    **Upload SPIFFS to Pico/ESP8266/ESP32**. At `Connecting....`, hold **BOOT** for 3 to 5 seconds.
 
-   ![Pick Upload SPIFFS to Pico/ESP8266/ESP32.](yt:tKfVU1n5TjA@2:08#crop=0.19,0.08,0.54,0.44)
+   ![Pick Upload SPIFFS to Pico/ESP8266/ESP32.](frames/pick_upload_spiffs.jpg#crop=0.18,0.04,0.68,0.96)
+
+   ![Sketch data upload completed.](frames/completed_spiffs_upload_successfully.jpg#crop=0.18,0.04,0.68,0.96)
 
 6. If it fails right away with `ERROR: No port specified, check IDE menus.`, restart the IDE and
    retry. This happens often.
