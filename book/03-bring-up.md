@@ -125,10 +125,15 @@ lives in a separate flash area (SPIFFS), so it is uploaded separately.
 
 Skip this section if you use IDE 2.x. The steps above apply, with these differences:
 
-- **Board and port:** select **Tools → Board → ESP32 Arduino → ESP32 Dev Module**, and your COM port
-  under **Tools → Port**.
+- **Board:** select **Tools → Board → ESP32 Arduino → ESP32 Dev Module**.
 
-  ![In IDE 1.8.19, choose ESP32 Dev Module.](yt:tKfVU1n5TjA@2:46)
+  ![Choose ESP32 Dev Module.](yt:tKfVU1n5TjA@2:46#crop=0.23,0,0.63,0.8)
+
+- **Port:** select your COM port under **Tools → Port**.
+- **Firmware upload:** click **Upload** (the right arrow). When the output shows `Connecting....`,
+  hold **BOOT** for 3 to 5 seconds, then wait for the upload to finish.
+
+  ![Uploading the firmware in IDE 1.8.19.](yt:tKfVU1n5TjA@3:17#crop=0.23,0,0.54,1)
 
 - **Sketch data upload:** run **Tools → ESP32 Sketch Data Upload**. Hold **BOOT** at
   `Connecting....` as before.
