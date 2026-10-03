@@ -157,7 +157,9 @@ def build(draft, labels):
         text = open(path, encoding='utf-8').read()
         if not draft:
             text = re.sub(r'(?s)<!--.*?-->', '', text)
-        md = markdown.Markdown(extensions=['extra', 'admonition', 'sane_lists', 'toc'],
+        md = markdown.Markdown(extensions=['abbr', 'attr_list', 'def_list', 'footnotes', 'md_in_html', 'tables',
+                                           'pymdownx.superfences',  # code fences inside list items
+                                           'admonition', 'sane_lists', 'toc'],
                                extension_configs={'toc': {'slugify': lambda v, s: slug(v)}})
         body = md.convert(figures(text, labels))
         kind = 'front' if os.path.basename(path).startswith('00') else 'chapter'

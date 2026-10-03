@@ -51,12 +51,12 @@ These steps use Arduino IDE 2.x. With IDE 1.8.19, see
 
 8. The ESP32 boots and asks for sketch data, as expected:
 
-   ```
-   Kaia.ai firmware version 0.8.0-iron
-   ESP IDF version v4.4.7-dirty
-   SPIFFS mounted successfully
-   Sketch data not found. Please upload sketch data.
-   ```
+    ```
+    Kaia.ai firmware version 0.8.0-iron
+    ESP IDF version v4.4.7-dirty
+    SPIFFS mounted successfully
+    Sketch data not found. Please upload sketch data.
+    ```
 
    ![The ESP32 asks for sketch data.](yt:tKfVU1n5TjA@1:27#crop=0.36,0.40,0.50,0.47)
 
@@ -81,10 +81,6 @@ lives in a separate flash area (SPIFFS), so it is uploaded separately.
    ![…and rename it to config.yaml.](frames/the_data_folder_rename_config_mini_bdc_30p_yaml_to_config_yaml.jpg#crop=0.09,0.33,0.70,0.52)
    </div>
 
-!!! update "Since the video was recorded"
-    The firmware's default [`data/config.yaml`](https://github.com/kaiaai/firmware/blob/iron/kaiaai-esp32/data/config.yaml)
-    is currently a copy of [`config_mini_bdc_30p.yaml`](https://github.com/kaiaai/firmware/blob/iron/kaiaai-esp32/data/config_mini_bdc_30p.yaml),
-    so for the BLD-120MM-PACK it already matches. Steps 3–4 give the same result.
 
 5. Click inside the code window, press **Ctrl+Shift+P**, type `Upload` and click
    **Upload SPIFFS to Pico/ESP8266/ESP32**. At `Connecting....`, hold **BOOT** for 3 to 5 seconds.
@@ -123,37 +119,94 @@ lives in a separate flash area (SPIFFS), so it is uploaded separately.
 
 ## If you use Arduino IDE 1.8.19 {: #ide1-upload }
 
-Skip this section if you use IDE 2.x. With IDE 1.8.19, follow these steps instead:
+Skip this section if you use IDE 2.x. With IDE 1.8.19, follow these steps instead of the two
+sections above.
 
-- **Board:** select **Tools → Board → ESP32 Arduino → ESP32 Dev Module**.
+### Upload the firmware
 
-  ![Choose ESP32 Dev Module.](frames/select_tools_board_esp32_arduino_esp32_dev_module.jpg#crop=0.23,0,0.63,0.8)
+1. Open the `kaiaai-esp32` sketch. If the IDE offers library or board updates, decline them.
+2. Connect the ESP32 to your PC over USB, with the board's power switch **off**.
 
-- **Port:** select your COM port under **Tools → Port**.
-- **Firmware upload:** click **Upload** (the right arrow). When the output shows `Connecting....`,
-  hold **BOOT** for 3 to 5 seconds, then wait for the upload to finish.
+   ![Plug the USB cable into the ESP32.](frames/plug_the_usb_cable_into_the_esp32.jpg)
 
-  ![Uploading the firmware in IDE 1.8.19.](frames/uploading_the_firmware_ide1.jpg#crop=0.23,0,0.54,1)
+3. Select **Tools → Board → ESP32 Arduino → ESP32 Dev Module**.
 
-- **Open the Serial Monitor:** **Tools → Serial Monitor**, with the baud rate set to **115200**.
-- **Press the ESP32's EN (reset) button.**
-- **Confirm the ESP32 boots the new firmware:** it asks for sketch data
-  (`Sketch data not found. Please upload sketch data.`).
+   ![Choose ESP32 Dev Module.](frames/select_tools_board_esp32_arduino_esp32_dev_module.jpg#crop=0.23,0,0.63,0.8)
 
-  ![The ESP32 boots the new firmware.](frames/serial_monitor_esp32_boots.jpg#crop=0,0,0.53,0.43)
+4. Select your COM port under **Tools → Port**.
+5. Click **Upload** (the right arrow). The first compile takes a while.
+6. When the output shows `Connecting....`, press and hold **BOOT** for 3 to 5 seconds.
 
-- **Close the Serial Monitor.** Don't skip this: while it's open it holds the COM port, and the
-  sketch data upload fails.
-- **Prepare the `data` folder** as in steps 2–4 of [Upload the sketch data](#upload-the-sketch-data).
-- **Run Tools → ESP32 Sketch Data Upload.**
+   ![Press BOOT for 3–5 seconds now.](frames/press_boot_for_3_5_seconds_now.jpg)
 
-  ![The sketch data upload is in the Tools menu.](yt:tKfVU1n5TjA@3:33)
+!!! update "Since the video was recorded"
+    Some ESP32 boards don't need BOOT pressed; if the upload succeeds without it, that's fine. If it
+    fails with `Failed to connect to ESP32: No serial data received`, retry and press BOOT as soon as
+    `Connecting...` appears.
 
-- **Hold BOOT** for 3 to 5 seconds when the output shows `Connecting....`.
+7. Wait for the upload to finish.
 
-- **Reopen the Serial Monitor.**
-- **Press EN.** The ESP32 loads `config.yaml` and enters WiFi configuration mode, as in step 7 of
-  [Upload the sketch data](#upload-the-sketch-data).
+   ![Uploading the firmware in IDE 1.8.19.](frames/uploading_the_firmware_ide1.jpg#crop=0.23,0,0.54,1)
+
+8. Open **Tools → Serial Monitor** and set the baud rate to **115200**.
+9. Press the ESP32's **EN** (reset) button.
+
+   ![Press the ESP32 reset (EN) button.](frames/press_esp32_reset.jpg)
+
+10. Confirm the ESP32 boots the new firmware and asks for sketch data:
+
+    ```
+    Kaia.ai firmware version 0.8.0-iron
+    ESP IDF version v4.4.7-dirty
+    SPIFFS mounted successfully
+    Sketch data not found. Please upload sketch data.
+    ```
+
+    ![The ESP32 boots the new firmware.](frames/serial_monitor_esp32_boots.jpg#crop=0,0,0.53,0.43)
+
+### Upload the sketch data
+
+1. **Close the Serial Monitor.** Don't skip this: while it's open it holds the COM port, and the
+   sketch data upload fails.
+2. Open **Sketch → Show Sketch Folder** and go into the `data` folder.
+3. Delete every `.yaml` file **except** `config_mini_bdc_30p.yaml`. Keep `favicon.png` and
+   `index.html`.
+4. Rename `config_mini_bdc_30p.yaml` to `config.yaml`.
+
+   ![Rename it to config.yaml.](frames/the_data_folder_rename_config_mini_bdc_30p_yaml_to_config_yaml.jpg#crop=0.09,0.33,0.70,0.52)
+
+
+5. Run **Tools → ESP32 Sketch Data Upload**.
+
+   ![Tools → ESP32 Sketch Data Upload.](yt:tKfVU1n5TjA@3:33#crop=0.23,0,0.4,0.67)
+
+6. When the output shows `Connecting....`, press and hold **BOOT** for 3 to 5 seconds.
+
+   ![Press BOOT for 3–5 seconds now.](frames/press_boot_for_3_5_seconds_now.jpg)
+
+!!! tip "If the sketch data upload fails"
+    - `Could not open COM3, the port doesn't exist`: close the Serial Monitor, check the USB cable,
+      retry.
+    - `SPIFFS_write error(-10010): unknown` / `error adding file!`: a file name in `data` is over
+      30 characters.
+    - `This chip is ESP32-S3 not ESP32. Wrong --chip argument?`: wrong board selected in the IDE.
+
+    See Appendix B for more.
+
+7. Reopen **Tools → Serial Monitor**.
+8. Press the ESP32's **EN** (reset) button.
+9. Confirm the ESP32 loads `config.yaml` and enters WiFi configuration mode:
+
+    ```
+    SPIFFS mounted successfully
+    /config.yaml found; loaded OK
+    WiFi SSID unknown
+    dest_ip unknown
+    To enter web config push-and-release EN, then push-and-hold BOOT within 1 sec
+    Setting up WiFi KAIA.AI; browse to http://192.168.4.1
+    ```
+
+    ![The ESP32 boots and loads config.yaml.](yt:tKfVU1n5TjA@3:58#crop=0,0,0.53,0.72)
 
 ## Configure the robot's WiFi
 
@@ -174,9 +227,9 @@ software runs.
 
 2. On your PC, in PowerShell or `cmd.exe`, run:
 
-   ```
-   ipconfig
-   ```
+    ```
+    ipconfig
+    ```
 
 3. Note the **IPv4 Address** under **Wireless LAN adapter Wi-Fi** (`192.168.1.113` in the video),
    not a VMware or other virtual adapter.
@@ -204,14 +257,14 @@ software runs.
    robot uses to reach your PC). The robot saves them to `/network.yaml`, restarts and joins your
    WiFi:
 
-   ```
-   /network.yaml found; loaded OK
-   /config.yaml found; loaded OK
-   Board model MINI-BDC30P-BODY with BDC-30P, version v1.1.1, manufacturer makerspet.com
-   LIDAR model LDROBOT LD14P
-   Motor driver type IN1_IN2; motor encoder type AB_QUAD
-   Connecting to WiFi NETGEAR48 ... connected, IP 192.168.93.127
-   ```
+    ```
+    /network.yaml found; loaded OK
+    /config.yaml found; loaded OK
+    Board model MINI-BDC30P-BODY with BDC-30P, version v1.1.1, manufacturer makerspet.com
+    LIDAR model LDROBOT LD14P
+    Motor driver type IN1_IN2; motor encoder type AB_QUAD
+    Connecting to WiFi NETGEAR48 ... connected, IP 192.168.93.127
+    ```
 
    ![The robot restarted and joined your WiFi.](yt:tKfVU1n5TjA@5:12)
 
@@ -235,9 +288,9 @@ software runs.
 
 3. Open Windows PowerShell and start the robot software container:
 
-   ```
-   docker run --name makerspet -it --rm -p 8888:8888/udp -p 4430:4430/tcp -e DISPLAY=host.docker.internal:0.0 -e LIBGL_ALWAYS_INDIRECT=0 kaiaai/kaiaai:iron
-   ```
+    ```
+    docker run --name makerspet -it --rm -p 8888:8888/udp -p 4430:4430/tcp -e DISPLAY=host.docker.internal:0.0 -e LIBGL_ALWAYS_INDIRECT=0 kaiaai/kaiaai:iron
+    ```
 
    ![Start the kaiaai/kaiaai:iron container.](yt:tKfVU1n5TjA@5:54)
 
@@ -262,23 +315,23 @@ software runs.
    PC (`Connecting to Micro-ROS agent 192.168.1.113 ...`). If WiFi fails, press **EN** again.
 4. In the container shell, run:
 
-   ```
-   ros2 launch kaiaai_bringup physical.launch.py
-   ```
+    ```
+    ros2 launch kaiaai_bringup physical.launch.py
+    ```
 
    ![Run the physical robot launch.](yt:tKfVU1n5TjA@6:26)
 
 5. The robot connects, and the Serial Monitor prints periodic status:
 
-   ```
-   Connecting to Micro-ROS agent 192.168.1.113 ... success
-   Syncing time ... OK
-   micro-ROS client key 0x8B6C9A69; ROS2 node /pet
-   Micro-ROS initialized
-   LiDAR info Model: LDROBOT LD14P
-   startLIDAR() result: OK
-   Telem avg 24 max 27ms, LiDAR RPM 5.01, wheels RPM 0.00 0.00, battery 8.14V, RSSI -62dBm
-   ```
+    ```
+    Connecting to Micro-ROS agent 192.168.1.113 ... success
+    Syncing time ... OK
+    micro-ROS client key 0x8B6C9A69; ROS2 node /pet
+    Micro-ROS initialized
+    LiDAR info Model: LDROBOT LD14P
+    startLIDAR() result: OK
+    Telem avg 24 max 27ms, LiDAR RPM 5.01, wheels RPM 0.00 0.00, battery 8.14V, RSSI -62dBm
+    ```
 
    ![The ESP32 has connected to ROS2.](yt:tKfVU1n5TjA@6:29)
 
@@ -304,15 +357,15 @@ software runs.
    pane.
 8. Click inside it and open another shell in the running container:
 
-   ```
-   docker exec -it makerspet bash
-   ```
+    ```
+    docker exec -it makerspet bash
+    ```
 
 9. Run the teleoperation app:
 
-   ```
-   ros2 run kaiaai_teleop teleop_keyboard
-   ```
+    ```
+    ros2 run kaiaai_teleop teleop_keyboard
+    ```
 
    ![A second shell in the container runs teleop_keyboard.](yt:tKfVU1n5TjA@6:54#crop=0.49,0.52,0.51,0.38)
 
@@ -340,10 +393,10 @@ only runs at full speed, see Appendix B.
    pane; if one opens in the wrong place, type `exit` in it and retry.
 4. Open another container shell and start the LiDAR visualization:
 
-   ```
-   docker exec -it makerspet bash
-   ros2 launch kaiaai_bringup monitor_robot.launch.py
-   ```
+    ```
+    docker exec -it makerspet bash
+    ros2 launch kaiaai_bringup monitor_robot.launch.py
+    ```
 
    ![A third shell opens RViz.](yt:tKfVU1n5TjA@8:14)
 

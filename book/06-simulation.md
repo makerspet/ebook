@@ -50,9 +50,9 @@ Ubuntu commands from the companion article are included too.
 
 1. In PowerShell, start the container (copy the command from the companion article to avoid typos):
 
-   ```
-   docker run --name makerspet -it --rm -v c:\maps:/root/maps -p 8888:8888/udp -e DISPLAY=host.docker.internal:0.0 -e LIBGL_ALWAYS_INDIRECT=0 kaiaai/kaiaai:iron
-   ```
+    ```
+    docker run --name makerspet -it --rm -v c:\maps:/root/maps -p 8888:8888/udp -e DISPLAY=host.docker.internal:0.0 -e LIBGL_ALWAYS_INDIRECT=0 kaiaai/kaiaai:iron
+    ```
 
    The prompt changes to something like `root@655461ab2cde:/ros_ws#`. `--name makerspet` lets you
    open more terminals in the same container later.
@@ -63,9 +63,9 @@ Ubuntu commands from the companion article are included too.
    tabs or windows work too.
 3. In each new one, enter the running container:
 
-   ```
-   docker exec -it makerspet bash
-   ```
+    ```
+    docker exec -it makerspet bash
+    ```
 
 ![A second pane opened in the same container with docker exec.](yt:7RVY4gUWgz4@1:58#crop=0.5,0,0.5,0.7)
 
@@ -94,9 +94,9 @@ Maps are saved to `~/maps`.
 
 1. In the first container terminal, start the simulated world:
 
-   ```
-   ros2 launch kaiaai_gazebo world.launch.py
-   ```
+    ```
+    ros2 launch kaiaai_gazebo world.launch.py
+    ```
 
 2. Wait for the Gazebo window; the first start takes a while. The terminal prints
    `Successfully spawned entity [makerspet_mini]`.
@@ -117,9 +117,9 @@ Maps are saved to `~/maps`.
 
 1. In the second container terminal, start keyboard teleop:
 
-   ```
-   ros2 run kaiaai_teleop teleop_keyboard
-   ```
+    ```
+    ros2 run kaiaai_teleop teleop_keyboard
+    ```
 
 2. It lists its keys:
 
@@ -143,9 +143,9 @@ Leave Gazebo and teleop running.
 
 1. In the third container terminal, run:
 
-   ```
-   ros2 launch kaiaai_bringup navigation.launch.py use_sim_time:=true slam:=True
-   ```
+    ```
+    ros2 launch kaiaai_bringup navigation.launch.py use_sim_time:=true slam:=True
+    ```
 
    `use_sim_time:=true` uses the simulator's clock; `slam:=True` builds a new map instead of
    loading a saved one.
@@ -213,9 +213,9 @@ Leave Gazebo and teleop running.
 
 1. In a free container terminal, run:
 
-   ```
-   ros2 run nav2_map_server map_saver_cli -f ~/maps/map --ros-args -p save_map_timeout:=60.0
-   ```
+    ```
+    ros2 run nav2_map_server map_saver_cli -f ~/maps/map --ros-args -p save_map_timeout:=60.0
+    ```
 
 ![The map saver command.](yt:7RVY4gUWgz4@9:46#crop=0.5,0.8,0.5,0.2)
 

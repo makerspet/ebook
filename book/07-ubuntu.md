@@ -24,20 +24,20 @@ USB cable for the ESP32 and a 2.4 GHz WiFi network.
    choose **Add to Favorites**.
 3. Unpack the archive (press **Tab** to complete file names):
 
-   ```bash
-   cd ~/Downloads
-   ls
-   tar -xvf arduino-1.8.19-linux64.tar.xz
-   ```
+    ```bash
+    cd ~/Downloads
+    ls
+    tar -xvf arduino-1.8.19-linux64.tar.xz
+    ```
 
    ![Unpacking the Arduino archive.](yt:fHPyjVdTNg4@1:18.5#crop=0.2,0.38,0.6,0.2)
 
 4. Run the install script. It asks for your password because it installs system-wide:
 
-   ```bash
-   cd arduino-1.8.19/
-   sudo ./install.sh
-   ```
+    ```bash
+    cd arduino-1.8.19/
+    sudo ./install.sh
+    ```
 
    ![The install script finishes with "done!".](yt:fHPyjVdTNg4@2:39#crop=0.2,0.42,0.8,0.46)
 
@@ -49,9 +49,9 @@ Same as Chapter 3.
 
 1. In **File → Preferences**, paste this into **Additional Boards Manager URLs**:
 
-   ```
-   https://espressif.github.io/arduino-esp32/package_esp32_index.json
-   ```
+    ```
+    https://espressif.github.io/arduino-esp32/package_esp32_index.json
+    ```
 
    ![Adding the Espressif boards URL.](yt:fHPyjVdTNg4@1:58)
 
@@ -76,18 +76,18 @@ On Ubuntu, only members of the `dialout` group can open serial ports, and the ES
 
 1. Add your user to `dialout` (in the video, `YOUR_USERNAME` is `ilia`):
 
-   ```bash
-   sudo usermod -a -G dialout YOUR_USERNAME
-   ```
+    ```bash
+    sudo usermod -a -G dialout YOUR_USERNAME
+    ```
 
 2. **Reboot your PC** so the group membership takes effect.
 
 3. Install pip and the Python serial library:
 
-   ```bash
-   sudo apt install -y python3-pip
-   pip3 install pyserial
-   ```
+    ```bash
+    sudo apt install -y python3-pip
+    pip3 install pyserial
+    ```
 
    ![pyserial installed.](yt:fHPyjVdTNg4@3:05#crop=0.28,0.35,0.66,0.47)
 
@@ -108,15 +108,15 @@ On Ubuntu, only members of the `dialout` group can open serial ports, and the ES
 2. Unpack it and copy its contents into your sketchbook, `~/Arduino`. The video uses release
    0.8.4; use your file's version number:
 
-   ```bash
-   cd ~/Downloads
-   ls
-   tar -xvf firmware-0.8.4.tar.gz
-   cd firmware-0.8.4/
-   cp -r * ~/Arduino/
-   cd ~/Arduino/
-   ls
-   ```
+    ```bash
+    cd ~/Downloads
+    ls
+    tar -xvf firmware-0.8.4.tar.gz
+    cd firmware-0.8.4/
+    cp -r * ~/Arduino/
+    cd ~/Arduino/
+    ls
+    ```
 
    `ls` should list `kaiaai-esp32` (the sketch), `libraries`, `LICENSE`, `README.md` and `tools`.
    `tools` contains the **ESP32FS** plugin for **ESP32 Sketch Data Upload**, so unlike on Windows
@@ -124,9 +124,9 @@ On Ubuntu, only members of the `dialout` group can open serial ports, and the ES
 
 3. The ESP32 upload tools call `python`, but Ubuntu 22.04 only has `python3`. Link them:
 
-   ```bash
-   sudo ln -s /usr/bin/python3 /usr/bin/python
-   ```
+    ```bash
+    sudo ln -s /usr/bin/python3 /usr/bin/python
+    ```
 
    ![Firmware copied and the python link created.](yt:fHPyjVdTNg4@3:57#crop=0.28,0.38,0.66,0.44)
 
@@ -189,9 +189,9 @@ properties (base and wheel diameter, wheel spacing, motor type, encoder pulses a
    `Setting up WiFi KAIA.AI; browse to http://192.168.4.1`.
 2. Copy your PC's IP address (note the capital `I`):
 
-   ```bash
-   hostname -I
-   ```
+    ```bash
+    hostname -I
+    ```
 
    ![WiFi setup ready (top); the PC's IP address (bottom).](yt:fHPyjVdTNg4@6:21)
 
@@ -223,17 +223,17 @@ properties (base and wheel diameter, wheel spacing, motor type, encoder pulses a
 
 3. Run step 2 (*Install the Docker packages*). At the time of the video it was:
 
-   ```bash
-   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-   ```
+    ```bash
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    ```
 
    ![Installing the Docker packages.](yt:fHPyjVdTNg4@8:13#crop=0.28,0.35,0.66,0.47)
 
 4. Test it; you should see **Hello from Docker!**:
 
-   ```bash
-   sudo docker run hello-world
-   ```
+    ```bash
+    sudo docker run hello-world
+    ```
 
    ![Docker installed.](yt:fHPyjVdTNg4@8:31#crop=0.28,0.35,0.66,0.47)
 
@@ -247,9 +247,9 @@ properties (base and wheel diameter, wheel spacing, motor type, encoder pulses a
    (Docker only)**; its `# Ubuntu` lines are the commands below.
 2. Pull the image (several gigabytes):
 
-   ```bash
-   sudo docker pull kaiaai/kaiaai:iron
-   ```
+    ```bash
+    sudo docker pull kaiaai/kaiaai:iron
+    ```
 
    ![Pulling kaiaai/kaiaai:iron.](yt:fHPyjVdTNg4@8:54)
 
@@ -259,9 +259,9 @@ properties (base and wheel diameter, wheel spacing, motor type, encoder pulses a
 
 1. Install it:
 
-   ```bash
-   sudo apt install terminator
-   ```
+    ```bash
+    sudo apt install terminator
+    ```
 
    ![Installing Terminator.](yt:fHPyjVdTNg4@9:13)
 
@@ -274,9 +274,9 @@ properties (base and wheel diameter, wheel spacing, motor type, encoder pulses a
 
 1. In the **top** pane, start the container (the Ubuntu version of Chapter 3's `docker run`):
 
-   ```bash
-   sudo docker run --name makerspet -it --rm -v ~/maps:/root/maps -p 8888:8888/udp -p 4430:4430/tcp -e DISPLAY -e QT_X11_NO_MITSHM=1 --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --volume="${XAUTHORITY}:/root/.Xauthority" kaiaai/kaiaai:iron
-   ```
+    ```bash
+    sudo docker run --name makerspet -it --rm -v ~/maps:/root/maps -p 8888:8888/udp -p 4430:4430/tcp -e DISPLAY -e QT_X11_NO_MITSHM=1 --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" --volume="${XAUTHORITY}:/root/.Xauthority" kaiaai/kaiaai:iron
+    ```
 
    Compared with Windows:
 
@@ -288,9 +288,9 @@ properties (base and wheel diameter, wheel spacing, motor type, encoder pulses a
 
 2. In the **bottom** pane, open a second shell in the container:
 
-   ```bash
-   sudo docker exec -it makerspet bash
-   ```
+    ```bash
+    sudo docker exec -it makerspet bash
+    ```
 
    ![Both panes at the container prompt, root@...:/ros_ws#.](yt:fHPyjVdTNg4@10:17#crop=0.39,0.22,0.61,0.5)
 
@@ -300,9 +300,9 @@ From here on, everything works as in Chapter 3.
 
 1. In the top pane, start the bring-up:
 
-   ```bash
-   ros2 launch kaiaai_bringup physical.launch.py
-   ```
+    ```bash
+    ros2 launch kaiaai_bringup physical.launch.py
+    ```
 
    ![The micro-ROS agent starts on port 8888.](yt:fHPyjVdTNg4@10:23#crop=0.39,0.22,0.61,0.45)
 
@@ -318,9 +318,9 @@ From here on, everything works as in Chapter 3.
 
 4. In the bottom pane, start keyboard teleoperation:
 
-   ```bash
-   ros2 run kaiaai_teleop teleop_keyboard
-   ```
+    ```bash
+    ros2 run kaiaai_teleop teleop_keyboard
+    ```
 
    **w** drives forward, **x** backs up, **a** and **d** turn left and right, **space** stops.
 
@@ -330,15 +330,15 @@ From here on, everything works as in Chapter 3.
 
 1. Right-click the top pane, choose **Split Horizontally**, and open another container shell:
 
-   ```bash
-   sudo docker exec -it makerspet bash
-   ```
+    ```bash
+    sudo docker exec -it makerspet bash
+    ```
 
 2. Launch the visualization:
 
-   ```bash
-   ros2 launch kaiaai_bringup monitor_robot.launch.py
-   ```
+    ```bash
+    ros2 launch kaiaai_bringup monitor_robot.launch.py
+    ```
 
    ![Three panes: bring-up, monitor and teleop.](yt:fHPyjVdTNg4@11:30#crop=0.39,0.2,0.61,0.8)
 

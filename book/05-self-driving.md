@@ -48,9 +48,9 @@ mapping and navigation, and one for exploration and saving the map.
 
 2. In the top window, launch the Docker image:
 
-   ```
-   docker run --name makerspet -it --rm -v c:\maps:/root/maps -p 8888:8888/udp -p 4430:4430/tcp -e DISPLAY=host.docker.internal:0.0 -e LIBGL_ALWAYS_INDIRECT=0 kaiaai/kaiaai:iron
-   ```
+    ```
+    docker run --name makerspet -it --rm -v c:\maps:/root/maps -p 8888:8888/udp -p 4430:4430/tcp -e DISPLAY=host.docker.internal:0.0 -e LIBGL_ALWAYS_INDIRECT=0 kaiaai/kaiaai:iron
+    ```
 
    `-v c:\maps:/root/maps` shares `c:\maps` on your PC with the container, so your saved map
    survives when the container stops.
@@ -73,9 +73,9 @@ mapping and navigation, and one for exploration and saving the map.
 
 4. In each of the other two windows, open a Bash shell inside the container:
 
-   ```
-   docker exec -it makerspet bash
-   ```
+    ```
+    docker exec -it makerspet bash
+    ```
 
 ![Open a Bash shell in the middle and bottom windows.](yt:81-9q7QfkHs@1:30)
 
@@ -83,9 +83,9 @@ mapping and navigation, and one for exploration and saving the map.
 
 1. In the top window, launch communication with your robot:
 
-   ```
-   ros2 launch kaiaai_bringup physical.launch.py
-   ```
+    ```
+    ros2 launch kaiaai_bringup physical.launch.py
+    ```
 
 ![Launch robot communication in the top window.](yt:81-9q7QfkHs@1:48)
 
@@ -99,9 +99,9 @@ mapping and navigation, and one for exploration and saving the map.
 1. In the middle window, launch mapping, navigation and visualization. `slam:=True` builds a new
    map while navigating (SLAM: simultaneous localization and mapping):
 
-   ```
-   ros2 launch kaiaai_bringup navigation.launch.py slam:=True
-   ```
+    ```
+    ros2 launch kaiaai_bringup navigation.launch.py slam:=True
+    ```
 
 ![Launch mapping and navigation in the middle window.](yt:81-9q7QfkHs@2:14)
 
@@ -111,9 +111,9 @@ mapping and navigation, and one for exploration and saving the map.
 
 3. In the bottom window, launch exploration:
 
-   ```
-   ros2 launch explore_lite explore.launch.py
-   ```
+    ```
+    ros2 launch explore_lite explore.launch.py
+    ```
 
 ![Launch exploration in the bottom window.](yt:81-9q7QfkHs@2:34)
 
@@ -133,9 +133,9 @@ mapping and navigation, and one for exploration and saving the map.
 
 2. In the same window, save the map:
 
-   ```
-   ros2 run nav2_map_server map_saver_cli -f ~/maps/map --ros-args -p save_map_timeout:=60.0
-   ```
+    ```
+    ros2 run nav2_map_server map_saver_cli -f ~/maps/map --ros-args -p save_map_timeout:=60.0
+    ```
 
 3. Look for `Map saved successfully`. The map is two files, `/root/maps/map.pgm` (the image) and
    `/root/maps/map.yaml` (its settings), also in `c:\maps` on your PC.
@@ -171,9 +171,9 @@ Next time, skip exploring and load the saved map.
 
 2. In the middle window, launch navigation with your saved map:
 
-   ```
-   ros2 launch kaiaai_bringup navigation.launch.py map:=$HOME/maps/map.yaml
-   ```
+    ```
+    ros2 launch kaiaai_bringup navigation.launch.py map:=$HOME/maps/map.yaml
+    ```
 
 ![Launch navigation with the saved map.](yt:81-9q7QfkHs@4:06)
 
