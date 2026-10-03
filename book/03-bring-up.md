@@ -41,7 +41,8 @@ These steps use Arduino IDE 2.x. With IDE 1.8.19, see
     fails with `Failed to connect to ESP32: No serial data received`, retry and press BOOT as soon as
     `Connecting...` appears.
 
-6. Wait for `Hash of data verified.` and `Hard resetting via RTS pin...`.
+6. Confirm the upload succeeded: the output ends with `Hash of data verified.` and
+   `Hard resetting via RTS pin...`.
 
    ![Firmware upload success.](frames/firmware_upload_success.jpg#crop=0.09,0.04,0.82,0.96)
 
@@ -86,6 +87,8 @@ lives in a separate flash area (SPIFFS), so it is uploaded separately.
    **Upload SPIFFS to Pico/ESP8266/ESP32**. At `Connecting....`, hold **BOOT** for 3 to 5 seconds.
 
    ![Pick Upload SPIFFS to Pico/ESP8266/ESP32.](frames/pick_upload_spiffs.jpg#crop=0.18,0.04,0.68,0.96)
+
+   Confirm the upload succeeded: the IDE shows **SPIFFS upload completed!**
 
    ![Sketch data upload completed.](frames/completed_spiffs_upload_successfully.jpg#crop=0.18,0.04,0.68,0.96)
 
@@ -144,7 +147,8 @@ sections above.
     fails with `Failed to connect to ESP32: No serial data received`, retry and press BOOT as soon as
     `Connecting...` appears.
 
-7. Wait for the upload to finish.
+7. Wait for the upload to finish and confirm it succeeded: the output ends with
+   `Hash of data verified.` and `Hard resetting via RTS pin...`.
 
    ![Uploading the firmware in IDE 1.8.19.](frames/uploading_the_firmware_ide1.jpg#crop=0.23,0,0.54,1)
 
@@ -166,8 +170,8 @@ sections above.
 
 ### Upload the sketch data
 
-1. **Close the Serial Monitor.** Don't skip this: while it's open it holds the COM port, and the
-   sketch data upload fails.
+1. **Close the Serial Monitor.** While it's open, it holds the COM port and the sketch data
+   upload fails.
 2. Open **Sketch → Show Sketch Folder** and go into the `data` folder.
 3. Delete every `.yaml` file **except** `config_mini_bdc_30p.yaml`. Keep `favicon.png` and
    `index.html`.
@@ -182,7 +186,15 @@ sections above.
 
 6. When the output shows `Connecting....`, press and hold **BOOT** for 3 to 5 seconds.
 
-   ![Press BOOT for 3–5 seconds now.](frames/press_boot_for_3_5_seconds_now.jpg)
+   <div class="pair" markdown="1">
+   ![The output shows Connecting….](frames/sketch_data_upload_connecting_ide1.jpg#crop=0.23,0.04,0.54,0.96)
+   ![…press BOOT for 3–5 seconds now.](frames/press_boot_for_3_5_seconds_now.jpg)
+   </div>
+
+7. Confirm the upload succeeded: the status bar shows **SPIFFS Image Uploaded** and the output ends
+   with `Hash of data verified.` and `Hard resetting via RTS pin...`.
+
+   ![Sketch data upload succeeded.](frames/sketch_data_upload_success_ide1.jpg#crop=0.23,0.04,0.54,0.96)
 
 !!! tip "If the sketch data upload fails"
     - `Could not open COM3, the port doesn't exist`: close the Serial Monitor, check the USB cable,
@@ -193,9 +205,9 @@ sections above.
 
     See Appendix B for more.
 
-7. Reopen **Tools → Serial Monitor**.
-8. Press the ESP32's **EN** (reset) button.
-9. Confirm the ESP32 loads `config.yaml` and enters WiFi configuration mode:
+8. Reopen **Tools → Serial Monitor**.
+9. Press the ESP32's **EN** (reset) button.
+10. Confirm the ESP32 loads `config.yaml` and enters WiFi configuration mode:
 
     ```
     SPIFFS mounted successfully
@@ -206,7 +218,7 @@ sections above.
     Setting up WiFi KAIA.AI; browse to http://192.168.4.1
     ```
 
-    ![The ESP32 boots and loads config.yaml.](yt:tKfVU1n5TjA@3:58#crop=0,0,0.53,0.72)
+    ![The ESP32 boots and loads config.yaml.](frames/the_esp32_boots_and_loads_config_yaml.jpg#crop=0,0,0.53,0.86)
 
 ## Configure the robot's WiFi
 
@@ -266,9 +278,9 @@ software runs.
     Connecting to WiFi NETGEAR48 ... connected, IP 192.168.93.127
     ```
 
-   ![The robot restarted and joined your WiFi.](yt:tKfVU1n5TjA@5:12)
+   ![The robot restarted and joined your WiFi.](frames/the_robot_restarted_and_joined_your_wifi.jpg#crop=0.18,0.125,0.82,0.875)
 
-9. Reconnect your PC to your WiFi; it may not switch back on its own.
+9. Make sure your PC has reconnected to your WiFi before proceeding.
 
 !!! note "If your PC's IP address changes"
     For example after a router restart, the robot joins WiFi but can't find the PC. Reset the
