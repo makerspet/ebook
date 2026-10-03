@@ -123,22 +123,37 @@ lives in a separate flash area (SPIFFS), so it is uploaded separately.
 
 ## If you use Arduino IDE 1.8.19 {: #ide1-upload }
 
-Skip this section if you use IDE 2.x. The steps above apply, with these differences:
+Skip this section if you use IDE 2.x. With IDE 1.8.19, follow these steps instead:
 
 - **Board:** select **Tools → Board → ESP32 Arduino → ESP32 Dev Module**.
 
-  ![Choose ESP32 Dev Module.](yt:tKfVU1n5TjA@2:46#crop=0.23,0,0.63,0.8)
+  ![Choose ESP32 Dev Module.](frames/select_tools_board_esp32_arduino_esp32_dev_module.jpg#crop=0.23,0,0.63,0.8)
 
 - **Port:** select your COM port under **Tools → Port**.
 - **Firmware upload:** click **Upload** (the right arrow). When the output shows `Connecting....`,
   hold **BOOT** for 3 to 5 seconds, then wait for the upload to finish.
 
-  ![Uploading the firmware in IDE 1.8.19.](yt:tKfVU1n5TjA@3:17#crop=0.23,0,0.54,1)
+  ![Uploading the firmware in IDE 1.8.19.](frames/uploading_the_firmware_ide1.jpg#crop=0.23,0,0.54,1)
 
-- **Sketch data upload:** run **Tools → ESP32 Sketch Data Upload**. Hold **BOOT** at
-  `Connecting....` as before.
+- **Open the Serial Monitor:** **Tools → Serial Monitor**, with the baud rate set to **115200**.
+- **Press the ESP32's EN (reset) button.**
+- **Confirm the ESP32 boots the new firmware:** it asks for sketch data
+  (`Sketch data not found. Please upload sketch data.`).
+
+  ![The ESP32 boots the new firmware.](frames/serial_monitor_esp32_boots.jpg#crop=0,0,0.53,0.43)
+
+- **Close the Serial Monitor.** Don't skip this: while it's open it holds the COM port, and the
+  sketch data upload fails.
+- **Prepare the `data` folder** as in steps 2–4 of [Upload the sketch data](#upload-the-sketch-data).
+- **Run Tools → ESP32 Sketch Data Upload.**
 
   ![The sketch data upload is in the Tools menu.](yt:tKfVU1n5TjA@3:33)
+
+- **Hold BOOT** for 3 to 5 seconds when the output shows `Connecting....`.
+
+- **Reopen the Serial Monitor.**
+- **Press EN.** The ESP32 loads `config.yaml` and enters WiFi configuration mode, as in step 7 of
+  [Upload the sketch data](#upload-the-sketch-data).
 
 ## Configure the robot's WiFi
 
