@@ -57,10 +57,8 @@ to it.
 
     ![Start the Docker image with the maps folder shared.](yt:7uo4BGxWHCA@1:23)
 
-!!! draft "Question for Ilia"
-    The video's terminal shows the older command, with no `-v` and `kaiaai/kaiaai:humble` (top
-    window at 1:26). The overlay and the guide say `-v c:\maps:/root/maps` and `kaiaai/kaiaai:iron`;
-    the book follows them. Also: must `C:\maps` exist beforehand, or does Docker Desktop create it?
+!!! note
+    You don't need to create `C:\maps` first; Docker Desktop creates it.
 
 7. In the **middle** and **bottom** windows, open shells in the same container:
 
@@ -189,13 +187,6 @@ to it.
 
     ![Map saved successfully.](yt:7uo4BGxWHCA@4:25#crop=0.59,0.52,0.41,0.48)
 
-!!! draft "Question for Ilia"
-    The video's terminal and the GitHub cheat sheet use `-f ~/map` (log: `/root/map.pgm`); this
-    upload's overlay says `-f ~/maps/map`, matching `-v c:\maps:/root/maps`, so the book uses that.
-    The Explorer view at 5:03 shows `.bash_history`, `map.pgm` and `map.yaml` in `C:\maps`, i.e. a
-    `c:\maps:/root` mount. Please confirm `~/maps/map`, and whether chapter 5 should load
-    `map:=$HOME/maps/map`.
-
 3. Press **Ctrl+C** in the middle and top windows and wait for the processes to finish.
 
     ![Terminate all tasks with Ctrl+C.](yt:7uo4BGxWHCA@4:30)
@@ -223,7 +214,7 @@ to it.
     ![map.pgm and map.yaml.](yt:7uo4BGxWHCA@5:03#crop=0.29,0.33,0.71,0.45)
 
 2. Open `map.pgm` in a PGM-capable viewer: GIMP for Windows (https://www.gimp.org/downloads/), as
-   in the video, or the lighter XnView. White is free space, black is obstacles, grey is
+   in the video, or the lighter XnView. White is free space, black is obstacles, gray is
    unexplored.
 
     ![The map in GIMP.](yt:7uo4BGxWHCA@5:12)

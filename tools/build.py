@@ -145,6 +145,39 @@ def remote_images(html_text):
     return re.sub(r'<img([^>]*?) src="(https?://[^"]+)"', lambda m: f'<img{m.group(1)} ' + sub_url(m.group(2)), html_text)
 
 
+def keep_with_figures(body):
+    """Wrap each top-level figure together with the short heading/step text right before it.
+
+    Stops a heading or "1. Do X" line ending one page while its illustration starts the next.
+    Only short lead-ins are grouped, so a group always fits on a page.
+    """
+    from bs4 import BeautifulSoup, NavigableString
+    soup = BeautifulSoup(body, 'html.parser')
+    blocks = [c for c in soup.contents if not isinstance(c, NavigableString)]
+    for fig in blocks:
+        if not (fig.name == 'figure' or (fig.name == 'div' and 'pair' in (fig.get('class') or []))):
+            continue
+        lead, size = [], 0
+        prev = fig.find_previous_sibling()
+        while prev is not None and len(lead) < 3:
+            if prev.name not in ('h2', 'h3', 'p', 'ol', 'ul') or prev.find(['figure', 'pre', 'table']):
+                break
+            size += len(prev.get_text())
+            if size > 450:
+                break
+            lead.insert(0, prev)
+            if prev.name in ('h2', 'h3'):
+                break  # a heading starts the group
+            prev = prev.find_previous_sibling()
+        if not lead:
+            continue
+        wrap = soup.new_tag('div', attrs={'class': 'keep'})
+        lead[0].insert_before(wrap)
+        for el in lead + [fig]:
+            wrap.append(el.extract())
+    return str(soup)
+
+
 def slug(text):
     return re.sub(r'[^a-z0-9]+', '-', text.lower()).strip('-')
 
@@ -162,6 +195,7 @@ def build(draft, labels):
                                            'admonition', 'sane_lists', 'toc'],
                                extension_configs={'toc': {'slugify': lambda v, s: slug(v)}})
         body = md.convert(figures(text, labels))
+        body = keep_with_figures(body)
         kind = 'front' if os.path.basename(path).startswith('00') else 'chapter'
         m = re.search(r'<h1 id="([^"]+)">(.*?)</h1>', body)
         if m and kind == 'chapter':

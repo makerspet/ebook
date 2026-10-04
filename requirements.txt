@@ -5,3 +5,4 @@ yt-dlp>=2025.1
 playwright>=1.45
 pymupdf>=1.24
 pymdown-extensions>=10
+beautifulsoup4>=4.12

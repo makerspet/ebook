@@ -72,10 +72,10 @@ Both motor terminal blocks use the same order:
 
 | Terminal | M2 | M1 | GND | ENCA | ENCB | +Venc |
 |---|---|---|---|---|---|---|
-| Wire colour | red | white | blue | green | yellow | black |
+| Wire color | red | white | blue | green | yellow | black |
 
 !!! note
-    These are the colours of the cables shipping now. Restocked cables may differ; if so, go by the
+    These are the colors of the cables shipping now. Restocked cables may differ; if so, go by the
     pin order on the plug and the terminal labels on the board.
 
 ![Both motor cables wired in.](frames/bdc-30p-with-motor-wires-attached-on-both-sides.jpg)
@@ -267,9 +267,9 @@ gets the wrong power pins.
 
     | Header pin | GND | TX | PWM | +5V |
     |---|---|---|---|---|
-    | Wire colour | black | yellow | red | green |
+    | Wire color | black | yellow | red | green |
 
-    Restocked cables may use other colours; go by the pin labels.
+    Restocked cables may use other colors; go by the pin labels.
 
 ![Connect the LiDAR wires to the board.](frames/connect_lidar_wires.jpg)
 

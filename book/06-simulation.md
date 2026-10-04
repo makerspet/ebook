@@ -1,4 +1,4 @@
-# 6. Practise in Simulation (No Robot Needed)
+# 6. Practice in Simulation (No Robot Needed)
 
 Video: [Simulate Arduino/ROS2 LiDAR robot using ROS2 Gazebo](https://youtu.be/7RVY4gUWgz4)
 {: .video-link }
@@ -153,7 +153,7 @@ Leave Gazebo and teleop running.
 ![The navigation launch command.](yt:7RVY4gUWgz4@4:18#crop=0.5,0.35,0.5,0.15)
 
 2. RViz opens. With SLAM, Localization shows `inactive`; that's expected. On the map, white is free
-   floor, dark outlines are walls and furniture, grey-green is unexplored.
+   floor, dark outlines are walls and furniture, gray-green is unexplored.
 
 ![RViz with the Displays and Navigation 2 panels.](yt:7RVY4gUWgz4@4:32)
 
@@ -200,9 +200,9 @@ Leave Gazebo and teleop running.
     If the **Recoveries** counter in the Navigation 2 panel climbs, show the side panel, click
     **Cancel** and give a closer goal.
 
-![Cancelling a goal.](yt:7RVY4gUWgz4@7:58#crop=0.43,0,0.57,0.9)
+![Canceling a goal.](yt:7RVY4gUWgz4@7:58#crop=0.43,0,0.57,0.9)
 
-7. Repeat until the walls form a closed outline with no grey-green left inside.
+7. Repeat until the walls form a closed outline with no gray-green left inside.
 
 ![The finished map.](yt:7RVY4gUWgz4@9:24)
 

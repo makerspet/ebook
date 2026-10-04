@@ -16,7 +16,7 @@ Requirements: Python 3.10+, Google Chrome, Node.js (for yt-dlp).
 pip install -r requirements.txt
 python tools/fetch_videos.py        # once: downloads the videos into work/ (git-ignored)
 python tools/build.py               # build/ebook-draft.pdf, with open questions
-python tools/build.py --timestamps  # same, each figure labelled with its timestamp or file name
+python tools/build.py --timestamps  # same, each figure labeled with its timestamp or file name
 python tools/build.py --final       # build/ebook.pdf
 ```
 

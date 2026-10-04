@@ -57,10 +57,9 @@ mapping and navigation, and one for exploration and saving the map.
 
 ![Launch the Docker image in the top window.](yt:81-9q7QfkHs@1:16)
 
-!!! draft "Question for Ilia"
-    `DISPLAY=host.docker.internal:0.0` needs an X server running on Windows (XLaunch is on the
-    desktop), but the video doesn't show starting it. Add a one-line reminder, or point back to
-    the chapter that sets it up?
+!!! tip
+    Start the X server first: launch **XLaunch** from your desktop with display number `0`
+    (Chapter 2). Without it, RViz can't open its window.
 
 !!! update "Since the video was recorded"
     A ROS 2 Jazzy image, `kaiaai/kaiaai:jazzy`, is also available next to `kaiaai/kaiaai:iron`.

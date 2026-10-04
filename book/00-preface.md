@@ -20,7 +20,7 @@ Once it's built, your robot can:
 - **be driven manually** from your PC keyboard;
 - **show its LiDAR readings** live on your screen;
 - **run in a 3D simulation**, mapping and navigating a virtual world;
-- **be reprogrammed** in Python or C++ to change its behaviour or process its sensor data.
+- **be reprogrammed** in Python or C++ to change its behavior or process its sensor data.
 
 ![The finished robot navigating on its own, next to the live map it builds.](frames/finished_robot_navigating_on_its_own.jpg)
 
@@ -42,7 +42,7 @@ No robotics experience is necessary.
 **How long it takes.** If you've built a kit like this before, allow about an hour each for the
 software setup, the assembly and the bring-up. For a first build, set aside a day.
 
-## How this book is organised
+## How this book is organized
 
 | Chapter | What you do | Video |
 |---|---|---|
@@ -51,7 +51,7 @@ software setup, the assembly and the bring-up. For a first build, set aside a da
 | 3. Upload the Firmware and Bring Up the Robot | Flash the ESP32, connect it to WiFi and test the motors and LiDAR | 9 min |
 | 4. Map Your Place by Driving the Robot | Drive the robot by keyboard to create your first map | 6 min |
 | 5. Let the Robot Explore and Self-Drive | Autonomous exploration and navigation to goals | 6 min |
-| 6. Practise in Simulation | The same mapping and navigation in a 3D simulator, no hardware needed | 10 min |
+| 6. Practice in Simulation | The same mapping and navigation in a 3D simulator, no hardware needed | 10 min |
 | 7. Using an Ubuntu PC Instead | Chapters 2 and 3, the Linux way | 13 min |
 | Appendix A | Running Ubuntu in a virtual machine on Windows | 6 min |
 | Appendix B | Troubleshooting and FAQ | |

@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap');
 
 :root {
   --ink: #1d232a;
   --muted: #5d6873;
-  --accent: #d2601a;
+  --accent: #ED6A3E;
   --rule: #d9dee3;
   --code-bg: #f3f5f7;
   --note: #2f6fb3;
@@ -14,9 +14,9 @@
 @page {
   size: letter;
   margin: 0.8in 0.8in 0.85in 0.8in;
-  @top-left { content: string(chapter); font: 8.5pt Inter, sans-serif; color: var(--muted); }
-  @top-right { content: "Build an Arduino, ROS 2 Self-Driving Robot"; font: 8.5pt Inter, sans-serif; color: var(--muted); }
-  @bottom-center { content: counter(page); font: 9pt Inter, sans-serif; color: var(--muted); }
+  @top-left { content: string(chapter); font: 8.5pt "Source Serif 4", Georgia, serif; color: var(--muted); }
+  @top-right { content: "Build an Arduino, ROS 2 Self-Driving Robot"; font: 8.5pt "Source Serif 4", Georgia, serif; color: var(--muted); }
+  @bottom-center { content: counter(page); font: 9pt "Source Serif 4", Georgia, serif; color: var(--muted); }
 }
 @page :first { margin: 0; @top-left { content: none; } @top-right { content: none; } @bottom-center { content: none; } }
 
@@ -24,15 +24,17 @@ html { font: 10.5pt/1.5 "Source Serif 4", Georgia, serif; color: var(--ink); }
 body { margin: 0; }
 
 /* ---- cover ---- */
-.cover { position: relative; height: 11in; width: 8.5in; overflow: hidden; break-after: page; background: #f3efe8; font-family: Inter, sans-serif; }
+.cover { position: relative; height: 11in; width: 8.5in; overflow: hidden; break-after: page; background: #f3efe8; font-family: "Source Serif 4", Georgia, serif; }
 .cover::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: .45in; background: var(--accent); }
 .cover-brand { position: absolute; top: .6in; left: .8in; display: flex; align-items: center; gap: .14in; }
 .cover-brand img { width: .75in; height: .75in; }
-.cover-brand span { font: 700 17pt Inter, sans-serif; color: var(--ink); letter-spacing: .01em; }
-.cover-robot { position: absolute; top: 1.7in; left: 50%; transform: translateX(-50%); width: 5.2in; }
+.cover-brand span { font: 700 17pt "Source Serif 4", Georgia, serif; color: var(--ink); letter-spacing: .01em; }
+.cover-robot { position: absolute; top: 2.25in; left: 50%; transform: translateX(-50%); width: 4.8in; }
 .cover-text { position: absolute; left: .8in; right: .8in; bottom: 1.05in; color: var(--ink); }
-.cover-title { font-size: 36pt; line-height: 1.1; margin: 0 0 .2in; font-weight: 700; }
+.cover-title { font-size: 36pt; line-height: 1.1; margin: 0 0 .2in; font-weight: 700; letter-spacing: .015em; }
 .cover-sub { font-size: 14pt; line-height: 1.35; margin: 0 0 .3in; color: var(--muted); max-width: 5.8in; }
+.cover-seal { position: absolute; top: 1.25in; right: .55in; width: 1.6in; height: 1.6in; transform: rotate(-12deg); }
+.cover-seal text { fill: #fff; font: 700 17px "Source Serif 4", Georgia, serif; letter-spacing: 1.2px; }
 .cover-author { font-size: 12pt; margin: 0; color: var(--ink); }
 
 .cover-brand sup { font-size: .5em; font-weight: 600; margin-left: 1px; }
@@ -41,15 +43,15 @@ body { margin: 0; }
 /* ---- copyright page ---- */
 @page plain { @top-left { content: none; } @top-right { content: none; } @bottom-center { content: none; } }
 .colophon { page: plain; break-after: page; height: 9.2in; display: flex; flex-direction: column; justify-content: flex-end;
-  font: 9pt/1.5 Inter, sans-serif; color: var(--muted); }
+  font: 9pt/1.5 "Source Serif 4", Georgia, serif; color: var(--muted); }
 .colophon p { margin: 0 0 .12in; }
 .colophon strong { color: var(--ink); }
 
 /* ---- contents ---- */
 .toc { break-after: page; }
-.toc h2 { font: 700 22pt Inter, sans-serif; margin: 0 0 .3in; }
+.toc h2 { font: 700 22pt "Source Serif 4", Georgia, serif; margin: 0 0 .3in; }
 .toc ol { list-style: none; padding: 0; margin: 0; counter-reset: none; }
-.toc li { font: 11.5pt/1.2 Inter, sans-serif; margin: 0 0 .14in; }
+.toc li { font: 11.5pt/1.2 "Source Serif 4", Georgia, serif; margin: 0 0 .14in; }
 .toc a { color: var(--ink); text-decoration: none; display: flex; align-items: baseline; }
 .toc .dots { flex: 1; border-bottom: 1.2px dotted #9aa5ae; margin: 0 6pt; transform: translateY(-3pt); }
 .toc .pn { color: var(--muted); min-width: 1.5em; text-align: right; }
@@ -57,9 +59,9 @@ body { margin: 0; }
 /* ---- chapters ---- */
 section.chapter, section.front { break-before: page; }
 h1[data-num]::before { content: attr(data-num) " "; }
-h1 { string-set: chapter content(text); font: 700 24pt/1.15 Inter, sans-serif; margin: 0 0 .25in; padding-bottom: .12in; border-bottom: 3px solid var(--accent); }
-h2 { font: 700 14.5pt/1.25 Inter, sans-serif; margin: .3in 0 .08in; break-after: avoid; }
-h3 { font: 600 11.5pt/1.3 Inter, sans-serif; margin: .2in 0 .05in; break-after: avoid; }
+h1 { string-set: chapter content(text); font: 700 24pt/1.15 "Source Serif 4", Georgia, serif; margin: 0 0 .25in; padding-bottom: .12in; border-bottom: 3px solid var(--accent); }
+h2 { font: 700 14.5pt/1.25 "Source Serif 4", Georgia, serif; margin: .3in 0 .08in; break-after: avoid; }
+h3 { font: 600 11.5pt/1.3 "Source Serif 4", Georgia, serif; margin: .2in 0 .05in; break-after: avoid; }
 p { margin: 0 0 .09in; orphans: 3; widows: 3; }
 a { color: var(--note); text-decoration: none; }
 ul, ol { margin: 0 0 .1in; padding-left: .28in; }
@@ -72,21 +74,21 @@ pre code { background: none; padding: 0; font-size: 8.4pt; line-height: 1.45; }
 
 table { border-collapse: collapse; margin: .08in 0 .16in; font-size: 9.5pt; width: 100%; break-inside: avoid; }
 th, td { border-bottom: 1px solid var(--rule); padding: 3pt 6pt; text-align: left; vertical-align: top; }
-th { font-family: Inter, sans-serif; font-weight: 600; border-bottom: 1.5px solid var(--ink); }
+th { font-family: "Source Serif 4", Georgia, serif; font-weight: 600; border-bottom: 1.5px solid var(--ink); }
 
 /* ---- figures ---- */
 figure { margin: .1in 0 .18in; break-inside: avoid; text-align: center; }
 figure img { max-width: 100%; max-height: 3.1in; border-radius: 3pt; }
 .pair { display: flex; gap: .16in; align-items: flex-start; break-inside: avoid; }
 .pair figure { flex: 1 1 0; min-width: 0; margin: .05in 0 .14in; }
-figcaption { font: 8.8pt/1.35 Inter, sans-serif; color: var(--muted); margin-top: 4pt; text-align: center; }
+figcaption { font: 8.8pt/1.35 "Source Serif 4", Georgia, serif; color: var(--muted); margin-top: 4pt; text-align: center; }
 .final .ts { display: none; }
 .ts { display: block; font: 600 7.5pt "JetBrains Mono", monospace; color: var(--accent); margin-top: 1pt; }
 p > img { max-width: 100%; max-height: 4in; display: block; margin: .08in auto; }
 
 /* ---- callouts (Markdown "!!! note" blocks) ---- */
 .admonition { border-left: 4px solid var(--note); background: #f1f6fb; padding: .07in .13in .03in; margin: .1in 0 .15in; break-inside: avoid; border-radius: 0 3pt 3pt 0; }
-.admonition-title { font: 700 9pt Inter, sans-serif; text-transform: uppercase; letter-spacing: .05em; color: var(--note); margin-bottom: .03in; }
+.admonition-title { font: 700 9pt "Source Serif 4", Georgia, serif; text-transform: uppercase; letter-spacing: .05em; color: var(--note); margin-bottom: .03in; }
 .admonition.warning, .admonition.danger { border-color: var(--warn); background: #fcf1f0; }
 .admonition.warning .admonition-title, .admonition.danger .admonition-title { color: var(--warn); }
 .admonition.tip { border-color: var(--tip); background: #eff8f3; }
@@ -97,7 +99,10 @@ p > img { max-width: 100%; max-height: 4in; display: block; margin: .08in auto; 
 .admonition.draft .admonition-title { color: #9b59b6; }
 .final .admonition.draft { display: none; }
 
-.video-link { font: 9pt Inter, sans-serif; color: var(--muted); margin: -.12in 0 .2in; }
+.video-link { font: 9pt "Source Serif 4", Georgia, serif; color: var(--muted); margin: -.12in 0 .2in; }
 
 .page-break { break-before: page; }
 .keep { break-inside: avoid; }
+
+/* keep a numbered step together with its own figure */
+li:has(> figure), li:has(> .pair) { break-inside: avoid; }
