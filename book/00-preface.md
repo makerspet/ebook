@@ -15,12 +15,12 @@ building maps, working out where the robot is, and planning a path around obstac
 
 Once it's built, your robot can:
 
-- **map your place completely on its own**, using SLAM and frontier exploration;
-- **drive itself** to any location you pick on the map, avoiding obstacles along the way;
-- **be driven manually** from your PC keyboard;
-- **show its LiDAR readings** live on your screen;
-- **run in a 3D simulation**, mapping and navigating a virtual world;
-- **be reprogrammed** in Python or C++ to change its behavior or process its sensor data.
+- **Map your place completely on its own**, using SLAM and frontier exploration
+- **Drive itself** to any location you pick on the map, avoiding obstacles along the way
+- **Be driven manually** from your PC keyboard
+- **Show its LiDAR readings** live on your screen
+- **Run in a 3D simulation**, mapping and navigating a virtual world
+- **Be reprogrammed** in Python or C++ to change its behavior or process its sensor data
 
 ![The finished robot navigating on its own, next to the live map it builds.](frames/finished_robot_navigating_on_its_own.jpg)
 
@@ -29,7 +29,7 @@ Once it's built, your robot can:
 - **The robot parts.** The Maker's Pet *Arduino/ROS2 Self-Driving Robot 120mm Build Pack*
   (BLD-120MM-PACK) contains everything, including the BDC-30P driver board, a Maker's Pet ESP32-E dev kit and an
   LDROBOT LD14P LiDAR. If you have a 3D printer, you can print the plastic parts yourself; the
-  print files are listed in Appendix C.
+  print files are listed in Appendix D.
 - **Six AA alkaline batteries.**
 - **A PC** running Windows 10/11 or Ubuntu 22.04. The PC runs the robot's "brain", so a faster PC
   gives smoother mapping and navigation.
@@ -56,6 +56,7 @@ software setup, the assembly and the bring-up. For a first build, set aside a da
 | Appendix A | Running Ubuntu in a virtual machine on Windows | 6 min |
 | Appendix B | Troubleshooting and FAQ | |
 | Appendix C | Quick reference: commands, LED codes and links | |
+| Appendix D | 3D printing the robot's plastic parts | |
 
 <div class="page-break"></div>
 

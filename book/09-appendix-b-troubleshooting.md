@@ -49,10 +49,9 @@ post positions.
 !!! warning
     Using rechargeable batteries is at your own risk.
 
-!!! draft "Question for Ilia"
-    Forum [#106](https://github.com/makerspet/support/discussions/106) (September 2026) reports the
-    2×18650 holder hits the LiDAR posts on a self-printed chassis STL v1.0.1. Add a chassis variant
-    or note?
+!!! tip
+    If the 18650 holder hits the LiDAR posts, check the assembly against the 18650 mod photo in
+    Chapter 1: the rear posts go in the base's outer spare holes.
 
 ### What battery voltage drives the motors? (Vbat, Vmot, JP2)
 
@@ -144,11 +143,7 @@ Swap the motor's ENCA and ENCB wires, then swap its M1 and M2 wires.
 
 Check the soldering on the motor's encoder board and resolder any loose components.
 
-![Check the soldering on the N20 encoder board.](yt:jNF1pKFe9b8@0:02)
-
-!!! draft "Question for Ilia"
-    Which component is the defect here? The tweezers point at the black sensor next to the connector
-    at 0:02. If you can name it (for example, "the Hall sensor"), the caption can say so.
+![A poorly soldered Hall sensor on the N20 encoder board.](yt:jNF1pKFe9b8@0:02)
 
 ### A motor runs at full speed at power-up, before WiFi connects
 
@@ -231,9 +226,9 @@ The Arduino IDE 2.x Library Manager can silently replace the firmware's MotorCon
 libraries with same-named ones. Copy the firmware's libraries back into your Arduino libraries
 folder and rename them (for example `MotorController_kaia`).
 
-!!! draft "Question for Ilia"
-    If a library folder is renamed, do the sketch's `#include` lines need to change? A short
-    step-by-step would help beginners.
+The sketch's `#include` lines don't need to change: Arduino finds libraries by their header
+files, not their folder names. Alternatively, reinstall the Arduino IDE from scratch and don't
+install any third-party libraries; use only the ones bundled with the firmware.
 
 ### Upload fails with "Failed to connect to ESP32: No serial data received"
 
@@ -415,11 +410,11 @@ The Serial Monitor keeps printing `Connecting to Micro-ROS agent ...` without `s
 - Check whether your PC's IP address has changed. If so, reset the WiFi configuration and enter the
   new address.
 
-!!! draft "Question for Ilia"
-    In [forum #93](https://github.com/makerspet/support/discussions/93) a Windows user who could ping
-    the robot, with the firewall off, fixed it by binding the published ports to the PC's IP:
-    `docker run ... -p <PC IPv4 address>:8888:8888/udp -p <PC IPv4 address>:4430:4430/tcp ...`.
-    Recommend this as a last resort?
+- As a last resort, bind the published ports to your PC's IPv4 address in the `docker run`
+  command. This fixed it for a Windows user who could ping the robot
+  ([forum #93](https://github.com/makerspet/support/discussions/93)):
+
+        docker run ... -p <PC IPv4 address>:8888:8888/udp -p <PC IPv4 address>:4430:4430/tcp ...
 
 ### Frequent CRC errors or "message(s) lost"
 
@@ -524,16 +519,6 @@ root@8ec422cb4258:/ros_ws# kill 334
 root@8ec422cb4258:/ros_ws# kill 272
 ```
 
-### The latest image misbehaves (for example, errors in `navigation.yaml`)
-
-Try the previous image release, or the Jazzy image. For one builder, `kaiaai/kaiaai:iron-03-11-2025`
-fixed a SLAM launch failure ([forum #82](https://github.com/makerspet/support/discussions/82)).
-Images are tested with Docker, not Podman.
-
-!!! draft "Question for Ilia"
-    Is the `iron-03-11-2025` workaround from forum #82 still needed, or is the current
-    `kaiaai/kaiaai:iron` fixed? If fixed, drop this entry.
-
 ### Windows WSL2 install fails
 
 Follow Microsoft's [WSL installation instructions](https://learn.microsoft.com/en-us/windows/wsl/install)
@@ -557,10 +542,6 @@ For the Jazzy image, use `kaiaai/kaiaai:jazzy`.
 !!! warning
     Don't commit or publish an image that contains secrets, such as your WiFi credentials.
 
-!!! draft "Question for Ilia"
-    The web page's `docker tag` and `docker push` lines lost their placeholder in the HTML (it reads
-    `docker tag kaiaai/kaiaai:iron /kaiaai:iron`). I've written `<your-docker-hub-user>`; please
-    confirm.
 
 ### Running more than one robot from one PC
 
@@ -739,17 +720,13 @@ The real wheel speed probably doesn't match the commanded speed, usually because
 
         ros2 param get /pet motor.encoder.ppr
 
-    Also useful: `motor.left.encoder.now`, `motor.right.encoder.now`, `rpm.now`,
-    `base.wheel.diameter` and `base.wheel.track`.
+    Also useful: `motor.left.encoder.now`, `motor.right.encoder.now`, `motor.left.rpm.now`,
+    `motor.right.rpm.now`, `base.wheel.diameter` and `base.wheel.track`.
 
 2. Count the encoder ticks over one full wheel revolution and divide by 4. The firmware multiplies
    the configured PPR by 4 for the quadrature edges, so enter the 1× value.
 3. Set the correct PPR and a Max RPM the motor can actually reach, then upload the sketch data again.
 
-!!! draft "Question for Ilia"
-    The guide lists `motor.left/right.encoder.now` and `rpm.now`. I've expanded the first to
-    `motor.left.encoder.now` / `motor.right.encoder.now`; please confirm the names, and whether
-    `rpm.now` has a left/right prefix.
 
 ### The scan or map slides sideways when the robot drives straight
 
@@ -784,7 +761,8 @@ docker container commit makerspet kaiaai/kaiaai:jazzy
 ### The robot makes a knocking sound
 
 If you 3D-printed the parts, set **Seam Position** to **Random** in your slicer for the caster
-wheel, or the seam can make it knock. Do the same for the wheels, or the robot may wobble slightly.
+wheel, or the seam can make it knock. Do the same for the wheels, or the robot may wobble slightly
+(Appendix D).
 
 ## B.9 Reference Serial Monitor output
 

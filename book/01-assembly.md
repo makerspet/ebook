@@ -42,12 +42,8 @@ Tools:
 ![The kit laid out.](yt:6GtjAB19GP8@0:16)
 
 !!! tip "Printing the parts yourself"
-    The 3D-printable parts are open source. The guide page has 3MF files for the base, LiDAR skirts,
-    LiDAR posts, board posts, caster roller, caster mounts and the 2S battery holder backstop, plus
-    the wheels and motor clamps, and the full Fusion 360 model.
-
-    When slicing the **caster roller** and **wheels**, set *Seam Position* to **Random**. Otherwise
-    the caster can knock rhythmically and the robot may wobble.
+    The plastic parts are open source. Appendix D lists the print files and the one slicer setting
+    that matters.
 
 ## Connect the motor wires to the board
 

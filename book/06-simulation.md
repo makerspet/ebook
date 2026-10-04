@@ -59,7 +59,7 @@ Ubuntu commands from the companion article are included too.
 
 ![The container is running; the prompt starts with root@.](yt:7RVY4gUWgz4@1:36#crop=0.5,0,0.5,0.3)
 
-2. Open two more terminals. I split the window into panes (in Windows Terminal, Alt+click **+**);
+2. Open two more terminals. I split the window into panes (in Windows Terminal, press **Alt+Shift+-**);
    tabs or windows work too.
 3. In each new one, enter the running container:
 
@@ -175,7 +175,7 @@ Leave Gazebo and teleop running.
 
 1. Click **Nav2 Goal** on the RViz toolbar.
 
-![The Nav2 Goal button.](yt:7RVY4gUWgz4@5:56#crop=0.43,0,0.57,0.12)
+![The Nav2 Goal button.](yt:7RVY4gUWgz4@5:56#crop=0.43,0,0.57,0.25)
 
 2. Left-click and hold where you want the robot to go.
 3. Drag toward the direction it should face on arrival. A green arrow shows the goal.
@@ -226,8 +226,7 @@ Leave Gazebo and teleop running.
 
 3. Open `map.pgm` in XnView to view it.
 
-!!! draft "Question for Ilia"
-    The video ends before the map is opened in XnView. Do you have a screenshot for here?
+![The saved map in XnView.](frames/living_room_map_viewed_in_xnview.jpg)
 
 ## Shut everything down
 

@@ -38,14 +38,10 @@ to it.
     ![In XLaunch, set the Display number to zero.](yt:7uo4BGxWHCA@0:50#crop=0.05,0,0.9,0.62)
 
 3. Launch Windows PowerShell.
-4. Open two more shells by holding **Alt** and clicking the **+** icon in the tab bar. Alt+Click
-   splits the window instead of opening a tab.
+4. Click in the PowerShell window and press **Alt+Shift+-** to split it horizontally. Repeat until
+   you have three panes: top, middle and bottom.
 
-    ![Alt+Click the plus icon to split the window.](yt:7uo4BGxWHCA@1:10)
-
-5. Arrange the three shells top, middle and bottom.
-
-6. In the **top** window, launch the robotics software:
+5. In the **top** window, launch the robotics software:
 
     ```
     docker run --name makerspet -it --rm -v c:\maps:/root/maps -p 8888:8888/udp -p 4430:4430/tcp -e DISPLAY=host.docker.internal:0.0 -e LIBGL_ALWAYS_INDIRECT=0 kaiaai/kaiaai:iron
@@ -57,10 +53,7 @@ to it.
 
     ![Start the Docker image with the maps folder shared.](yt:7uo4BGxWHCA@1:23)
 
-!!! note
-    You don't need to create `C:\maps` first; Docker Desktop creates it.
-
-7. In the **middle** and **bottom** windows, open shells in the same container:
+6. In the **middle** and **bottom** windows, open shells in the same container:
 
     ```
     docker exec -it makerspet bash
@@ -70,10 +63,8 @@ to it.
 
     ![Open two more shells with docker exec.](yt:7uo4BGxWHCA@1:30)
 
-8. Click `https://github.com/kaiaai/kaiaai` in the startup message and scroll to
+7. Click `https://github.com/kaiaai/kaiaai` in the startup message and scroll to
    **Command cheat sheets** › **Operate a physical robot** to copy and paste commands.
-
-    ![The command reference link in the startup message.](yt:7uo4BGxWHCA@1:34#crop=0.05,0,0.95,0.2)
 
     ![The cheat sheet for a physical robot.](yt:7uo4BGxWHCA@1:44#crop=0,0,0.42,1)
 
@@ -99,7 +90,9 @@ to it.
     ![The robot has connected.](yt:7uo4BGxWHCA@2:07#crop=0.59,0,0.41,0.28)
 
 !!! note
-    Occasional `message(s) lost` and `RESULT_CRC_ERROR` lines are normal over WiFi.
+    Occasional `message(s) lost` and `RESULT_CRC_ERROR` lines are normal over WiFi. To keep them
+    rare, give the robot a strong WiFi signal and keep the network quiet while the robot runs: for
+    example, don't stream video on another PC or phone on the same WiFi.
 
 ## Start teleoperation and mapping
 
@@ -209,9 +202,9 @@ to it.
 
 1. Open File Explorer and type `C:\maps` into the address bar.
 
-    ![Go to C:\maps in File Explorer.](yt:7uo4BGxWHCA@4:58#crop=0.29,0.33,0.71,0.67)
+    ![Go to C:\maps in File Explorer.](yt:7uo4BGxWHCA@4:58#crop=0,0.33,1,0.67)
 
-    ![map.pgm and map.yaml.](yt:7uo4BGxWHCA@5:03#crop=0.29,0.33,0.71,0.45)
+    ![map.pgm and map.yaml.](yt:7uo4BGxWHCA@5:03#crop=0,0.33,1,0.45)
 
 2. Open `map.pgm` in a PGM-capable viewer: GIMP for Windows (https://www.gimp.org/downloads/), as
    in the video, or the lighter XnView. White is free space, black is obstacles, gray is

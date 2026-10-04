@@ -368,13 +368,34 @@ following chapters, use this chapter's `sudo docker run` wherever they show the 
 
 ## Alternatives
 
-**ROS2 without Docker.** On Ubuntu 22.04, run
-[`install_ros2_iron_ubuntu_22_04.sh`](https://github.com/kaiaai/install/blob/iron/ubuntu/install_ros2_iron_ubuntu_22_04.sh), then [`install_kaiaai_iron.sh`](https://github.com/kaiaai/install/blob/iron/ubuntu/install_kaiaai_iron.sh). Wherever this chapter runs
-`sudo docker exec -it makerspet bash`, open an ordinary terminal instead.
+**ROS2 without Docker.** On Ubuntu 22.04, install ROS2 Iron and the Kaia.ai packages with two
+scripts from [github.com/kaiaai/install](https://github.com/kaiaai/install). Run them as your normal
+user; they ask for your password when they need `sudo`:
 
-**ROS2 Jazzy.** The Jazzy image, `kaiaai/kaiaai:jazzy`, starts on Linux with [`start_jazzy.sh`](https://github.com/kaiaai/install/blob/jazzy/docker/utils/start_jazzy.sh).
-Without Docker, on Ubuntu 24.04, run [`install_ros2_jazzy_ubuntu_24_04.sh`](https://github.com/kaiaai/install/blob/jazzy/ubuntu/install_ros2_jazzy_ubuntu_24_04.sh), then
-[`install_kaiaai_jazzy.sh`](https://github.com/kaiaai/install/blob/jazzy/ubuntu/install_kaiaai_jazzy.sh).
+```
+wget https://raw.githubusercontent.com/kaiaai/install/iron/ubuntu/install_ros2_iron_ubuntu_22_04.sh
+bash install_ros2_iron_ubuntu_22_04.sh
+wget https://raw.githubusercontent.com/kaiaai/install/iron/ubuntu/install_kaiaai_iron.sh
+bash install_kaiaai_iron.sh
+```
+
+Wherever this chapter runs `sudo docker exec -it makerspet bash`, open an ordinary terminal instead.
+
+**ROS2 Jazzy.** The Jazzy image, `kaiaai/kaiaai:jazzy`, starts on Linux with `start_jazzy.sh`:
+
+```
+wget https://raw.githubusercontent.com/kaiaai/install/jazzy/docker/utils/start_jazzy.sh
+bash start_jazzy.sh
+```
+
+Without Docker, on Ubuntu 24.04:
+
+```
+wget https://raw.githubusercontent.com/kaiaai/install/jazzy/ubuntu/install_ros2_jazzy_ubuntu_24_04.sh
+bash install_ros2_jazzy_ubuntu_24_04.sh
+wget https://raw.githubusercontent.com/kaiaai/install/jazzy/ubuntu/install_kaiaai_jazzy.sh
+bash install_kaiaai_jazzy.sh
+```
 
 !!! warning "Jazzy image: add --ipc=host whenever you use --net=host"
     The Jazzy image passes ROS2 messages through shared memory, and `start_jazzy.sh` uses
@@ -383,14 +404,9 @@ Without Docker, on Ubuntu 24.04, run [`install_ros2_jazzy_ubuntu_24_04.sh`](http
     but receive no messages. Nodes inside the container, and the robot, work either way.
 
 **Raspberry Pi and other ARM64 boards.** The Docker image is x86-64 only. Install Ubuntu 22.04 on
-the Pi, run `install_ros2_iron_ubuntu_22_04.sh` (or the official ROS2 Iron Ubuntu .deb
-instructions), then `install_kaiaai_iron.sh`. For Jazzy, use Ubuntu 24.04 with
-`install_ros2_jazzy_ubuntu_24_04.sh` and `install_kaiaai_jazzy.sh`.
+the Pi and run the two Iron scripts above (or follow the official ROS2 Iron Ubuntu .deb
+instructions). For Jazzy, use Ubuntu 24.04 and the two Jazzy scripts.
 
 **Ubuntu in a virtual machine on Windows.** If WSL2 doesn't work, you can follow this chapter in an
 Ubuntu 22.04 VM. I don't recommend it: in my experience the VM makes ROS2 laggy. You can also upload
 the firmware from Windows (Chapter 3) and run only ROS2 in the VM.
-
-!!! draft "Question for Ilia"
-    Scripts link to github.com/kaiaai/install, as in the guide. Should the book also give the exact
-    commands to run them (e.g. `bash install_ros2_iron_ubuntu_22_04.sh`)?

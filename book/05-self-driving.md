@@ -41,10 +41,8 @@ invisible. The robot also gets stuck on thick carpet and high thresholds.
 You will use three command windows: one for the Docker container and the robot link, one for
 mapping and navigation, and one for exploration and saving the map.
 
-1. Open Windows PowerShell (or `cmd.exe`) and Alt-click the **+** button in the tab bar twice to
-   split it into three panes.
-
-![Alt-click + until you have three command windows.](yt:81-9q7QfkHs@0:58)
+1. Open Windows PowerShell, click in its window and press **Alt+Shift+-** to split it horizontally.
+   Repeat until you have three panes: top, middle and bottom.
 
 2. In the top window, launch the Docker image:
 

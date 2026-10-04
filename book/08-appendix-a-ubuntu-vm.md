@@ -16,14 +16,13 @@ PC is comfortable.
 
 ## Install VMware Workstation Player
 
-1. Search for "VMware Workstation Player download" and download the installer. The video uses
-   VMware Player 17.6.3 for Windows.
+1. Download the VMware Workstation installer for Windows. It's now free for personal, educational
+   and commercial use, with no license key. The video uses VMware Player 17.6.3.
 
-    !!! draft "Question for Ilia"
-        Since Broadcom took over VMware, the download and licensing pages have changed, and the video
-        downloads from TechSpot, a third-party mirror. Point to the official Broadcom page instead,
-        and add the current steps (Broadcom account, "VMware Workstation Pro for Personal Use", etc.)?
-        I could not verify them from the video.
+    !!! tip "Where to download"
+        I've had a good experience downloading it from TechSpot (search for "VMware Workstation
+        TechSpot"). You can also download it directly from Broadcom, but that needs a Broadcom
+        account and, in my experience, is a hassle.
 
 2. Run the installer, accept the license agreement and click **Next**.
 3. On **Custom Setup**, keep the default folder
@@ -89,44 +88,12 @@ PC is comfortable.
 The VM boots into the Ubuntu installer.
 
 1. Choose your keyboard layout and click **Continue**.
-2. On **Updates and other software**, I choose **Minimal installation**; it's all you need. Keep
-   **Download updates while installing Ubuntu** checked and click **Continue**.
+2. Follow the installer's prompts. Its defaults work; the disk it erases is the VM's virtual disk,
+   not your Windows drive.
+3. When **Installation Complete** appears, click **Restart Now**, then log in.
 
-    ![Choose Minimal installation.](yt:q9uG86FcqVA@2:22#crop=0.08,0.14,0.67,0.82)
-
-3. Keep **Erase disk and install Ubuntu**, click **Install Now**, then **Continue**. This erases
-   only the VM's virtual disk, not your Windows drive.
-
-    ![Erase disk affects only the VM's virtual disk.](yt:q9uG86FcqVA@2:26#crop=0.08,0.14,0.67,0.82)
-
-4. Pick your time zone and click **Continue**.
-5. On **Who are you?**, enter your name, computer name, user name and password, then click
-   **Continue**.
-
-    ![Who are you? page.](yt:q9uG86FcqVA@2:40#crop=0.08,0.14,0.67,0.82)
-
-6. When **Installation Complete** appears, click **Restart Now**.
-
-7. Log in and click through the welcome screens with **Skip** and **Next**.
-
-## First boot: updates and clean-up
-
-1. If Ubuntu offers to upgrade to 24.04, click **Don't Upgrade**. The robot software needs 22.04.
-
-    ![Dismiss the 24.04 upgrade.](yt:q9uG86FcqVA@3:14#crop=0.08,0.14,0.67,0.82)
-
-2. When **Software Updater** offers updates, click **Install Now**, then **Restart Now**.
-
-    ![Install the updates.](yt:q9uG86FcqVA@3:22#crop=0.08,0.14,0.67,0.82)
-
-3. Eject the Ubuntu image: right-click the disc icon in the dock and choose **Eject**.
-
-    ![Eject the Ubuntu image.](yt:q9uG86FcqVA@3:36#crop=0.08,0.14,0.67,0.82)
-
-4. The full-screen button in the VMware toolbar toggles full screen; in full screen, the pin button
-   at its left auto-hides the toolbar.
-
-    ![Ubuntu full screen, VMware toolbar pinned.](yt:q9uG86FcqVA@3:50)
+!!! warning
+    If Ubuntu offers to upgrade to 24.04, decline. The robot software in this book needs 22.04.
 
 ## Remove unneeded hardware and set up networking
 
@@ -173,6 +140,3 @@ Windows (the host) or to the VM.
 - **Connect to a virtual machine** (`Ubuntu 22.04`) if Arduino IDE runs in the VM.
 
 Don't check **Remember my choice and do not ask again** until you're sure.
-
-!!! draft "Question for Ilia"
-    The video picks "Connect to the host". The two bullets above are my addition; please confirm.

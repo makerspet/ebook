@@ -146,35 +146,132 @@ def remote_images(html_text):
 
 
 def keep_with_figures(body):
-    """Wrap each top-level figure together with the short heading/step text right before it.
+    """Keep headings and short lead-in text on the same page as the figure they lead to.
 
-    Stops a heading or "1. Do X" line ending one page while its illustration starts the next.
-    Only short lead-ins are grouped, so a group always fits on a page.
+    1. A heading is grouped with what follows it up to and including the first figure, even when
+       that figure sits inside step 1 or 2 of a list: the list is split there (numbering continues).
+    2. Any other top-level figure is grouped with the short text right before it.
+    Groups are capped in size so they always fit on a page.
     """
     from bs4 import BeautifulSoup, NavigableString
     soup = BeautifulSoup(body, 'html.parser')
-    blocks = [c for c in soup.contents if not isinstance(c, NavigableString)]
-    for fig in blocks:
-        if not (fig.name == 'figure' or (fig.name == 'div' and 'pair' in (fig.get('class') or []))):
-            continue
+    MAX_TEXT, MAX_BLOCKS = 700, 4
+
+    def is_fig(el):
+        return el.name == 'figure' or (el.name == 'div' and 'pair' in (el.get('class') or []))
+
+    def has_fig(el):
+        return is_fig(el) or el.find('figure') is not None
+
+    def is_code(el):
+        return el.name == 'pre' or (el.name == 'div' and 'highlight' in (el.get('class') or []))
+
+    def in_keep(el):
+        return any('keep' in (p.get('class') or []) for p in el.parents if p.name == 'div')
+
+    def blocks_after(el):
+        sib = el.next_sibling
+        while sib is not None:
+            if not isinstance(sib, NavigableString):
+                yield sib
+            sib = sib.next_sibling
+
+    def split_list(lst, upto):
+        """Move the items after index `upto` of an ol/ul into a new list right after it."""
+        items = lst.find_all('li', recursive=False)
+        if upto >= len(items) - 1:
+            return
+        rest = soup.new_tag(lst.name)
+        if lst.name == 'ol':
+            rest['start'] = str(int(lst.get('start', 1)) + upto + 1)
+        for li in items[upto + 1:]:
+            rest.append(li.extract())
+        lst.insert_after(rest)
+
+    def wrap(els):
+        box = soup.new_tag('div', attrs={'class': 'keep'})
+        els[0].insert_before(box)
+        for el in els:
+            box.append(el.extract())
+
+    # 1. headings: heading ... first figure
+    for h in soup.find_all(['h2', 'h3'], recursive=False):
+        group, size, found = [h], 0, False
+        if h.find_previous_sibling() is not None and h.find_previous_sibling().name in ('h2', 'h3'):
+            continue  # handled together with the heading above it
+        for blk in blocks_after(h):
+            if blk.name in ('h2', 'h3') and all(g.name in ('h2', 'h3') for g in group):
+                group.append(blk)  # e.g. "## B.9 ..." followed by "### Healthy boot"
+                continue
+            if blk.name in ('h1', 'h2', 'h3') or len(group) > MAX_BLOCKS or in_keep(blk):
+                group = None
+                break
+            if (is_code(blk) or blk.name == 'table') and not has_fig(blk):
+                if size + len(blk.get_text()) <= 2500:  # a code block or table up to about a page
+                    group.append(blk)
+                    found = True
+                else:
+                    group = None
+                break
+            if blk.name in ('ol', 'ul') and not has_fig(blk):
+                items = blk.find_all('li', recursive=False)
+                if items and size + len(items[0].get_text()) <= MAX_TEXT:
+                    split_list(blk, 0)
+                    group.append(blk)
+                    found = True
+                    nxt = blk.find_next_sibling()
+                    if nxt is not None and is_fig(nxt):  # a figure right after step 1 joins too
+                        group.append(nxt)
+                else:
+                    group = None
+                break
+            if is_fig(blk):
+                group.append(blk)
+                found = True
+                break
+            if blk.name in ('ol', 'ul') and has_fig(blk):
+                items = blk.find_all('li', recursive=False)
+                k = next(i for i, li in enumerate(items) if li.find('figure') is not None)
+                size += sum(len(li.get_text()) for li in items[:k])
+                if k > 2 or size > MAX_TEXT:
+                    group = None
+                    break
+                split_list(blk, k)
+                group.append(blk)
+                found = True
+                break
+            if has_fig(blk) or blk.name not in ('p', 'ol', 'ul', 'pre', 'div'):
+                group = None
+                break
+            size += len(blk.get_text())
+            if size > MAX_TEXT:
+                group = None
+                break
+            group.append(blk)
+        if group and found:
+            wrap(group)
+
+    # 2. other top-level figures: short text right before them
+    for fig in [c for c in soup.contents if not isinstance(c, NavigableString) and is_fig(c)]:
         lead, size = [], 0
         prev = fig.find_previous_sibling()
         while prev is not None and len(lead) < 3:
-            if prev.name not in ('h2', 'h3', 'p', 'ol', 'ul') or prev.find(['figure', 'pre', 'table']):
+            if not (prev.name in ('h2', 'h3', 'p', 'ol', 'ul') or is_code(prev)) or has_fig(prev) or in_keep(prev):
                 break
+            if prev.name in ('ol', 'ul') and len(prev.get_text()) > MAX_TEXT // 2:
+                items = prev.find_all('li', recursive=False)
+                if len(items) > 1:  # keep only the last step with the figure
+                    split_list(prev, len(items) - 2)
+                    prev = prev.find_next_sibling()
             size += len(prev.get_text())
-            if size > 450:
+            if size > MAX_TEXT:
                 break
             lead.insert(0, prev)
             if prev.name in ('h2', 'h3'):
-                break  # a heading starts the group
+                break
             prev = prev.find_previous_sibling()
-        if not lead:
-            continue
-        wrap = soup.new_tag('div', attrs={'class': 'keep'})
-        lead[0].insert_before(wrap)
-        for el in lead + [fig]:
-            wrap.append(el.extract())
+        if lead:
+            wrap(lead + [fig])
     return str(soup)
 
 

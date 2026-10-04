@@ -110,11 +110,5 @@ configuration mode.
 
 **3D printing**
 
-The robot's plastic parts are open source. The build guide's "Download Files for 3D Printing"
-section links the 3MF files for the base, LiDAR skirts, LiDAR posts, board posts, caster roller,
-caster mounts, battery holder backstop, wheels and motor clamps, plus the full Autodesk Fusion 360
-model. When printing the caster roller and wheels, set your slicer's seam position to **Random**.
-
-!!! draft "Question for Ilia"
-    The guide's 3MF and Fusion 360 links didn't survive the text extraction. Do you want direct URLs
-    here, or is pointing to the guide page better (it stays current)?
+Print files and the Fusion 360 model: the "Download Files for 3D Printing" section of
+[makerspet.com/blog/bld-120mm-pack](https://makerspet.com/blog/bld-120mm-pack/). See Appendix D.

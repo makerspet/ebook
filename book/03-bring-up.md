@@ -345,7 +345,7 @@ software runs.
     Telem avg 24 max 27ms, LiDAR RPM 5.01, wheels RPM 0.00 0.00, battery 8.14V, RSSI -62dBm
     ```
 
-   ![The ESP32 has connected to ROS2.](yt:tKfVU1n5TjA@6:29)
+   ![The robot reports its status in the Serial Monitor.](frames/telem_robot_status.jpg)
 
 6. The activity LED now blinks rapidly.
 
@@ -354,19 +354,25 @@ software runs.
     must not be zero.** If it stays `0.00`, check the LiDAR wires and that `config.yaml` matches your
     LiDAR (LD14P by default).
 
+!!! update "Since the video was recorded: antivirus"
+    Antivirus software can block the robot's connection to your PC. My Avast started blocking these
+    ports in December 2025. If the robot joins WiFi but never connects to the PC, try disabling
+    your antivirus.
+
 !!! tip "Connected to WiFi, but not to the PC?"
     If `Connecting to Micro-ROS agent ...` repeats without `success`:
+
     - Check that `physical.launch.py` is running in the container.
     - Check the robot and PC are on the same network, and it doesn't block devices from talking to
       each other ("client isolation"), as café, restaurant and university networks often do.
     - Check your PC's IP address hasn't changed.
-    - Make sure your PC accepts incoming local connections. Try disabling your antivirus: my
-      Avast started blocking these ports in December 2025.
+    - Make sure your PC accepts incoming local connections and your antivirus isn't blocking
+      them (see the box above).
 
     See Appendix B for more.
 
-7. In Windows Terminal, hold **Alt** and click **+** to split the window into a second PowerShell
-   pane.
+7. In Windows Terminal, press **Alt+Shift+-** to split the window horizontally into a second
+   PowerShell pane.
 8. Click inside it and open another shell in the running container:
 
     ```
@@ -380,6 +386,10 @@ software runs.
     ```
 
    ![A second shell in the container runs teleop_keyboard.](yt:tKfVU1n5TjA@6:54#crop=0.49,0.52,0.51,0.38)
+
+!!! tip "Advanced: command history"
+    In a container shell, press the **up** and **down** arrow keys to step through common robot
+    commands. They were preloaded into the bash history when the Docker image was built.
 
 10. With the teleop pane selected, drive the wheels:
     - Press **w** repeatedly to speed up forward to maximum. Watch the wheel RPM rise in the
@@ -401,8 +411,8 @@ only runs at full speed, see Appendix B.
 
    ![Reattach the LiDAR.](yt:tKfVU1n5TjA@7:48)
 
-3. Hold **Alt**, click **+** and click inside the new pane. Windows Terminal splits the selected
-   pane; if one opens in the wrong place, type `exit` in it and retry.
+3. Click inside a PowerShell pane and press **Alt+Shift+-** to split it. If a pane opens in the
+   wrong place, type `exit` in it and retry.
 4. Open another container shell and start the LiDAR visualization:
 
     ```
@@ -424,9 +434,9 @@ only runs at full speed, see Appendix B.
     Start it (display number 0) and rerun the command.
 
 !!! note
-    A few `RESULT_CRC_ERROR` and `message(s) lost` lines are normal. If they flood the terminal,
-    WiFi packets are being dropped: move the robot and PC closer to the router and avoid heavy WiFi
-    use.
+    Occasional `message(s) lost` and `RESULT_CRC_ERROR` lines are normal over WiFi. To keep them
+    rare, give the robot a strong WiFi signal and keep the network quiet while the robot runs: for
+    example, don't stream video on another PC or phone on the same WiFi.
 
 ## Shut down
 
