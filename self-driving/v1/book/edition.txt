@@ -1,0 +1,2 @@
+edition: 1.0
+date: October 2026

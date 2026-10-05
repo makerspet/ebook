@@ -1,0 +1,465 @@
+# 3. Upload the Firmware and Bring Up the Robot
+
+Video: [Step by Step Arduino LiDAR Robot Bringup](https://youtu.be/tKfVU1n5TjA)
+{: .video-link }
+
+You upload the firmware and its configuration ("sketch data") to the ESP32, connect the robot to
+your WiFi and start the ROS2 software on your PC. At the end you drive the wheels from your keyboard
+and see live LiDAR data.
+
+You need the assembled robot (Chapter 1) and the PC software from Chapter 2. Plan for about
+30 minutes.
+
+## Upload the firmware
+
+These steps use Arduino IDE 2.x. With IDE 1.8.19, see
+[If you use Arduino IDE 1.8.19](#ide1-upload) below; only the menus differ.
+
+1. Open the `kaiaai-esp32` sketch. If the IDE offers library or board updates, click **LATER**.
+
+   ![Close the update pop-ups. Don't update.](frames/close_the_update_pop_ups_don_not_update_libraries_boards.jpg#crop=0.18,0.04,0.68,0.96)
+
+2. Connect the ESP32 to your PC over USB, with the board's power switch **off**.
+
+   ![Plug the USB cable into the ESP32.](frames/plug_the_usb_cable_into_the_esp32.jpg)
+
+3. In the board selector, choose **DOIT ESP32 DEVKIT V1** and your COM port (`COM3` in the video).
+
+   ![Select the board and COM port.](frames/select_the_board_and_com_port.jpg#crop=0.28,0.23,0.48,0.6)
+
+4. Click **Upload** (the right arrow). The first compile takes a while.
+5. When the output shows `Connecting....`, press and hold **BOOT** for 3 to 5 seconds to put the
+   ESP32 into download mode.
+
+   <div class="pair" markdown="1">
+   ![Upload starts connecting…](frames/hold_boot_when_the_upload_starts_connecting.jpg#crop=0.18,0.04,0.68,0.96)
+   ![…press BOOT for 3–5 seconds now.](frames/press_boot_for_3_5_seconds_now.jpg)
+   </div>
+
+!!! update "Since the video was recorded"
+    Some ESP32 boards don't need BOOT pressed; if the upload succeeds without it, that's fine. If it
+    fails with `Failed to connect to ESP32: No serial data received`, retry and press BOOT as soon as
+    `Connecting...` appears.
+
+6. Confirm the upload succeeded: the output ends with `Hash of data verified.` and
+   `Hard resetting via RTS pin...`.
+
+   ![Firmware upload success.](frames/firmware_upload_success.jpg#crop=0.09,0.04,0.82,0.96)
+
+7. Open **Tools → Serial Monitor** at **115200 baud** and press the ESP32's **EN** (reset) button.
+
+   ![Press the ESP32 reset (EN) button.](frames/press_esp32_reset.jpg)
+
+8. The ESP32 boots and asks for sketch data, as expected:
+
+    ```
+    Kaia.ai firmware version 0.8.0-iron
+    ESP IDF version v4.4.7-dirty
+    SPIFFS mounted successfully
+    Sketch data not found. Please upload sketch data.
+    ```
+
+   ![The ESP32 asks for sketch data.](yt:tKfVU1n5TjA@1:27#crop=0.36,0.40,0.50,0.47)
+
+## Upload the sketch data
+
+The sketch data is the robot's configuration file, `config.yaml`, plus the WiFi setup web page. It
+lives in a separate flash area (SPIFFS), so it is uploaded separately.
+
+1. **Close the Serial Monitor**; it holds the COM port and the upload will fail.
+2. Open **Sketch → Show Sketch Folder** and go into the `data` folder. It holds `config.yaml`,
+   which the firmware loads at power-up, config files for other hardware, `favicon.png` and
+   `index.html`.
+
+   ![The data folder.](yt:tKfVU1n5TjA@1:38#crop=0.1,0.37,0.68,0.5)
+
+3. Delete every `.yaml` file **except** `config_mini_bdc_30p.yaml`, the config for the BLD-120MM-PACK
+   with the BDC-30P board. Keep `favicon.png` and `index.html`.
+4. Rename `config_mini_bdc_30p.yaml` to `config.yaml`. It sets the ESP32 pins, motors and LiDAR model.
+
+   <div class="pair" markdown="1">
+   ![Keep only the BDC-30P config…](yt:tKfVU1n5TjA@1:44)
+   ![…and rename it to config.yaml.](frames/the_data_folder_rename_config_mini_bdc_30p_yaml_to_config_yaml.jpg#crop=0.09,0.33,0.70,0.52)
+   </div>
+
+
+5. Click inside the code window, press **Ctrl+Shift+P**, type `Upload` and click
+   **Upload SPIFFS to Pico/ESP8266/ESP32**. At `Connecting....`, hold **BOOT** for 3 to 5 seconds.
+
+   ![Pick Upload SPIFFS to Pico/ESP8266/ESP32.](frames/pick_upload_spiffs.jpg#crop=0.18,0.04,0.68,0.96)
+
+   Confirm the upload succeeded: the IDE shows **SPIFFS upload completed!**
+
+   ![Sketch data upload completed.](frames/completed_spiffs_upload_successfully.jpg#crop=0.18,0.04,0.68,0.96)
+
+6. If it fails right away with `ERROR: No port specified, check IDE menus.`, restart the IDE and
+   retry. This happens often.
+
+   ![A common SPIFFS upload error.](yt:tKfVU1n5TjA@1:56#crop=0.36,0.40,0.50,0.16)
+
+!!! tip "If the sketch data upload still fails"
+    - `Could not open COM3, the port doesn't exist`: close the Serial Monitor, check the USB cable,
+      retry.
+    - `SPIFFS_write error(-10010): unknown` / `error adding file!`: a file name in `data` is over
+      30 characters.
+    - `This chip is ESP32-S3 not ESP32. Wrong --chip argument?`: wrong board selected in the IDE.
+
+    See Appendix B for more.
+
+7. Close the SPIFFS Upload output tab, reopen the Serial Monitor and press **EN**. The ESP32 loads
+   `config.yaml` and enters WiFi configuration mode:
+
+    ```
+    SPIFFS mounted successfully
+    /config.yaml found; loaded OK
+    WiFi SSID unknown
+    dest_ip unknown
+    To enter web config push-and-release EN, then push-and-hold BOOT within 1 sec
+    Setting up WiFi KAIA.AI; browse to http://192.168.4.1
+    ```
+
+    ![Config loaded; ready for WiFi configuration.](yt:tKfVU1n5TjA@2:34#crop=0.36,0.40,0.50,0.47)
+
+## If you use Arduino IDE 1.8.19 {: #ide1-upload }
+
+Skip this section if you use IDE 2.x. With IDE 1.8.19, follow these steps instead of the two
+sections above.
+
+### Upload the firmware
+
+1. Open the `kaiaai-esp32` sketch. If the IDE offers library or board updates, decline them.
+2. Connect the ESP32 to your PC over USB, with the board's power switch **off**.
+
+   ![Plug the USB cable into the ESP32.](frames/plug_the_usb_cable_into_the_esp32.jpg)
+
+3. Select **Tools → Board → ESP32 Arduino → ESP32 Dev Module**.
+
+   ![Choose ESP32 Dev Module.](frames/select_tools_board_esp32_arduino_esp32_dev_module.jpg#crop=0.23,0,0.63,0.8)
+
+4. Select your COM port under **Tools → Port**.
+5. Click **Upload** (the right arrow). The first compile takes a while.
+6. When the output shows `Connecting....`, press and hold **BOOT** for 3 to 5 seconds.
+
+   ![Press BOOT for 3–5 seconds now.](frames/press_boot_for_3_5_seconds_now.jpg)
+
+!!! update "Since the video was recorded"
+    Some ESP32 boards don't need BOOT pressed; if the upload succeeds without it, that's fine. If it
+    fails with `Failed to connect to ESP32: No serial data received`, retry and press BOOT as soon as
+    `Connecting...` appears.
+
+7. Wait for the upload to finish and confirm it succeeded: the output ends with
+   `Hash of data verified.` and `Hard resetting via RTS pin...`.
+
+   ![Uploading the firmware in IDE 1.8.19.](frames/uploading_the_firmware_ide1.jpg#crop=0.23,0,0.54,1)
+
+8. Open **Tools → Serial Monitor** and set the baud rate to **115200**.
+9. Press the ESP32's **EN** (reset) button.
+
+   ![Press the ESP32 reset (EN) button.](frames/press_esp32_reset.jpg)
+
+10. Confirm the ESP32 boots the new firmware and asks for sketch data:
+
+    ```
+    Kaia.ai firmware version 0.8.0-iron
+    ESP IDF version v4.4.7-dirty
+    SPIFFS mounted successfully
+    Sketch data not found. Please upload sketch data.
+    ```
+
+    ![The ESP32 boots the new firmware.](frames/serial_monitor_esp32_boots.jpg#crop=0,0,0.53,0.43)
+
+### Upload the sketch data
+
+1. **Close the Serial Monitor.** While it's open, it holds the COM port and the sketch data
+   upload fails.
+2. Open **Sketch → Show Sketch Folder** and go into the `data` folder.
+3. Delete every `.yaml` file **except** `config_mini_bdc_30p.yaml`. Keep `favicon.png` and
+   `index.html`.
+4. Rename `config_mini_bdc_30p.yaml` to `config.yaml`.
+
+   ![Rename it to config.yaml.](frames/the_data_folder_rename_config_mini_bdc_30p_yaml_to_config_yaml.jpg#crop=0.09,0.33,0.70,0.52)
+
+
+5. Run **Tools → ESP32 Sketch Data Upload**.
+
+   ![Tools → ESP32 Sketch Data Upload.](yt:tKfVU1n5TjA@3:33#crop=0.23,0,0.4,0.67)
+
+6. When the output shows `Connecting....`, press and hold **BOOT** for 3 to 5 seconds.
+
+   <div class="pair" markdown="1">
+   ![The output shows Connecting….](frames/sketch_data_upload_connecting_ide1.jpg#crop=0.23,0.04,0.54,0.96)
+   ![…press BOOT for 3–5 seconds now.](frames/press_boot_for_3_5_seconds_now.jpg)
+   </div>
+
+7. Confirm the upload succeeded: the status bar shows **SPIFFS Image Uploaded** and the output ends
+   with `Hash of data verified.` and `Hard resetting via RTS pin...`.
+
+   ![Sketch data upload succeeded.](frames/sketch_data_upload_success_ide1.jpg#crop=0.23,0.04,0.54,0.96)
+
+!!! tip "If the sketch data upload fails"
+    - `Could not open COM3, the port doesn't exist`: close the Serial Monitor, check the USB cable,
+      retry.
+    - `SPIFFS_write error(-10010): unknown` / `error adding file!`: a file name in `data` is over
+      30 characters.
+    - `This chip is ESP32-S3 not ESP32. Wrong --chip argument?`: wrong board selected in the IDE.
+
+    See Appendix B for more.
+
+8. Reopen **Tools → Serial Monitor**.
+9. Press the ESP32's **EN** (reset) button.
+10. Confirm the ESP32 loads `config.yaml` and enters WiFi configuration mode:
+
+    ```
+    SPIFFS mounted successfully
+    /config.yaml found; loaded OK
+    WiFi SSID unknown
+    dest_ip unknown
+    To enter web config push-and-release EN, then push-and-hold BOOT within 1 sec
+    Setting up WiFi KAIA.AI; browse to http://192.168.4.1
+    ```
+
+    ![The ESP32 boots and loads config.yaml.](frames/the_esp32_boots_and_loads_config_yaml.jpg#crop=0,0,0.53,0.86)
+
+## Configure the robot's WiFi
+
+In configuration (AP) mode the ESP32 creates its own hotspot, `KAIA.AI`. Connect to it and use a web
+page to give the robot your WiFi name and password and your PC's IP address, where the ROS2
+software runs.
+
+1. The ESP32's blue activity LED is **solid on** in AP mode.
+
+   ![Activity LED solid on: AP mode.](yt:tKfVU1n5TjA@4:04)
+
+   | Activity LED | What the robot is doing |
+   |---|---|
+   | Solid on | AP mode, waiting for WiFi configuration |
+   | Slow blinking, once per second | Connecting to your WiFi |
+   | Very slow blinking, once per 20 seconds | Connected to WiFi, connecting to the ROS2 PC |
+   | Fast blinking | Connected to the ROS2 PC |
+
+2. On your PC, in PowerShell or `cmd.exe`, run:
+
+    ```
+    ipconfig
+    ```
+
+3. Note the **IPv4 Address** under **Wireless LAN adapter Wi-Fi** (`192.168.1.113` in the video),
+   not a VMware or other virtual adapter.
+
+   ![Note the Wi-Fi adapter's IPv4 Address.](yt:tKfVU1n5TjA@4:22#crop=0.08,0.15,0.72,0.66)
+
+4. Connect your PC to the open **KAIA.AI** network.
+
+   ![Connect to KAIA.AI.](yt:tKfVU1n5TjA@4:34)
+
+5. Browse to `http://192.168.4.1` to open the **Kaia.ai Robot Configurator**.
+
+   ![The Kaia.ai Robot Configurator.](yt:tKfVU1n5TjA@4:50#crop=0,0,0.95,0.5)
+
+6. Enter your WiFi name in **SSID 2.4GHz** and its password in **WiFi Password**.
+7. Enter your PC's IPv4 address from step 3 in **Local PC IPv4** and click **Connect**.
+
+   ![Fill in WiFi and PC IP, then click Connect.](yt:tKfVU1n5TjA@5:06)
+
+!!! warning "2.4 GHz WiFi only"
+    The ESP32 can't use 5 GHz. If your router has separate network names, enter the 2.4 GHz one
+    (`NETGEAR48`, not `NETGEAR48_5G`, in the video).
+
+8. The page shows **Connecting to WiFi...** with the saved settings (`dest_port 8888` is the port the
+   robot uses to reach your PC). The robot saves them to `/network.yaml`, restarts and joins your
+   WiFi:
+
+    ```
+    /network.yaml found; loaded OK
+    /config.yaml found; loaded OK
+    Board model MINI-BDC30P-BODY with BDC-30P, version v1.1.1, manufacturer makerspet.com
+    LIDAR model LDROBOT LD14P
+    Motor driver type IN1_IN2; motor encoder type AB_QUAD
+    Connecting to WiFi NETGEAR48 ... connected, IP 192.168.93.127
+    ```
+
+   ![The robot restarted and joined your WiFi.](frames/the_robot_restarted_and_joined_your_wifi.jpg#crop=0.18,0.125,0.82,0.875)
+
+9. Make sure your PC has reconnected to your WiFi before proceeding.
+
+!!! note "If your PC's IP address changes"
+    For example after a router restart, the robot joins WiFi but can't find the PC. Reset the
+    robot's WiFi settings (end of this chapter) and enter the new address.
+
+## Launch the robot software on your PC
+
+1. Make sure Docker Desktop is running.
+
+   ![Docker Desktop must be running.](yt:tKfVU1n5TjA@5:30)
+
+2. Make sure your X server is running; it shows the robot software's windows (RViz) on your
+   desktop. In the video it's VcXsrv, started with XLaunch: set **Display number** to `0`, then
+   click **Next** through to **Finish**.
+
+   ![In XLaunch, set Display number to 0.](yt:tKfVU1n5TjA@5:37#crop=0.07,0.12,0.37,0.52)
+
+3. Open Windows PowerShell and start the robot software container:
+
+    ```
+    docker run --name makerspet -it --rm -p 8888:8888/udp -p 4430:4430/tcp -e DISPLAY=host.docker.internal:0.0 -e LIBGL_ALWAYS_INDIRECT=0 kaiaai/kaiaai:iron
+    ```
+
+   ![Start the kaiaai/kaiaai:iron container.](yt:tKfVU1n5TjA@5:54)
+
+   The prompt changes to something like `root@6028bbee19de:/ros_ws#`: a Linux shell inside the
+   container. The robot talks to the PC on port 8888/udp, hence `dest_port 8888`.
+
+!!! tip "If docker run fails"
+    - `error during connect: ... dockerDesktopLinuxEngine ...`: launch Docker Desktop.
+    - `Conflict. The container name "/makerspet" is already in use`: your last session's container
+      is still running. Run `docker container stop makerspet` and retry. Next time, leave each shell
+      with `exit` instead of closing the window.
+    - `Ports are not available: exposing port TCP 0.0.0.0:4430`: reboot your PC.
+
+## Bring up the robot and test the motors
+
+1. Open the Arduino Serial Monitor to watch the robot's messages.
+2. Put the robot on a pedestal, such as a small box, so the wheels spin freely.
+
+   ![Wheels in the air.](yt:tKfVU1n5TjA@6:10)
+
+3. Turn the power switch **on** and press **EN**. The robot joins your WiFi and tries to reach your
+   PC (`Connecting to Micro-ROS agent 192.168.1.113 ...`). If WiFi fails, press **EN** again.
+4. In the container shell, run:
+
+    ```
+    ros2 launch kaiaai_bringup physical.launch.py
+    ```
+
+   ![Run the physical robot launch.](yt:tKfVU1n5TjA@6:26)
+
+5. The robot connects, and the Serial Monitor prints periodic status:
+
+    ```
+    Connecting to Micro-ROS agent 192.168.1.113 ... success
+    Syncing time ... OK
+    micro-ROS client key 0x8B6C9A69; ROS2 node /pet
+    Micro-ROS initialized
+    LiDAR info Model: LDROBOT LD14P
+    startLIDAR() result: OK
+    Telem avg 24 max 27ms, LiDAR RPM 5.01, wheels RPM 0.00 0.00, battery 8.14V, RSSI -62dBm
+    ```
+
+   ![The robot reports its status in the Serial Monitor.](frames/telem_robot_status.jpg)
+
+6. The activity LED now blinks rapidly.
+
+!!! tip "Read the status line"
+    `Telem` shows LiDAR speed, wheel speeds, battery voltage and WiFi signal (RSSI). **LiDAR RPM
+    must not be zero.** If it stays `0.00`, check the LiDAR wires and that `config.yaml` matches your
+    LiDAR (LD14P by default).
+
+!!! update "Since the video was recorded: antivirus"
+    Antivirus software can block the robot's connection to your PC. My Avast started blocking these
+    ports in December 2025. If the robot joins WiFi but never connects to the PC, try disabling
+    your antivirus.
+
+!!! tip "Connected to WiFi, but not to the PC?"
+    If `Connecting to Micro-ROS agent ...` repeats without `success`:
+
+    - Check that `physical.launch.py` is running in the container.
+    - Check the robot and PC are on the same network, and it doesn't block devices from talking to
+      each other ("client isolation"), as café, restaurant and university networks often do.
+    - Check your PC's IP address hasn't changed.
+    - Make sure your PC accepts incoming local connections and your antivirus isn't blocking
+      them (see the box above).
+
+    See Appendix B for more.
+
+7. In Windows Terminal, press **Alt+Shift+-** to split the window horizontally into a second
+   PowerShell pane.
+8. Click inside it and open another shell in the running container:
+
+    ```
+    docker exec -it makerspet bash
+    ```
+
+9. Run the teleoperation app:
+
+    ```
+    ros2 run kaiaai_teleop teleop_keyboard
+    ```
+
+   ![A second shell in the container runs teleop_keyboard.](yt:tKfVU1n5TjA@6:54#crop=0.49,0.52,0.51,0.38)
+
+!!! tip "Advanced: command history"
+    In a container shell, press the **up** and **down** arrow keys to step through common robot
+    commands. They were preloaded into the bash history when the Docker image was built.
+
+10. With the teleop pane selected, drive the wheels:
+    - Press **w** repeatedly to speed up forward to maximum. Watch the wheel RPM rise in the
+      Serial Monitor.
+    - Press **x** several times to slow down and reverse.
+    - Press **space** to stop, then **d** to spin right.
+    - Press **space** to stop, then **a** to spin left.
+    - Press **space** to stop.
+
+    ![The wheels at maximum speed.](yt:tKfVU1n5TjA@7:12)
+
+If both wheels turn the right way, the motors work. If a wheel doesn't turn, turns the wrong way or
+only runs at full speed, see Appendix B.
+
+## Check the LiDAR
+
+1. Turn the power off and unplug the USB cable.
+2. Reattach the LiDAR to the LiDAR posts with **hex button M3 screws**.
+
+   ![Reattach the LiDAR.](yt:tKfVU1n5TjA@7:48)
+
+3. Click inside a PowerShell pane and press **Alt+Shift+-** to split it. If a pane opens in the
+   wrong place, type `exit` in it and retry.
+4. Open another container shell and start the LiDAR visualization:
+
+    ```
+    docker exec -it makerspet bash
+    ros2 launch kaiaai_bringup monitor_robot.launch.py
+    ```
+
+   ![A third shell opens RViz.](yt:tKfVU1n5TjA@8:14)
+
+   An empty RViz window opens.
+
+5. Turn the robot on. The white dots in RViz are what the LiDAR sees; the red arrow shows which way
+   the robot faces.
+
+   ![Live LiDAR scan in RViz.](yt:tKfVU1n5TjA@8:41)
+
+!!! warning "RViz doesn't open?"
+    `could not connect to display host.docker.internal:0.0` means your X server isn't running.
+    Start it (display number 0) and rerun the command.
+
+!!! note
+    Occasional `message(s) lost` and `RESULT_CRC_ERROR` lines are normal over WiFi. To keep them
+    rare, give the robot a strong WiFi signal and keep the network quiet while the robot runs: for
+    example, don't stream video on another PC or phone on the same WiFi.
+
+## Shut down
+
+1. Turn the robot off.
+2. Press **Ctrl+C** in each shell.
+3. Type `exit` in each shell. Exiting the `docker run` shell stops the container, and `--rm`
+   removes it so the name is free next time.
+
+Next, you'll map your place and make the robot self-drive around obstacles.
+
+## Reset the robot's WiFi settings
+
+To change the WiFi network or your PC's IP address:
+
+1. Power up the ESP32 (USB or battery).
+2. Press **EN**, then within 1 second press and hold **BOOT**. The LED blinks very fast.
+3. Keep holding until the LED turns solid on.
+4. Release **BOOT**. The ESP32 reboots into AP mode; configure WiFi again as above.
+
+<div class="pair" markdown="1">
+![Press EN, then hold BOOT.](yt:tKfVU1n5TjA@9:16)
+![Release BOOT: WiFi configuration mode.](yt:tKfVU1n5TjA@9:24)
+</div>
+
+Full documentation and troubleshooting:
+[makerspet.com/blog/bld-120mm-pack/](https://makerspet.com/blog/bld-120mm-pack/) and Appendix B.
