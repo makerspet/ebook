@@ -120,6 +120,8 @@ lives in a separate flash area (SPIFFS), so it is uploaded separately.
 
     ![Config loaded; ready for WiFi configuration.](yt:tKfVU1n5TjA@2:34#crop=0.36,0.40,0.50,0.47)
 
+<div class="page-break"></div>
+
 ## If you use Arduino IDE 1.8.19 {: #ide1-upload }
 
 Skip this section if you use IDE 2.x. With IDE 1.8.19, follow these steps instead of the two

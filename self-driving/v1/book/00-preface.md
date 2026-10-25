@@ -59,17 +59,19 @@ software setup, the assembly and the bring-up. For a first build, set aside a da
 | Appendix C | Quick reference: commands, LED codes and links | |
 | Appendix D | 3D printing the robot's plastic parts | |
 
-<div class="page-break"></div>
-
+<div class="keep" markdown="1">
 Pick your path:
 
 - **Windows PC:** Chapters 1 → 2 → 3 → 4 → 5.
 - **Ubuntu PC:** Chapter 1 → 8 → 4 → 5.
 - **No robot yet?** Install the PC software (Chapter 2 or 8, skipping the Arduino parts), then go
   straight to Chapters 6 and 7.
+</div>
 
 Each chapter starts with a link to its video. The illustrations are frames from that video, so if
 a step isn't clear from a picture, you can watch that part of the video.
+
+<div class="page-break"></div>
 
 ## Conventions
 

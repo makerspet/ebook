@@ -64,11 +64,13 @@ Wire the screw terminals first, while the board is loose in your hand.
 
 5. Connect the rest the same way, one motor cable per motor terminal block. Tug each wire gently to check it holds.
 
+<div class="keep" markdown="1">
 Both motor terminal blocks use the same order:
 
 | Terminal | M2 | M1 | GND | ENCA | ENCB | +Venc |
 |---|---|---|---|---|---|---|
 | Wire color | red | white | blue | green | yellow | black |
+</div>
 
 !!! note
     These are the colors of the cables shipping now. Restocked cables may differ; if so, go by the
@@ -325,7 +327,7 @@ motor-to-cable and cable-to-board connections.
     - The motor wires are in the **correct screw terminals**, none broken or loose.
     - **No debris in the gearbox**; it can seize the gears and burn out the motor.
     - **Motor screws not overtightened**; bent plastic can catch the gears or encoder disk.
-    - Gently spin the magnet to turn the motor's core shaft. If it turns freely, the gearbox may be seizing.
+    - Gently spin the magnet to turn the motor's core shaft. It should turn freely; if it doesn't, the motor or its gearbox may be jammed.
     - Encoder sensors can get bent and touch the encoder wheel. Carefully bend them back and check the encoder magnet turns freely.
     - No cable rubs on a motor's encoder magnet.
 

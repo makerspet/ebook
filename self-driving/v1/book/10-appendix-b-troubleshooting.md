@@ -93,7 +93,7 @@ Start with the mechanics and wiring:
 - Keep debris out of the gearbox; it can seize the gears and burn out the motor.
 - Don't overtighten the motor screws. Bent plastic (including the base) can catch the gears or the
   encoder disk and burn out the motor.
-- Gently spin the magnet. If the core shaft spins freely, the gearbox may be seizing.
+- Gently spin the magnet to turn the motor's core shaft. It should turn freely; if it doesn't, the motor or its gearbox may be jammed.
 - Bent encoder sensors can touch the encoder wheel. Bend them back and check the magnet spins
   freely.
 

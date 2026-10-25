@@ -198,6 +198,8 @@ Next time, skip exploring and load the saved map.
 
 ![The Navigation 2 panel shows navigation status.](yt:81-9q7QfkHs@4:50#crop=0,0.08,0.3,0.5)
 
+<div class="page-break"></div>
+
 ## Shut down
 
 1. Press Ctrl-C in each window.
