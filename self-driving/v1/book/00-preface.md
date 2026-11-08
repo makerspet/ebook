@@ -1,9 +1,10 @@
 # About This Book
 
-This book walks you through building a small self-driving robot, from a bag of parts to a robot
-that maps your home and drives itself to any spot you click on the map. It follows my Maker's Pet
-video course step by step, adds the fixes and tips I collected from builders after the videos
-were recorded, and puts everything in one place you can read at your workbench.
+This step-by-step guide takes you from a bag of parts to your own LiDAR robot that maps your home
+and drives itself to any spot you click on the map. You'll assemble it, map your place, program it
+and let an AI assistant drive it. The book follows my Maker's Pet video course, adds the fixes and
+tips I collected from builders after the videos were recorded, and puts everything in one place
+you can read at your workbench.
 
 
 ## What you will build
@@ -38,6 +39,10 @@ Once it's built, your robot can:
 - **A small screwdriver and a wire stripper.**
 
 No robotics experience is necessary.
+
+**The hardware is optional.** You can learn without a physical robot. Chapter 6 runs a simulated
+robot in a 3D world on your PC, where you drive it, map a room and send it to goals. The programs
+in Chapter 7 run on the simulated robot too. All you need is the PC.
 
 **How long it takes.** If you've built a kit like this before, allow about an hour each for the
 software setup, the assembly and the bring-up. For a first build, set aside a day.

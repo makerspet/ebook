@@ -40,11 +40,13 @@ Ubuntu commands from the companion article are included too.
 
 ![In XLaunch, set the display number to 0.](yt:7RVY4gUWgz4@0:42#crop=0,0,0.36,0.45)
 
+<div class="page-break"></div>
+
 4. Start **Windows PowerShell**.
 
 !!! tip
-    Create `C:\maps` first. The `docker run` command below shares it with the container as
-    `/root/maps`, so maps you save in Docker land on your PC.
+    The `docker run` command below shares `C:\maps` with the container as `/root/maps`, so maps
+    you save in Docker land on your PC.
 
 ## Launch the Docker container
 

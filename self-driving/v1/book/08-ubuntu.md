@@ -30,7 +30,7 @@ USB cable for the ESP32 and a 2.4 GHz WiFi network.
     tar -xvf arduino-1.8.19-linux64.tar.xz
     ```
 
-   ![Unpacking the Arduino archive.](yt:fHPyjVdTNg4@1:18.5#crop=0.2,0.38,0.6,0.2)
+   ![Unpacking the Arduino archive.](yt:fHPyjVdTNg4@1:18.5#crop=0.2,0.41,0.79,0.47)
 
 4. Run the install script. It asks for your password because it installs system-wide:
 

@@ -15,7 +15,7 @@
   size: letter;
   margin: 0.8in 0.8in 0.85in 0.8in;
   @top-left { content: string(chapter); font: 8.5pt "Source Serif 4", Georgia, serif; color: var(--muted); }
-  @top-right { content: "Build an Arduino, ROS 2 Self-Driving Robot"; font: 8.5pt "Source Serif 4", Georgia, serif; color: var(--muted); }
+  @top-right { content: "Build, Program a Self-Driving Robot"; font: 8.5pt "Source Serif 4", Georgia, serif; color: var(--muted); }
   @bottom-center { content: counter(page); font: 9pt "Source Serif 4", Georgia, serif; color: var(--muted); }
 }
 @page :first { margin: 0; @top-left { content: none; } @top-right { content: none; } @bottom-center { content: none; } }
@@ -26,18 +26,13 @@ body { margin: 0; }
 /* ---- cover ---- */
 .cover { position: relative; height: 11in; width: 8.5in; overflow: hidden; break-after: page; background: #f3efe8; font-family: "Source Serif 4", Georgia, serif; }
 .cover::after { content: ""; z-index: 1; position: absolute; left: 0; right: 0; bottom: 0; height: .45in; background: var(--accent); }
-.cover-brand { position: absolute; top: .6in; left: .8in; display: flex; align-items: center; gap: .14in; }
+.cover-brand { position: absolute; top: .45in; left: .8in; display: flex; align-items: center; gap: .14in; }
 .cover-brand img { width: .75in; height: .75in; }
 .cover-brand span { font: 700 17pt "Source Serif 4", Georgia, serif; color: var(--ink); letter-spacing: .01em; }
-.cover-robot { position: absolute; top: 2.02in; left: 50%; transform: translateX(-50%); width: 4.8in; }
-.cover-text { position: absolute; left: .8in; right: .8in; bottom: 1.05in; color: var(--ink); }
-.cover-title { font-size: 36pt; line-height: 1.1; margin: 0 0 .2in; font-weight: 700; letter-spacing: .015em; }
-.cover-sub { font-size: 14pt; line-height: 1.35; margin: 0 0 .3in; color: var(--muted); max-width: 4.6in; }
-.cover-ribbon { position: absolute; right: -1.5in; bottom: 1.26in; width: 5.6in; transform: rotate(-45deg); z-index: 2;
-  background: #FD9234; color: #fff; text-align: center; padding: 13pt 0 15pt; font: 700 15pt/1.25 "Source Serif 4", Georgia, serif;
-  letter-spacing: .02em; }
-.cover-seal { position: absolute; top: .62in; right: .8in; width: 1.6in; height: 1.6in; }
-.cover-seal text { fill: #fff; font: 700 17px "Source Serif 4", Georgia, serif; letter-spacing: 1.2px; }
+.cover-robot { position: absolute; top: 1.15in; left: 50%; transform: translateX(-50%); width: 6.2in; }
+.cover-text { position: absolute; left: .8in; right: .8in; top: 7.55in; color: var(--ink); }
+.cover-title { font-size: 54pt; line-height: 1.06; margin: 0; font-weight: 700; letter-spacing: .01em; }
+.cover-tag { font-size: 18pt; line-height: 1.3; margin: .24in 0 0; color: var(--ink); }
 .cover-author { font-size: 12pt; margin: 0; color: var(--ink); }
 
 .cover-brand sup { font-size: .5em; font-weight: 600; margin-left: 1px; }
@@ -82,9 +77,10 @@ th { font-family: "Source Serif 4", Georgia, serif; font-weight: 600; border-bot
 
 /* ---- figures ---- */
 figure { margin: .1in 0 .18in; break-inside: avoid; text-align: center; }
-figure img { max-width: 100%; max-height: 3.1in; border-radius: 3pt; }
-.pair { display: flex; gap: .16in; align-items: flex-start; break-inside: avoid; }
-.pair figure { flex: 1 1 0; min-width: 0; margin: .05in 0 .14in; }
+figure img { width: auto; height: auto; max-width: 100%; max-height: 3.9in; border-radius: 3pt; }
+.pair { display: block; break-inside: avoid; font-size: 0; }  /* inline blocks: paged.js measures flex poorly */
+.pair figure { display: inline-block; vertical-align: top; width: calc(50% - .08in); margin: .05in 0 .14in; font-size: 10.5pt; }
+.pair figure + figure { margin-left: .16in; }
 figcaption { font: 8.8pt/1.35 "Source Serif 4", Georgia, serif; color: var(--muted); margin-top: 4pt; text-align: center; }
 .final .ts { display: none; }
 .ts { display: block; font: 600 7.5pt "JetBrains Mono", monospace; color: var(--accent); margin-top: 1pt; }
@@ -109,7 +105,8 @@ p > img { max-width: 100%; max-height: 4in; display: block; margin: .08in auto; 
 .keep { break-inside: avoid; }
 
 /* keep a numbered step together with its own figure */
-li:has(> figure), li:has(> .pair) { break-inside: avoid; }
+/* steps may now split from their figures; use manual page breaks instead */
 
 /* inside a keep group only the group itself avoids breaks; nested avoids confuse paged.js */
 .keep li, .keep pre, .keep figure, .keep .pair { break-inside: auto; }
+

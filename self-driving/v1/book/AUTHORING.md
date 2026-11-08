@@ -27,8 +27,11 @@ Chapters live in `book/NN-slug.md` and are assembled in file-name order.
 - Ordinary images (`![Caption](https://...)`) work too, e.g. illustrations from makerspet.com or
   the support forum; they are downloaded and cached at build time.
 
-- Keep a callout with its figure: wrap both in `<div class="keep" markdown="1"> … </div>`.
-  Force a page break with `<div class="page-break"></div>`.
+- Page layout is manual (`AUTO_KEEP = False` in `tools/build.py`). Force a page break by putting
+  `<div class="page-break"></div>` on its own line, with a blank line before and after, right
+  above whatever should start the new page. Before a numbered step it goes at the start of the
+  line, just above `3. ...`; the numbering continues. To keep a few blocks together instead, wrap
+  them in `<div class="keep" markdown="1"> … </div>`.
 
 ## Chapter shape
 

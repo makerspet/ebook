@@ -26,6 +26,7 @@ OUT = os.path.join(ROOT, 'build')
 FF = imageio_ffmpeg.get_ffmpeg_exe()
 PAGED_JS = 'https://unpkg.com/pagedjs@0.4.3/dist/paged.polyfill.js'
 UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0 Safari/537.36'
+AUTO_KEEP = False  # True: auto-group headings/steps with their figures; False: manual page breaks only
 FIG_WIDTH = 1400  # px; frames are downscaled to keep the PDF small
 
 FIG_RE = re.compile(r'!\[([^\]]*)\]\(yt:([\w-]{11})@([\d:.]+)(?:#crop=([\d.,]+))?\)')
@@ -133,7 +134,12 @@ def figures(md_text, labels):
             if labels:
                 chip = f'<span class="ts">{html.escape(label)}</span>'
         cap_html = markdown.markdown(cap)[3:-4] if cap else ''
-        fig = (f'{indent}<figure><img src="{src}" alt="{html.escape(cap)}">'
+        dims = ''
+        local = os.path.join(OUT, src)
+        if os.path.exists(local):  # known size lets paged.js lay out pages before images load
+            w, h = Image.open(local).size
+            dims = f' width="{w}" height="{h}"'
+        fig = (f'{indent}<figure><img src="{src}"{dims} alt="{html.escape(cap)}">'
                f'<figcaption>{cap_html}{chip}</figcaption></figure>')
         out.append(fig if indent else f'\n{fig}\n')  # top-level figures must be HTML blocks
     return '\n'.join(out)
@@ -193,8 +199,8 @@ def keep_with_figures(body):
     def is_code(el):
         return el.name == 'pre' or (el.name == 'div' and 'highlight' in (el.get('class') or []))
 
-    def in_keep(el):
-        return any('keep' in (p.get('class') or []) for p in el.parents if p.name == 'div')
+    def in_keep(el):  # already grouped, or opted out with <div class="nokeep">
+        return any({'keep', 'nokeep'} & set(p.get('class') or []) for p in el.parents if p.name == 'div')
 
     def blocks_after(el):
         sib = el.next_sibling
@@ -284,7 +290,11 @@ def keep_with_figures(body):
             wrap(group)
 
     # 2. other top-level figures: short text right before them
-    for fig in [c for c in soup.contents if not isinstance(c, NavigableString) and is_fig(c)]:
+    for fig in [c for c in soup.find_all(['figure', 'div'])
+                if is_fig(c) and c.parent is not None and (c.parent.name == '[document]' or
+                                                          'nokeep' in (c.parent.get('class') or []))]:
+        if fig.parent.name != '[document]':
+            continue  # inside <div class="nokeep">: leave it to flow
         lead, size = [], 0
         prev = fig.find_previous_sibling()
         while prev is not None and len(lead) < 3:
@@ -299,8 +309,8 @@ def keep_with_figures(body):
             if size > MAX_TEXT:
                 break
             lead.insert(0, prev)
-            if prev.name in ('h2', 'h3'):
-                break
+            if prev.name in ('h2', 'h3', 'ol', 'ul'):
+                break  # a heading starts the group; only the one step right before the figure joins it
             prev = prev.find_previous_sibling()
         if lead:
             wrap(lead + [fig])
@@ -324,7 +334,9 @@ def build(draft, labels):
                                            'admonition', 'sane_lists', 'toc'],
                                extension_configs={'toc': {'slugify': lambda v, s: slug(v)}})
         body = md.convert(figures(text, labels))
-        body = keep_with_figures(split_long_code(body))
+        body = split_long_code(body)
+        if AUTO_KEEP:
+            body = keep_with_figures(body)
         kind = 'front' if os.path.basename(path).startswith('00') else 'chapter'
         m = re.search(r'<h1 id="([^"]+)">(.*?)</h1>', body)
         if m and kind == 'chapter':

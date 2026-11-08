@@ -1,4 +1,4 @@
-# Build an Arduino, ROS 2 Self-Driving Robot
+# Build, Program a Self-Driving Robot
 
 Source for the PDF e-book that accompanies the Maker's Pet video course
 ([YouTube playlist](https://www.youtube.com/watch?v=6GtjAB19GP8&list=PLOSXKDW70aR8uA1IFahSKVuk5ODDfjTZV))
